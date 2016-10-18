@@ -197,8 +197,21 @@
 
             function sendOrders(finalizedOrders) {
                 // ajax here to send the object
-                console.log(finalizedOrders);
-                reInitializeOrders();
+
+                $.ajax({
+                    url: "cashier-controller/process-orders.php",
+                    data: itemOrders,
+                    dataType: "html",
+                    method: "POST",
+                    success: function(data) {
+                        if (data === 'success') {
+                            reInitializeOrders();
+                        }
+                    },
+                    error: function(errorThrown) {
+                        console.log(errorThrown);
+                    }
+                });
             }
 
             function fetchItems() {
