@@ -18,12 +18,12 @@
                 $status = $connect->error();
             } else {
                 $status = "success";
+                $statement->close();
             }
         }
     
     }
 
     echo $status;
-    $connect->close();
 
 ?>
