@@ -6,6 +6,7 @@
         <!--stylesheet imports-->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+        <script src="dist/js/jquery.js"></script>
         <style>
 
             body {
@@ -116,7 +117,6 @@
         </div>
 
         <!--script imports-->
-        <script src="dist/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
 
@@ -133,7 +133,7 @@
                 itemIds = new Array();
                 itemQuantities = new Array();
                 itemSelected = new Object();
-                console.log(itemSelected);
+                computeTotalCost();
             }
 
             function insertItem(item) {
