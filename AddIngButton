@@ -1,0 +1,24 @@
+$(document).ready(function() {
+	 var ingTable = $('table[name=ingTable');
+
+
+    $(document).on("click", ".addingredient", function(e) {
+        e.preventDefault();
+
+        $(siblingwrapper).append(
+                '<tr><td><input type="text" maxlength = 45 name="siblingname" placeholder="ex. Virma Lopez"  /></td>'
+                + '<td><input type="number" min = "0" max = "999" step = "1" name="siblingage" placeholder="ex. 14"  /></td>'
+                + '<td><input type="text" maxlength = 20 name="siblingoccupation" placeholder="ex. Student"  /></td>'
+                + '<td><input type="text" maxlength = 100 name="siblinglocation" placeholder="ex. Binan, Laguna"  /></td>'
+                + '<td><button class="removesibling">-</button></td></tr>'
+                );
+    });
+
+    $(document).on("click", ".removeingredient", function(e) {
+        e.preventDefault();
+        var c = confirm("Do you want to remove this ingredient row?");
+        if (c) {
+            $(this).parent().parent().remove();
+        }
+    });
+}

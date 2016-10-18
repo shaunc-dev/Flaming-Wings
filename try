@@ -1,0 +1,17 @@
+<?php
+
+//query mo
+//result mo
+
+//bla bla bla
+
+$myarr = array();
+$myarr["myrealarr"] = array();
+$myarr["anotherstuff"] = array();
+
+array_push(value_mo, $myarr["anotherstuff"]);
+
+echo json_encode($myarr);
+
+
+?>
