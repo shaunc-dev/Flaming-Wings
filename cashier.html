@@ -126,6 +126,12 @@
             var itemIds = new Array();
             var itemQuantities = new Array();
 
+            function reInitializeOrders() {
+                $("#orders tr").remove();
+                itemOrders = new Object();
+                itemIds = new Array();
+                itemQuantities = new Array();
+            }
 
             function insertItem(item) {
                 var $itemName = $("<h3>", {"class": "box-title"}).text(item.name);
@@ -186,19 +192,24 @@
             function sendOrders(finalizedOrders) {
                 // ajax here to send the object
                 console.log(finalizedOrders);
+                reInitializeOrders();
             }
 
-            // mock recipe list (will integrate with the database soon)
-            for (var i = 1; i <= 30; i++) {
-                $("#items").append(insertItem(
-                    {
-                        id: i,
-                        name: "Flaming Wings " + i,
-                        price: "50.00",
-                        pieces_left: "50"
-                    }
-                ));
+            function fetchItems() {
+                // mock recipe list (will integrate with the database soon)
+                for (var i = 1; i <= 30; i++) {
+                    $("#items").append(insertItem(
+                        {
+                            id: i,
+                            name: "Flaming Wings " + i,
+                            price: "50.00",
+                            pieces_left: "50"
+                        }
+                    ));
+                }
             }
+
+            fetchItems();
 
             $("#confirm-orders").on("click", function() {
                 itemOrders.id = itemIds;
