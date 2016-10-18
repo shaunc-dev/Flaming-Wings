@@ -127,10 +127,13 @@
             var itemQuantities = new Array();
 
             function reInitializeOrders() {
+                $(".box-body").removeClass("item-focus");
                 $("#orders tr").remove();
                 itemOrders = new Object();
                 itemIds = new Array();
                 itemQuantities = new Array();
+                itemSelected = new Object();
+                console.log(itemSelected);
             }
 
             function insertItem(item) {
