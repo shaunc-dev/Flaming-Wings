@@ -15,7 +15,10 @@ function reInitializeOrders() {
 function insertItem(item) {
     var $itemName = $("<h3>", {"class": "box-title"}).text(item.name);
     var $itemHeader = $("<div>", {"class": "box-header with-border"}).append($itemName);
-    var $itemDescription = $("<div>", {"class": "box-body"}).append($("<small>").text("Php " + item.price)).append("<br>").append($("<small>").text(item.pieces_left + " pieces left"));
+    var $itemDescription = $("<div>", {"class": "box-body"})
+    .append($("<small>").text("Php " + item.price))
+    // .append("<br>")
+    // .append($("<small>").text(item.pieces_left + " pieces left"));
     
     var $boxTemplate = $("<div>", {"class": "box box-primary box-solid"}).append($itemHeader).append($itemDescription);
     var $columnTemplate = $("<div>", {"class": "col-sm-3"}).append($boxTemplate);
@@ -95,7 +98,8 @@ function fetchItems() {
                 id: i,
                 name: "Flaming Wings " + i,
                 price: "50.00",
-                pieces_left: "50"
+                // pieces_left: "50",
+                type: 1
             }
         ));
     }
@@ -121,7 +125,7 @@ $("#add-to-orders").on("click", function() {
     var orderQuantity = $("#order-quantity").val();
     var piecesLeft = parseInt(itemSelected.pieces_left);
 
-    if (orderQuantity <= piecesLeft) {
+    // if (orderQuantity <= piecesLeft) {
         addToOrder(
             { 
                 name: itemSelected.name,
@@ -133,7 +137,7 @@ $("#add-to-orders").on("click", function() {
         itemIds.push(itemSelected.id);
         itemQuantities.push(orderQuantity);
         $("#order-quantity").val(1);
-    } else {
-        $("#order-quantity").val(this.val());
-    }
+    // } else {
+    //     $("#order-quantity").val(this.val());
+    // }
 });
