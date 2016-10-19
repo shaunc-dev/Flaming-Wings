@@ -133,5 +133,7 @@ $("#add-to-orders").on("click", function() {
         itemIds.push(itemSelected.id);
         itemQuantities.push(orderQuantity);
         $("#order-quantity").val(1);
+    } else {
+        $("#order-quantity").val(this.val());
     }
 });
