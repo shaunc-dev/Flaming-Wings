@@ -129,6 +129,7 @@ function computeTotalCost() {
 
 function sendOrders(finalizedOrders) {
     // ajax here to send the Object
+    console.log(finalizedOrders);
     $.ajax({
         url: "cashier-controller/process-orders.php",
         data: finalizedOrders,
