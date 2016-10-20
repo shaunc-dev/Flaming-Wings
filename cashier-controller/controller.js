@@ -13,7 +13,7 @@ function reInitializeOrders() {
 }
 
 function insertItem(item) {
-    var $itemName = $("<h3>", {"class": "box-title"}).text(item.name);
+    var $itemName = $("<h7>", {"class": ""}).text(item.name);
     var $itemHeader = $("<div>", {"class": "box-header with-border"}).append($itemName);
     var $itemDescription = $("<div>", {"class": "box-body"})
     .append($("<small>").text("Php " + item.price))
@@ -67,7 +67,7 @@ function addToOrder(itemSelected) {
     $row = $("<tr>");
     
     $deleteButton = $("<span>", {"class": "glyphicon glyphicon-trash", "style": "color: #f56954;"});
-    $deleteColumn = $("<td>").html($deleteButton);
+    $deleteColumn = $("<td>").append($deleteButton);
     $itemQuantity = $("<td>").html(itemSelected.quantity);
     $itemName = $("<td>").html(itemSelected.name);
     $itemPrice = $("<td>").html(itemSelected.price.toFixed(2));
@@ -116,18 +116,20 @@ function sendOrders(finalizedOrders) {
 }
 
 function fetchItems() {
-    // mock recipe list (will integrate with the database soon)
-    for (var i = 1; i <= 30; i++) {
-        $("#items").append(insertItem(
-            {
-                id: i,
-                name: "Flaming Wings " + i,
-                price: "50.00",
-                // pieces_left: "50",
-                type: 1
+    $.ajax({
+        url: "cashier-controller/get-recipes.php",
+        dataType: "json",
+        success: function(data) {
+            console.log(data.recipes.length);
+            for (var i = 0; i < data.recipes.length; i++) {
+                $("#items").append(insertItem(data.recipes[i]));
             }
-        ));
-    }
+        },
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+    // mock recipe list (will integrate with the database soon)
 }
 
 fetchItems();
