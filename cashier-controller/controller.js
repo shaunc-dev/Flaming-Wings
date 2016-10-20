@@ -36,6 +36,7 @@ function isUnlocked(boolean) {
         $("#lock, #clear").css("display", "block");
         $("#cancel").css("display", "none");
         $("#add-to-orders").attr("disabled", true);
+        $("#confirm-orders").attr("disabled", true);
 
         $("#clear").on("click", function() {
             reInitializeOrders();
@@ -50,6 +51,7 @@ function isUnlocked(boolean) {
         $("#lock, #clear").css("display", "none");
         $("#cancel").css("display", "block");
         $("#add-to-orders").attr("disabled", false);
+        $("#confirm-orders").attr("disabled", false);
     }
 }
 
