@@ -47,6 +47,17 @@
                 text-align: right;
             }
 
+            .nav-tabs {
+                overflow-x: auto;
+                overflow-y: hidden;
+                display: -webkit-box;
+                display: -moz-box;
+            }
+
+            .nav-tabs > li {
+                float: none;
+            }
+
             
         </style>
     </head>
@@ -114,9 +125,9 @@
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Recipes</h3>
                                     </div>
-                                    <div class="box-body" style="height: 600px; overflow-y: scroll; overflow-x: hidden">
-                                        <div class="nav-tabs-custom">
-                                            <ul class="nav nav-tabs" id="type-tabs">
+                                    <div class="box-body">
+                                        <div class="nav-tabs-custom" style="height: 600px; overflow-y: auto; overflow-x: hidden">
+                                            <ul class="nav nav-tabs" id="type-tabs" style="overflow-x:auto">
                                             </ul>
                                             <div class="tab-content" id="type-tabs-content">
                                             </div>

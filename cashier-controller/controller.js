@@ -13,7 +13,34 @@ function reInitializeOrders() {
 }
 
 function setupTabs() {
-    
+    $.ajax({
+        url: "cashier-controller/get-types.php",
+        dataType: "json",
+        success: function(data) {
+            for (var i = 0; i < data.types.length; i++) {
+                $tablinks = $("<a>", {"href": "#type_" + data.types[i].id, "data-toggle": "tab"}).text(data.types[i].name);
+                $tabpanes = $("<div>", {"class": "tab-pane", "id": "type_" + data.types[i].id, "data-type-id": data.types[i].id}).append($("<div>", {"class": "row"}));
+
+                $("#type-tabs").append($("<li>").append($tablinks));
+                $("#type-tabs-content").append($tabpanes);
+
+            }
+        }, 
+        error: function(errorThrown) {
+            console.log(errorThrown);
+        }
+    });
+}
+
+function insertInsideTab(type, itemToBeInserted) {
+    // console.log(itemToBeInserted);
+
+    $("#type-tabs-content .tab-pane").each(function() {
+        // console.log($(this + " .row"));
+        if (type == $(this).data("type-id")) {
+            $("#type-tabs-content #type_"+type+" .row").append(itemToBeInserted);
+        }
+    });
 }
 
 function insertItem(item) {
@@ -25,13 +52,13 @@ function insertItem(item) {
     // .append($("<small>").text(item.pieces_left + " pieces left"));
     
     var $boxTemplate = $("<div>", {"class": "box box-primary box-solid"}).append($itemHeader).append($itemDescription);
-    var $columnTemplate = $("<div>", {"class": "col-sm-3"}).append($boxTemplate);
+    var $columnTemplate = $("<div>", {"class": "col-sm-2 col-md-4 col-lg-4"}).append($boxTemplate);
     
     $boxTemplate.on("click", function() {
         selectItem($itemDescription, item);
     });
 
-    return $columnTemplate;
+    insertInsideTab(item.type, $columnTemplate);
 }
 
 function isUnlocked(boolean) {
@@ -124,9 +151,8 @@ function fetchItems() {
         url: "cashier-controller/get-recipes.php",
         dataType: "json",
         success: function(data) {
-            console.log(data.recipes.length);
             for (var i = 0; i < data.recipes.length; i++) {
-                $("#items").append(insertItem(data.recipes[i]));
+                insertItem(data.recipes[i]);
             }
         },
         error: function(errorThrown) {
@@ -136,7 +162,12 @@ function fetchItems() {
     // mock recipe list (will integrate with the database soon)
 }
 
+// initialize everything below
+
+setupTabs();
 fetchItems();
+
+$("a[href='#type_1']").click();
 
 $("#cancel").on("click", function() {
     $("#unlock-modal").modal();
