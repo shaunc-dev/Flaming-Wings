@@ -5,7 +5,7 @@ require('connect.php');
 // preparing arrays
 $recipe = array();
 $recipe["recipes"] = array();
-$result = $connect->query("select r.recipe_id `id`, r.recipe_name `name`, r.recipe_typeid `type`, r.price `price` from recipe r, recipetype rt where r.recipe_typeid = rt.recipe_typeid") or die ($connect->error);
+$result = $connect->query("select r.recipe_id `id`, r.recipe_name `name`, r.recipe_typeid `type`, r.price `price` from recipe r, recipetype rt where r.deactivate = '0' && r.recipe_typeid = rt.recipe_typeid order by r.recipe_typeid asc") or die ($connect->error);
 
 while ($row = $result->fetch_assoc()) {
     array_push($recipe["recipes"], (object) [
