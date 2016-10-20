@@ -1,6 +1,10 @@
 <?php
 
 require("connect.php");
-$result = $connect->query("select * from recipetype");
+$types = array();
+$types["type"] = array();
+
+$result = $connect->query("select * from recipetype") or die ($connect-error);
+
 
 ?>

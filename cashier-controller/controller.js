@@ -12,11 +12,15 @@ function reInitializeOrders() {
     computeTotalCost();
 }
 
+function setupTabs() {
+    
+}
+
 function insertItem(item) {
     var $itemName = $("<h7>", {"class": ""}).text(item.name);
     var $itemHeader = $("<div>", {"class": "box-header with-border"}).append($itemName);
     var $itemDescription = $("<div>", {"class": "box-body"})
-    .append($("<small>").text("Php " + item.price))
+    .append($("<small>").text("₱ " + item.price))
     // .append("<br>")
     // .append($("<small>").text(item.pieces_left + " pieces left"));
     
