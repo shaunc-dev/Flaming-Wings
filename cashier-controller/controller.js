@@ -30,6 +30,27 @@ function insertItem(item) {
     return $columnTemplate;
 }
 
+function isUnlocked(boolean) {
+    if (boolean) {
+        $("#orders tr td:last-child").css("display", "block");
+        $("#lock, #clear").css("display", "block");
+        $("#cancel").css("display", "none");
+
+        $("#clear").on("click", function() {
+            reInitializeOrders();
+            isUnlocked(false);
+        });
+
+        $("#lock").on("click", function() {
+            isUnlocked(false);
+        });
+    } else {
+        $("#orders tr td:last-child").css("display", "none");
+        $("#lock, #clear").css("display", "none");
+        $("#cancel").css("display", "block");
+    }
+}
+
 function selectItem($selectedItem, itemProperties) {
     $(".box-body").removeClass("item-focus");
     $selectedItem.addClass("item-focus");
@@ -108,7 +129,12 @@ function fetchItems() {
 fetchItems();
 
 $("#cancel").on("click", function() {
-    reInitializeOrders();
+    $("#unlock-modal").modal();
+    $("#manager-password").focus();
+    $("#unlock-button").on("click", function() {
+        isUnlocked(true);
+        $("#unlock-modal").modal("hide");
+    });
 });
 
 $("#confirm-orders").on("click", function() {
@@ -130,7 +156,7 @@ $("#add-to-orders").on("click", function() {
             { 
                 name: itemSelected.name,
                 quantity: orderQuantity,
-                price: piecesLeft * orderQuantity
+                price: itemSelected.price * orderQuantity
             }
         );
 

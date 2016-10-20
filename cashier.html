@@ -12,6 +12,10 @@
             body {
                 height: 100%;
             }
+            
+            #lock, #clear {
+                display: none;
+            }
 
             .content-wrapper {
                 margin-left: 0;
@@ -71,7 +75,7 @@
                                     <div class="box-header">
                                         <h3 class="box-title">Orders</h3>
                                         <div class="box-tools">
-                                            <button class="btn btn-danger" id="cancel">Cancel order</button>
+                                            <button class="btn btn-danger" id="clear">Clear order</button>
                                         </div>
                                     </div>
                                     <div class="box-body" id="outer" style="height: 500px; overflow-y:scroll">
@@ -88,6 +92,10 @@
                                         </table>
                                     </div>
                                     <div class="box-footer">
+                                        <div style="float:left">
+                                            <button class="btn btn-danger" id="cancel">Modify order</button>
+                                            <button class="btn btn-danger" id="lock">Lock</button>
+                                        </div>
                                         <div style="float: right">
                                             <button id="confirm-orders" class="btn btn-primary">
                                                 Confirm order
@@ -119,6 +127,26 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="unlock-modal" role="dialog">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Please enter password</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-lock"></i>
+                                </span>
+                                <input type="password" class="form-control" id="manager-password" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" id="unlock-button">Unlock</button>
                         </div>
                     </div>
                 </div>
