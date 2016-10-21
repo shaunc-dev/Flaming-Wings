@@ -139,10 +139,14 @@ function sendOrders(finalizedOrders) {
             if (data === 'success') {
                 console.log(data);
                 reInitializeOrders();
+            } else {
+                console.log(data);
             }
         },
-        error: function(errorThrown) {
+        error: function(jqXHR, textStatus, errorThrown) {
             console.log(errorThrown);
+            console.log(textStatus);
+            console.log(jqXHR);
         }
     });
 }
