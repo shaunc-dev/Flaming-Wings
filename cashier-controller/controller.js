@@ -4,12 +4,15 @@ var itemQuantities = new Array();
 
 function reInitializeOrders() {
     console.log("Resetting values...");
+
     $(".box-body").removeClass("item-focus");
     $("#orders tr").remove();
     itemIds = new Array();
     itemQuantities = new Array();
     itemSelected = new Object();
     computeTotalCost();
+    $("#type-tabs-content .tab-pane .row *").remove();
+    fetchItems();
 }
 
 function setupTabs() {
@@ -19,12 +22,15 @@ function setupTabs() {
         success: function(data) {
             for (var i = 0; i < data.types.length; i++) {
                 $tablinks = $("<a>", {"href": "#type_" + data.types[i].id, "data-toggle": "tab"}).text(data.types[i].name);
-                $tabpanes = $("<div>", {"class": "tab-pane", "id": "type_" + data.types[i].id, "data-type-id": data.types[i].id}).append($("<div>", {"class": "row"}));
+                $tabpanes = $("<div>", {"class": "tab-pane", "id": "type_" + data.types[i].id, "data-type-id": data.types[i].id, "role": "tabpanel"}).append($("<div>", {"class": "row"}));
 
                 $("#type-tabs").append($("<li>").append($tablinks));
                 $("#type-tabs-content").append($tabpanes);
 
             }
+
+            $("a[href='#type_1']").tab("show");
+            
         }, 
         error: function(errorThrown) {
             console.log(errorThrown);
@@ -68,15 +74,6 @@ function isUnlocked(boolean) {
         $("#cancel").css("display", "none");
         $("#add-to-orders").attr("disabled", true);
         $("#confirm-orders").attr("disabled", true);
-
-        $("#clear").on("click", function() {
-            reInitializeOrders();
-            isUnlocked(false);
-        });
-
-        $("#lock").on("click", function() {
-            isUnlocked(false);
-        });
     } else {
         $("#orders tr td:last-child").css("display", "none");
         $("#lock, #clear").css("display", "none");
@@ -130,6 +127,7 @@ function computeTotalCost() {
 function sendOrders(finalizedOrders) {
     // ajax here to send the Object
     console.log(finalizedOrders);
+    reInitializeOrders();
     $.ajax({
         url: "cashier-controller/process-orders.php",
         data: finalizedOrders,
@@ -156,6 +154,7 @@ function fetchItems() {
         url: "cashier-controller/get-recipes.php",
         dataType: "json",
         success: function(data) {
+            console.log(data);
             for (var i = 0; i < data.recipes.length; i++) {
                 insertItem(data.recipes[i]);
             }
@@ -164,52 +163,61 @@ function fetchItems() {
             console.log(errorThrown);
         }
     });
-    // mock recipe list (will integrate with the database soon)
+}
+
+function initializeListeners() {
+    $("#clear").on("click", function() {
+        reInitializeOrders();
+        isUnlocked(false);
+    });
+
+    $("#lock").on("click", function() {
+        isUnlocked(false);
+    });
+
+    $("#cancel").on("click", function() {
+        $("#unlock-modal").modal();
+        $("#manager-password").focus();
+        $("#unlock-button").on("click", function() {
+            isUnlocked(true);
+            $("#unlock-modal").modal("hide");
+        });
+    });
+
+    $("#confirm-orders").on("click", function() {
+        var itemOrders = new Object();
+        itemOrders.id = itemIds;
+        itemOrders.quantity = itemQuantities;
+        
+        if (itemOrders.id.length > 0 && itemOrders.quantity.length > 0) {
+            sendOrders(itemOrders);
+        }
+    });
+
+    $("#add-to-orders").on("click", function() {
+        var orderQuantity = $("#order-quantity").val();
+        var piecesLeft = parseInt(itemSelected.pieces_left);
+
+        // if (orderQuantity <= piecesLeft) {
+            addToOrder(
+                { 
+                    name: itemSelected.name,
+                    quantity: orderQuantity,
+                    price: itemSelected.price * orderQuantity
+                }
+            );
+
+            itemIds.push(itemSelected.id);
+            itemQuantities.push(orderQuantity);
+            $("#order-quantity").val(1);
+        // } else {
+        //     $("#order-quantity").val(this.val());
+        // }
+    });
 }
 
 // initialize everything below
 
 setupTabs();
 fetchItems();
-
-$("a[href='#type_1']").click();
-
-$("#cancel").on("click", function() {
-    $("#unlock-modal").modal();
-    $("#manager-password").focus();
-    $("#unlock-button").on("click", function() {
-        isUnlocked(true);
-        $("#unlock-modal").modal("hide");
-    });
-});
-
-$("#confirm-orders").on("click", function() {
-    var itemOrders = new Object();
-    itemOrders.id = itemIds;
-    itemOrders.quantity = itemQuantities;
-    
-    if (itemOrders.id.length > 0 && itemOrders.quantity.length > 0) {
-        sendOrders(itemOrders);
-    }
-});
-
-$("#add-to-orders").on("click", function() {
-    var orderQuantity = $("#order-quantity").val();
-    var piecesLeft = parseInt(itemSelected.pieces_left);
-
-    // if (orderQuantity <= piecesLeft) {
-        addToOrder(
-            { 
-                name: itemSelected.name,
-                quantity: orderQuantity,
-                price: itemSelected.price * orderQuantity
-            }
-        );
-
-        itemIds.push(itemSelected.id);
-        itemQuantities.push(orderQuantity);
-        $("#order-quantity").val(1);
-    // } else {
-    //     $("#order-quantity").val(this.val());
-    // }
-});
+initializeListeners();

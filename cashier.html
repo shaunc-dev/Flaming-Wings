@@ -6,12 +6,9 @@
         <!--stylesheet imports-->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="dist/css/jquery.mCustomScrollbar.min.css">
         <script src="dist/js/jquery.js"></script>
         <style>
-
-            body {
-                height: 100%;
-            }
             
             #lock, #clear {
                 display: none;
@@ -48,8 +45,7 @@
             }
 
             .nav-tabs {
-                overflow-x: auto;
-                overflow-y: hidden;
+                overflow: hidden;
                 display: -webkit-box;
                 display: -moz-box;
             }
@@ -89,7 +85,7 @@
                                             <button class="btn btn-danger" id="clear">Clear order</button>
                                         </div>
                                     </div>
-                                    <div class="box-body table-responsive no-padding" id="outer" style="height: 500px; overflow-y:auto">
+                                    <div class="box-body table-responsive no-padding" id="outer" style="height: 543px; overflow-y:auto">
                                         <table class="table table-hover">
                                             <thead class="floating-head">
                                                 <tr style="background-color: white">
@@ -125,10 +121,10 @@
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Recipes</h3>
                                     </div>
-                                    <div class="box-body">
+                                    <div class="box-body no-padding">
                                         <div class="nav-tabs-custom" style="height: 600px; overflow-y: auto; overflow-x: hidden">
-                                            <ul class="nav nav-tabs" id="type-tabs" style="overflow-x:auto">
-                                            </ul>
+                                                <ul class="nav nav-tabs" id="type-tabs" style="overflow-x:auto">
+                                                </ul>
                                             <div class="tab-content" id="type-tabs-content">
                                             </div>
                                         </div>
@@ -174,6 +170,7 @@
         <!--script imports-->
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
+        <script src="dist/js/jquery.mCustomScrollbar.min.js"></script>
         <script src="cashier-controller/controller.js"></script>
     </body>
 </html>
