@@ -5,6 +5,9 @@
 
     if (isset($_POST["id"]) && isset($_POST["quantity"])) {
         // inserting the timestamp, and to get the sales_id
+        $received_ids = $_POST["id"];
+        $received_quantities = $_POST["quantity"];
+
         $result = $connect->query("insert into sales () values ()");
 
         $sales_id = $connect->insert_id;
@@ -13,14 +16,14 @@
         $get_qty_from_stock = $connect->prepare("select qty, stock_id from stock where ingName_id = ?");
         $update_qty_in_stock = $connect->prepare("update stock set qty = ? where stock_id = ?");
 
-        for ($i = 0; $i < sizeof($_POST["id"]); $i++) {
-            $statement->bind_param('ii', $_POST["id"][$i], $_POST["quantity"][$i]);
+        for ($i = 0; $i < sizeof($received_ids); $i++) {
+            $statement->bind_param('ii', $received_ids[$i], $received_quantities[$i]);
             $statement->execute();
 
             if (!$statement) {
                 $status = $connect->error;
             } else {
-                $get_ingredient->bind_param('i', $_POST["id"]);
+                $get_ingredient->bind_param('i', $received_ids[$i]);
                 $get_ingredient->execute();
                 $get_ingredient_result = $get_ingredient->get_result();
 
@@ -39,7 +42,7 @@
                             $status = $connect->error;
                         } else {
                             while ($row = $get_qty_from_stock_result->fetch_assoc()) {
-                                $new_stock_quantity = $row["qty"] - ($recipe_quantity * $_POST["quantity"]);
+                                $new_stock_quantity = $row["qty"] - ($recipe_quantity * $received_quantities[$i]);
                                 $update_qty_in_stock->bind_param('ii', $new_stock_quantity, $row["stock_id"]);
                                 $update_qty_in_stock->execute();
 
