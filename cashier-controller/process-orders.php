@@ -12,7 +12,7 @@
 
         $sales_id = $connect->insert_id;
         $statement = $connect->prepare("insert into sales_details (sales_id, recipe_id, qty) values ('".$sales_id."', ?, ?)");
-        $get_ingredient = $connect->prepare("select ingName_id, qty from recipe where recipe_id = ?");
+        $get_ingredient = $connect->prepare("select ingName_id, qty from recipeingredients where recipe_id = ?");
         $get_qty_from_stock = $connect->prepare("select qty, stock_id from stock where ingName_id = ?");
         $update_qty_in_stock = $connect->prepare("update stock set qty = ? where stock_id = ?");
 
@@ -27,8 +27,8 @@
                 $get_ingredient->execute();
                 $get_ingredient_result = $get_ingredient->get_result();
 
-                if (!$get_ingredient) {
-                    $status = $connect->error;
+                if (!$get_ingredient || $get_ingredient_result->num_rows() == 0) {
+                    $status = "error in get_ingredient || \n num-rows = 0";;
                 } else {
                     while ($get_ingredient_row = $get_ingredient_result->fetch_assoc()) {
                         $ingredient_id = $get_ingredient_row["ingName_id"];
@@ -38,8 +38,8 @@
                         $get_qty_from_stock->execute();
                         $get_qty_from_stock_result = $get_qty_from_stock->get_result();
 
-                        if (!$get_qty_from_stock) {
-                            $status = $connect->error;
+                        if (!$get_qty_from_stock || $get_qty_from_stock_result->num_rows() == 0) {
+                            $status = "error in get_qty_from_stock || \n num-rows = 0";
                         } else {
                             while ($row = $get_qty_from_stock_result->fetch_assoc()) {
                                 $new_stock_quantity = $row["qty"] - ($recipe_quantity * $received_quantities[$i]);
