@@ -42,7 +42,6 @@ function insertInsideTab(type, itemToBeInserted) {
     // console.log(itemToBeInserted);
 
     $("#type-tabs-content .tab-pane").each(function() {
-        // console.log($(this + " .row"));
         if (type == $(this).data("type-id")) {
             $("#type-tabs-content #type_"+type+" .row").append(itemToBeInserted);
         }
@@ -134,11 +133,9 @@ function sendOrders(finalizedOrders) {
         dataType: "html",
         method: "POST",
         success: function(data) {
-            if (data === 'success') {
+            if (data == 'success') {
                 console.log(data);
                 reInitializeOrders();
-            } else {
-                console.log(data);
             }
         },
         error: function(jqXHR, textStatus, errorThrown) {
@@ -188,6 +185,7 @@ function initializeListeners() {
         var itemOrders = new Object();
         itemOrders.id = itemIds;
         itemOrders.quantity = itemQuantities;
+        itemOrders.total = parseFloat($("#total-cost").text());
         
         if (itemOrders.id.length > 0 && itemOrders.quantity.length > 0) {
             sendOrders(itemOrders);

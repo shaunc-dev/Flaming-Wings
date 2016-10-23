@@ -7,8 +7,9 @@
         // inserting the timestamp, and to get the sales_id
         $received_ids = $_POST["id"];
         $received_quantities = $_POST["quantity"];
+        $total = $_POST["total"];
 
-        $result = $connect->query("insert into sales () values ()") or die ($connect->error);
+        $result = $connect->query("insert into sales (total) values ('".$total."')") or die ($connect->error);
 
         $sales_id = $connect->insert_id;
         $statement = $connect->prepare("insert into sales_details (sales_id, recipe_id, qty) values ('".$sales_id."', ?, ?)");
