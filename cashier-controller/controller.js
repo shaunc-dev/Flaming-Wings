@@ -125,16 +125,13 @@ function computeTotalCost() {
 
 function sendOrders(finalizedOrders) {
     // ajax here to send the Object
-    console.log(finalizedOrders);
-    reInitializeOrders();
     $.ajax({
         url: "cashier-controller/process-orders.php",
         data: finalizedOrders,
         dataType: "html",
         method: "POST",
         success: function(data) {
-            if (data == 'success') {
-                console.log(data);
+            if (data == "success") {
                 reInitializeOrders();
             }
         },
