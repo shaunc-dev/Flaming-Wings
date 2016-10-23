@@ -132,6 +132,7 @@ function sendOrders(finalizedOrders) {
         method: "POST",
         success: function(data) {
             if (data == "success") {
+                console.log(data);
                 reInitializeOrders();
             }
         },
@@ -148,7 +149,6 @@ function fetchItems() {
         url: "cashier-controller/get-recipes.php",
         dataType: "json",
         success: function(data) {
-            console.log(data);
             for (var i = 0; i < data.recipes.length; i++) {
                 insertItem(data.recipes[i]);
             }
