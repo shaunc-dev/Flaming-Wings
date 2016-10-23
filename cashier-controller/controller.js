@@ -173,8 +173,16 @@ function initializeListeners() {
         $("#unlock-modal").modal();
         $("#manager-password").focus();
         $("#unlock-button").on("click", function() {
-            isUnlocked(true);
-            $("#unlock-modal").modal("hide");
+            var jqXHR = $.post("cashier-controller/access-verification.php", { password: $("#manager-password").val() });
+            jqXHR.done(function (data) {
+                console.log(data);
+                if (data == "true") {
+                    isUnlocked(true);
+                    $("#unlock-modal").modal("hide");
+                } else {
+                    // something to alert
+                }
+            });
         });
     });
 
