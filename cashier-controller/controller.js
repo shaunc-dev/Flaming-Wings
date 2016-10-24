@@ -131,8 +131,8 @@ function sendOrders(finalizedOrders) {
         dataType: "html",
         method: "POST",
         success: function(data) {
+            console.log(data);
             if (data == "success") {
-                console.log(data);
                 reInitializeOrders();
             }
         },
