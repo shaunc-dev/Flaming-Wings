@@ -80,9 +80,6 @@
         <div class="wrapper">
             <div class="content-wrapper">
                 <div class="alert-overlay">
-                    <div class="alert alert-success">
-
-                    </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
