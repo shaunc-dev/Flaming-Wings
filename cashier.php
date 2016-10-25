@@ -6,7 +6,6 @@
         <!--stylesheet imports-->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="dist/css/jquery.mCustomScrollbar.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <script src="dist/js/jquery.js"></script>
         <script>
@@ -194,7 +193,6 @@
         <!--script imports-->
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
-        <script src="dist/js/jquery.mCustomScrollbar.min.js"></script>
         <script src="cashier-controller/controller.js"></script>
     </body>
 </html>
