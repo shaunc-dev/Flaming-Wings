@@ -198,10 +198,12 @@ function initializeListeners() {
     });
 
     $("#add-to-orders").on("click", function() {
-        var orderQuantity = $("#order-quantity").val();
-        var piecesLeft = parseInt(itemSelected.pieces_left);
 
-        // if (orderQuantity <= piecesLeft) {
+        if (itemSelected == null) {
+            generateAlert("Select an item first!", danger);
+        } else {
+            var orderQuantity = $("#order-quantity").val();
+            
             addToOrder(
                 { 
                     name: itemSelected.name,
@@ -213,9 +215,22 @@ function initializeListeners() {
             itemIds.push(itemSelected.id);
             itemQuantities.push(orderQuantity);
             $("#order-quantity").val(1);
-        // } else {
-        //     $("#order-quantity").val(this.val());
-        // }
+        }
+    });
+}
+
+/**
+ * @param alertType either success or a danger alert style (green or red)
+ */
+function generateAlert(message, alertType) {
+    $alert = $("<div>", {
+        "class": "alert alert-" + alertType + "",
+    }).html(message);
+    $(".alert-overlay").append($alert).show();
+
+    setTimeout(5000, function() {
+        $alert.remove();
+        $(".alert-overlay").fadeOut(1000);
     });
 }
 

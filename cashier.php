@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="dist/css/jquery.mCustomScrollbar.min.css">
         <script src="dist/js/jquery.js"></script>
-        <script>
+        <!--<script>
             $(window).on("load", function() {
                 $.post("cashier-controller/check.php")
                 .done(function(data) {
@@ -17,8 +17,12 @@
                     }
                 });
             });
-        </script>
+        </script>-->
         <style>
+
+            .alert-overlay {
+                z-index: 1;
+            }
             
             #lock, #clear {
                 display: none;
@@ -27,6 +31,7 @@
             .content-wrapper {
                 margin-left: 0;
                 padding: 30px;
+                z-index: 0;
             }
 
             .item-focus, .total-background {
@@ -64,12 +69,21 @@
                 float: none;
             }
 
+            .alert-overlay {
+                display: none;
+            }
+
             
         </style>
     </head>
     <body class="layout-boxed">
         <div class="wrapper">
             <div class="content-wrapper">
+                <div class="alert-overlay">
+                    <div class="alert alert-success">
+
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
