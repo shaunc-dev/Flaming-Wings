@@ -8,6 +8,16 @@
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="dist/css/jquery.mCustomScrollbar.min.css">
         <script src="dist/js/jquery.js"></script>
+        <script>
+            $(window).on("load", function() {
+                $.post("cashier-controller/check.php")
+                .done(function(data) {
+                    if (data == "false") {
+                        window.location.replace("http://localhost/Flaming-Wings/login.php");
+                    }
+                });
+            });
+        </script>
         <style>
             
             #lock, #clear {
