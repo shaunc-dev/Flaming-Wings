@@ -7,8 +7,9 @@
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
         <link rel="stylesheet" href="dist/css/jquery.mCustomScrollbar.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <script src="dist/js/jquery.js"></script>
-        <!--<script>
+        <script>
             $(window).on("load", function() {
                 $.post("cashier-controller/check.php")
                 .done(function(data) {
@@ -17,10 +18,11 @@
                     }
                 });
             });
-        </script>-->
+        </script>
         <style>
 
-            .alert-overlay {
+            .alert {
+                position: relative;
                 z-index: 1;
             }
             
@@ -32,6 +34,7 @@
                 margin-left: 0;
                 padding: 30px;
                 z-index: 0;
+                position: relative;
             }
 
             .item-focus, .total-background {
@@ -69,18 +72,12 @@
                 float: none;
             }
 
-            .alert-overlay {
-                display: none;
-            }
-
             
         </style>
     </head>
     <body class="layout-boxed">
         <div class="wrapper">
             <div class="content-wrapper">
-                <div class="alert-overlay">
-                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
@@ -162,6 +159,12 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="alert-overlay">
                         </div>
                     </div>
                 </div>

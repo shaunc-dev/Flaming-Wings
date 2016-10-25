@@ -9,7 +9,7 @@ function reInitializeOrders() {
     $("#orders tr").remove();
     itemIds = new Array();
     itemQuantities = new Array();
-    itemSelected = new Object();
+    itemSelected = null;
     computeTotalCost();
     $("#type-tabs-content .tab-pane .row *").remove();
     fetchItems();
@@ -133,6 +133,7 @@ function sendOrders(finalizedOrders) {
         success: function(data) {
             console.log(data);
             if (data == "success") {
+                generateAlert("Customer's order is confirmed!", "success");
                 reInitializeOrders();
             }
         },
@@ -163,6 +164,7 @@ function initializeListeners() {
     $("#clear").on("click", function() {
         reInitializeOrders();
         isUnlocked(false);
+        generateAlert("Order has been cancelled!", "danger");
     });
 
     $("#lock").on("click", function() {
@@ -200,10 +202,10 @@ function initializeListeners() {
     $("#add-to-orders").on("click", function() {
 
         if (itemSelected == null) {
-            generateAlert("Select an item first!", danger);
+            generateAlert("Select an item first!", "danger");
         } else {
             var orderQuantity = $("#order-quantity").val();
-            
+
             addToOrder(
                 { 
                     name: itemSelected.name,
@@ -220,18 +222,30 @@ function initializeListeners() {
 }
 
 /**
- * @param alertType either success or a danger alert style (green or red)
+ * @param alertType type of alert to generate (possible values are success, info, warning, and danger)
  */
 function generateAlert(message, alertType) {
+    $(".alert").remove();
+    var alertIcon = "";
+
+    if (alertType == "danger") {
+        alertIcon = "icon fa fa-ban";
+    } else if (alertType == "info") {
+        alertIcon = "icon fa fa-info";
+    } else if (alertType == "warning") {
+        alertIcon = "icon fa fa-warning";
+    } else if (alertType == "success") {
+        alertIcon = "icon fa fa-check";
+    }
+
     $alert = $("<div>", {
         "class": "alert alert-" + alertType + "",
-    }).html(message);
+    }).html($("<i>", {"class": alertIcon})).append(message);
     $(".alert-overlay").append($alert).show();
 
-    setTimeout(5000, function() {
-        $alert.remove();
-        $(".alert-overlay").fadeOut(1000);
-    });
+    setTimeout(function() {
+        $(".alert").fadeOut();
+    }, 5000);
 }
 
 // initialize everything below
