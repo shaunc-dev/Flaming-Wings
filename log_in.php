@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -27,25 +28,25 @@
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-         <img src="logoo.png" alt="Mountain View">
+         <img src="logo-transparent.png" alt="Mountain View">
       </div><!-- /.login-logo -->
       <div class="login-box-body">
         <p class="login-box-msg">Sign in here</p>
         <form action="../../index2.html" method="post">
           <div class="form-group has-feedback">
-            <input type="UsernName" class="form-control" placeholder="Username">
+            <input type="UsernName" class="form-control" placeholder="Username" required>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">
-            <input type="Password" class="form-control" placeholder="Password">
+            <input type="Password" class="form-control" placeholder="Password" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
-          <center>
+          
           <div class="row">
             <div class="col-xs-4">
               <p><button class="btn btn-block btn-danger">Sign In</button></p>
             </div><!-- /.col -->
-          </center>
+          
           </div>
         </form>
       
