@@ -74,6 +74,7 @@ function isUnlocked(boolean) {
         $("#add-to-orders").attr("disabled", true);
         $("#confirm-orders").attr("disabled", true);
     } else {
+        $("#manager-password").val("");
         $("#orders tr td:last-child").css("display", "none");
         $("#lock, #clear").css("display", "none");
         $("#cancel").css("display", "block");
