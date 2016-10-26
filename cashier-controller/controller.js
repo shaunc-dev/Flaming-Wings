@@ -206,17 +206,21 @@ function initializeListeners() {
         } else {
             var orderQuantity = $("#order-quantity").val();
 
-            addToOrder(
-                { 
-                    name: itemSelected.name,
-                    quantity: orderQuantity,
-                    price: itemSelected.price * orderQuantity
-                }
-            );
+            if (orderQuantity > 0) {
+                addToOrder(
+                    { 
+                        name: itemSelected.name,
+                        quantity: orderQuantity,
+                        price: itemSelected.price * orderQuantity
+                    }
+                );
 
-            itemIds.push(itemSelected.id);
-            itemQuantities.push(orderQuantity);
-            $("#order-quantity").val(1);
+                itemIds.push(itemSelected.id);
+                itemQuantities.push(orderQuantity);
+                $("#order-quantity").val(1);
+            } else  {
+                generateAlert("An item should have a quantity!", "danger");
+            }
         }
     });
 }

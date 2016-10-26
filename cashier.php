@@ -9,14 +9,14 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <script src="dist/js/jquery.js"></script>
         <script>
-            $(window).on("load", function() {
-                $.post("cashier-controller/check.php")
-                .done(function(data) {
-                    if (data == "false") {
-                        window.location.replace("http://localhost/Flaming-Wings/login.php");
-                    }
-                });
-            });
+            // $(window).on("load", function() {
+            //     $.post("cashier-controller/check.php")
+            //     .done(function(data) {
+            //         if (data == "false") {
+            //             window.location.replace("http://localhost/Flaming-Wings/login.php");
+            //         }
+            //     });
+            // });
         </script>
         <style>
 
