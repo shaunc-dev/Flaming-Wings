@@ -48,7 +48,7 @@
       <div class="register-bogx-body">
         <p class="login-box-msg">Register a new membership</p>
      
-        <form action="Register1.php" method="post" id="register">
+        <form action="Register1.php" method="post" id="register" onsubmit="return checkPass()">
           <!-- First name --> 
            <div class="form-group has-feedback">
             <input type="text" class="form-control" placeholder="First name" name="firstName" id="firstName" oninput="makeUsername()"
@@ -95,15 +95,17 @@
           <!-- retype/confirm password--> 
           <div class="form-group has-feedback">
             <input type="Password" class="form-control" placeholder="Retype password" name="confirm_password" id="confirm_password" pattern=".{6,}" title="Password must contain six or more characters" 
-            onkeyup="checkPass(); return false;" required>
+            onkeyup="checkPass(); " required>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span> <span id="confirmMessage" class="confirmMessage"></span>
           </div>
 
           <!--register button --> 
-          <div class="row">
-            <div class="col-xs-4">
-             <p><button class="btn btn-block btn-danger" id="rButton">Register</button></p>
-            </div><!-- /.col -->
+          <div class="form-group">
+            
+           <!--   <p><button class="btn btn-block btn-danger" type="submit" id="rButton">Register</button></p> -->
+
+           <center><input type="submit" value="REGISTER"></center>
+            
           </div>
         </form>
     
@@ -127,6 +129,7 @@
 
    // checkPassword 
 
+
       function checkPass()
       {
           //Store the password field objects into variables ...
@@ -139,6 +142,8 @@
           var badColor = "#ff6666";
           //Compare the values in the password field 
           //and the confirmation field
+          var ok = true; 
+
           if(pass1.value == pass2.value){
               //The passwords match. 
               //Set the color to the good color and inform
@@ -146,7 +151,6 @@
               pass2.style.backgroundColor = goodColor;
               message.style.color = goodColor;
               message.innerHTML = "Passwords match!"
-              document.getElementById("rButton").submit();
 
           }else{
               //The passwords do not match.
@@ -155,9 +159,11 @@
               pass2.style.backgroundColor = badColor;
               message.style.color = badColor;
               message.innerHTML = "Passwords do not match!"
-              $("#rButton").prop('disabled', false); 
+              ok = false; 
+
 
           }
+          return ok; 
       } 
   
    
