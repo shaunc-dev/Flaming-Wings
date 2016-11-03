@@ -81,20 +81,20 @@
           </div>
           <!-- username --> 
           <div class="form-group has-feedback">
-            <input type="UserName" class="form-control" placeholder="Username" name="user_name" 
+            <input type="UserName" class="form-control" placeholder="Username" name="user_name" pattern=".{6,}" title="Must contain more than six characters"
             value="<?php if(isset($_POST['user_name'])) echo $_POST['user_name']; ?>" required>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
 
           <!-- password --> 
           <div class="form-group has-feedback">
-            <input type="Password" class="form-control" placeholder="Password" id="password" pattern=".{6,}" name="password" title="Password must contain six or more characters" required>
+            <input type="Password" class="form-control" placeholder="Password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
 
           <!-- retype/confirm password--> 
           <div class="form-group has-feedback">
-            <input type="Password" class="form-control" placeholder="Retype password" name="confirm_password" id="confirm_password" pattern=".{6,}" title="Password must contain six or more characters" 
+            <input type="Password" class="form-control" placeholder="Retype password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             onkeyup="checkPass(); " required>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span> <span id="confirmMessage" class="confirmMessage"></span>
           </div>

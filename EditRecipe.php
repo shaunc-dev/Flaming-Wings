@@ -277,7 +277,7 @@ if (!isset($_SESSION["guest"])) {
                 <form class="form-horizontal">
                   <div class="box-body">
                     <div class="form-group">
-                      <label for="query" class="col-sm-2 control-label">Recipe ID</label>
+                      <label for="query" class="col-sm-5 control-label">Search by Recipe ID</label>
                       <div class="col-sm-8">
                         <input type="text" class="form-control" id="query" name="query" placeholder="Enter Recipe ID" required>
                       </div>
