@@ -7,11 +7,12 @@ if (!isset($_SESSION["guest"])) {
 }
 
 ?>
+
 <html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Flaming Wings | Edit Recipe</title>
+    <title>Flaming Wings | Registered Users</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -45,26 +46,21 @@ if (!isset($_SESSION["guest"])) {
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- PHP --> 
 
-    <?php 
-    include("dbconnection.php"); 
-    ?>
+   <!-- PHP --> 
+   <?PHP 
+   include("dbconnection.php")
 
-
-
-   
+   ?>
 
     <!-- HEADER -->
   </head>
   <body class="hold-transition skin-red sidebar-mini">
     <div class="wrapper">
 
-    
-
       <header class="main-header">
         <!-- Logo -->
-        <a href="http://localhost/Flaming Wings/MAIN.php" class="logo">
+        <a href="MAIN.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <!-- logo for regular state and mobile devices -->
           <img src="logoo.jpg" alt="Mountain View" style="width:200px;height:50px;">
@@ -177,16 +173,25 @@ if (!isset($_SESSION["guest"])) {
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
 
+            <!--USER TYE-->
+            <li class="treeview">
+              <a href="RegisteredUsers.php">
+                <i class="fa fa-user"></i> <span>Users</span> 
+              </a>
+            </li>
+
             <!--DASHBOARD-->
-            <li class="active treeview">
-              <a href="http://localhost/Flaming-Wings/MAIN.php">
+            <li class="treeview">
+              <a href="MAIN.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
               </a>
             </li>
 
 
 
-   <!---RECIPE -->
+
+
+            <!---RECIPE -->
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-book"></i>
@@ -199,7 +204,7 @@ if (!isset($_SESSION["guest"])) {
                 <li><a href="http://localhost/Flaming-Wings/AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
                 <li><a href="http://localhost/Flaming-Wings/EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
                 <li><a href="http://localhost/Flaming-Wings/DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
+                 <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
               </ul>
             </li>
 
@@ -243,7 +248,7 @@ if (!isset($_SESSION["guest"])) {
             </li>
         <!-- /.sidebar -->
 
-         
+        
          <!--CONVERSION-->
             <li class="treeview">
               <a href="#">
@@ -259,121 +264,155 @@ if (!isset($_SESSION["guest"])) {
             </li>
       </aside>
 
-
-
+           <!--SEARCH--> 
     <div class="content-wrapper">
        <section class="content">
-       
-            <!-- END OF MODAL -->
-
-        <!--SEARCH-->
-      <form action="SearchEditRecipeBar.php" method="post" class="sidebar-form">
-            <div class="col-xs-10">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title"><b>SEARCH RECIPE TO BE EDITED</b></h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal">
-                  <div class="box-body">
-                    <div class="form-group">
-                      <label for="query" class="col-sm-5 control-label">Search by Recipe ID</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" id="query" name="query" placeholder="Enter Recipe ID" required>
-                      </div>
-                    </div>
-                  <div class="box-footer">
-                   <input type="submit" class="btn btn-info pull-right" value="Submit"/>
-                  </div><!-- /.box-footer -->
-                </form>
-              </div>
-            </div>
-          </form>
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+              <!-- general form elements -->
+               <h3>
+                Registered Users
+               </h3>
 
 
+              <!---START OF WRAPPER-->
 
 
-          <!--RECIPES (EDIT)--> 
-           <div class="row">
-            <div class="col-xs-10">
-              <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title"><b>EDIT RECIPE</b></h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="stocktable" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                         </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="recipeResults" class="table table-bordered table-hover">
-                    <thead>
+           <div class="col-md-50">
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#manager" data-toggle="tab">Manager</a></li>
+                  <li><a href="#stockcontroller" data-toggle="tab">Stock Controller</a></li>
+                  <li><a href="#cashier" data-toggle="tab">Cashier</a></li>
+                   <li><a href="#employee" data-toggle="tab">Employee</a></li>
+                </ul>
 
-                      <tr>
-                        <th>Recipe ID</th> <!--recipe id-->
-                        <th>Recipe Type</th> <!--recipe type-->
-                        <th>Recipe Name</th> <!--recipe name-->
-                     
 
-                      </tr>
-                    </thead>
-                    <form action="EditTheRecipe.php" method="get">
-                    <tbody>
-                     
-                       <?php
-                        $stock_code = isset($_GET['recipe_name']) ? $_GET['recipe_name'] : '';
-                          $sql = mysqli_query($connect, "SELECT recipe_id, recipe.recipe_name, recipe_type FROM recipe, recipetype WHERE deactivate = 0 AND recipe.recipe_typeid=recipetype.recipe_typeid order by recipe.recipe_id DESC");
-                        while ($row = mysqli_fetch_array($sql)){
-                          echo "<tr>"; 
-                          echo "<td>".$row['recipe_id']."</td>"; //recipe id
-                          echo "<td>".$row["recipe_type"]."</td>"; //type
-                          echo "<td>".$row["recipe_name"]."</td>"; //recipe name
-                          echo "<td><a href='EditTheRecipe.php?varname=".$row['recipe_id']."'> Edit</a></td>";
+                <!--MANAGER TAB-->
+                <div class="tab-content">
+                 <div class="active tab-pane" id="manager">
+                  <table class="table table-bordered">
+                    <tr>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </tr>
+                    <tr>
+                      <td>Example </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
 
-                          echo "</tr>";
-
-                      
-                        }
-                         ?>
-                        
-                    </tbody>
-                  </form>
+                  
                   </table>
-                   <div class="box-footer">
-                   
-                  </div>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
 
 
 
-            </section><!-- right col -->
-          </div><!-- /.row (main row) -->
+                  </div><!-- /.tab-pane -->
 
 
 
-        </section><!-- /.content -->
-      </div><!-- /.content-wrapper -->
+                <div class="tab-pane" id="stockcontroller">
+                  <table class="table table-bordered">
+                    <tr>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </tr>
+                    <tr>
+                      <td>Lang </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>    
+                  </table>
+
+                  </div><!-- /.tab-pane -->
 
 
 
-    
-      
+                 <div class="tab-pane" id="cashier">
+                  <table class="table table-bordered">
+                    <tr>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </tr>
+                    <tr>
+                      <td>Po </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>    
+                  </table>
+
+                  </div><!-- /.tab-pane -->
+
+
+                <div class="tab-pane" id="employee">
+                  <table class="table table-bordered">
+                    <tr>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </tr>
+                    <tr>
+                      <td>Ito </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>
+                    <tr>
+                      <td> </td>
+                      <td> </td>
+                      <td> </td>
+                    </tr>    
+                  </table>
+
+                  </div><!-- /.tab-pane -->
+
+                  
+
+             <!-- E N D I N G -->
     </div><!-- ./wrapper -->
-
-
-
-
-
-          <!---TABLE FOR RECIPE-->
-
-
-
-
-          <!---TABLE FOR RECIPE-->
           
 
-    
+          </div><!-- /.tab-pane -->
+         
+    </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>

@@ -1,12 +1,9 @@
-<!DOCTYPE html>
 <?php
 
-session_start();
-if (!isset($_SESSION["guest"])) {
-  header("login.php");
-}
-
+  session_start(); 
 ?>
+<!DOCTYPE html>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -25,16 +22,14 @@ if (!isset($_SESSION["guest"])) {
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
+   
     <!-- Morris chart -->
     <link rel="stylesheet" href="plugins/morris/morris.css">
     <!-- jvectormap -->
     <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Date Picker -->
     <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker-bs3.css">
+  
     <!-- bootstrap wysihtml5 - text editor -->
     <link rel="stylesheet" href="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
@@ -48,6 +43,7 @@ if (!isset($_SESSION["guest"])) {
    <?PHP 
    include("dbconnection.php")
 
+
    ?>
 
    
@@ -59,7 +55,7 @@ if (!isset($_SESSION["guest"])) {
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="MAIN.html" class="logo">
+        <a href="MAIN.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <!-- logo for regular state and mobile devices -->
           <img src="logoo.jpg" alt="Mountain View" style="width:200px;height:50px;">
@@ -123,7 +119,6 @@ if (!isset($_SESSION["guest"])) {
               <!-- UPPER RIGHT CORNER -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
                   <span class="hidden-xs">Brooklyn Beckham</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -266,8 +261,14 @@ if (!isset($_SESSION["guest"])) {
             Dashboard
             <small>Control panel</small>
             <?php 
+
+
             echo "<p class='pull-right'><b>Today is: </b> " . date('l jS \of F Y h:i:s A') . "</p>";
+            echo "Hey " . $_SESSION['user_name'] . ".<br>";
+               echo "<a href='logout.php'>Logout</a>";
              ?>
+
+
           </h1>
         
         </section>
