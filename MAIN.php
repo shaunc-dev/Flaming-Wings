@@ -1,3 +1,7 @@
+<?php
+
+  session_start(); 
+?>
 <!DOCTYPE html>
 
 <html>
@@ -257,9 +261,10 @@
             Dashboard
             <small>Control panel</small>
             <?php 
+
+
             echo "<p class='pull-right'><b>Today is: </b> " . date('l jS \of F Y h:i:s A') . "</p>";
-           
-               echo "Hey " .$username . " "; 
+            echo "Hey " . $_SESSION['user_name'] . ".<br>";
                echo "<a href='logout.php'>Logout</a>";
              ?>
 
