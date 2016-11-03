@@ -1,5 +1,5 @@
   <?php 
-  header ("Refresh: 3; url=Register.php"); 
+  
    include("dbconnection.php"); 
    $firstName = $_POST['firstName']; 
    $lastName = $_POST['lastName']; 
@@ -12,5 +12,6 @@
 
   mysqli_query($connect, $sql_query);
  
+ header ("Refresh: 3; url=Register.php"); 
 
 ?>

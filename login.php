@@ -1,5 +1,5 @@
  <?PHP 
- 
+  session_start(); 
    include("dbconnection.php"); 
    // if the form is submitted or not 
    // if the form is submitted 
