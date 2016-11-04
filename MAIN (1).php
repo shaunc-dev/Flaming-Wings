@@ -58,7 +58,7 @@
         <a href="MAIN.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <!-- logo for regular state and mobile devices -->
-          <img src="logo-transparent.png" alt="Mountain View" style="width:200px;height:50px;">
+          <img src="logoo.jpg" alt="Mountain View" style="width:200px;height:50px;">
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -117,10 +117,8 @@
 
 
               <!-- UPPER RIGHT CORNER -->
-
-              <!-- LOGOUT BUTTON -->
               <li class="dropdown user user-menu">
-                <a class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <span class="hidden-xs">
                  
                  <?php 
@@ -131,19 +129,18 @@
                 </a>
               </li>
               <!-- Control Sidebar Toggle Button -->
-
-             <li class="dropdown notifications-menu">
+              <li>
+              <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-user"></i>
+                       <i class="fa fa-user"></i>
                 </a>
                 <ul class="dropdown-menu">
-                  
-                   <li><a href='logout.php'>Logout</a></li>
-                </ul>
-              </li> 
-
-
-              </div>
+                  <li>
+                   <li>
+                      <a href='logout.php'>Logout</a>
+                  </li>
+              </ul>
+          </div>
         </nav>
       </header>
 
@@ -283,7 +280,8 @@
         </section>
 
      <section class="content">
-       <?php echo "<h5> Hey " . $_SESSION['user_name'] . "! </h5>"; ?>
+       <?php echo "<h5> Hey " . $_SESSION['user_name'] . "! </h5>"; 
+              echo "<a href='logout.php'>Logout</a>";?>
           <!-- Small boxes (Stat box) -->
           <div class="row">
 

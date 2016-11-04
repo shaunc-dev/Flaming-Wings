@@ -38,6 +38,24 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    <script>
+
+      $(document).ready(function () {
+       $("#user_name").blur(function () {
+        var username = $(this).val();
+          if (username == '') {
+            $("#availability").html("");
+          }else{
+            $.ajax({
+            url: "username_validation.php?uname="+username
+            }).done(function( data ) {
+          $("#availability").html(data);
+       }); 
+       } 
+       });
+      });
+    </script>
   </head>
   <body class="hold-transition register-page">
     <div class="register-box">
@@ -84,6 +102,8 @@
             <input type="UserName" class="form-control" placeholder="Username" name="user_name" pattern=".{6,}" title="Must contain more than six characters"
             value="<?php if(isset($_POST['user_name'])) echo $_POST['user_name']; ?>" required>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            <div id="username_availability_result"></div>
+
           </div>
 
           <!-- password --> 
@@ -166,7 +186,24 @@
           return ok; 
       } 
   
-   
+   //function to check username availability  
+function check_availability(){  
+  
+        //get the username  
+        var username = $('#username').val();  
+  
+        //use ajax to run the check  
+        $.post("username_validation.php", { username: username },  
+            function(result){  
+                //if the result is 1  
+                if(result == 1){  
+                    //show that the username is available  
+                    $('#username_availability_result').html(username + ' is Available');  
+                }else{  
+                    //show that the username is NOT available  
+                    $('#username_availability_result').html(username + ' is not Available');  
+                }  
+        });  
         
   // makeUsername 
 function makeUsername(){
