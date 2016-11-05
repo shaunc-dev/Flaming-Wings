@@ -6,19 +6,30 @@
         <!--stylesheet imports-->
         <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+        <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <script src="dist/js/jquery.js"></script>
         <script>
-            $(window).on("load", function() {
-                $.post("cashier-controller/check.php")
-                .done(function(data) {
-                    if (data == "false") {
-                        window.location.replace("http://localhost/Flaming-Wings/login.php");
-                    }
-                });
-            });
+            // $(window).on("load", function() {
+            //     $.post("cashier-controller/check.php")
+            //     .done(function(data) {
+            //         if (data == "false") {
+            //             window.location.replace("http://localhost/Flaming-Wings/login.php");
+            //         }
+            //     });
+            // });
         </script>
         <style>
+
+            .layout-boxed {
+                background: #fff;
+            }
+
+            .nav-tabs-custom > .nav-tabs > li.active {
+                border-top-color: #dd4b39;
+                background: #dd4b39 !important;
+                color: white;
+            }
 
             .alert {
                 position: relative;
@@ -37,7 +48,7 @@
             }
 
             .item-focus, .total-background {
-                background: #3c8dbc;
+                background: #dd4b39;
                 color: white;
             }
 
@@ -74,14 +85,15 @@
             
         </style>
     </head>
-    <body class="layout-boxed">
+    <body class="layout-boxed skin-red">
         <div class="wrapper">
+            <?php include("templates/navbar.php"); ?>
             <div class="content-wrapper">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="box box-primary box-solid">
+                                <div class="box box-danger box-solid">
                                     <div class="box-body total-background">
                                         <div class="row">
                                             <div class="col-sm-3">
@@ -95,7 +107,7 @@
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <div class="box box-primary">
+                                <div class="box box-danger">
                                     <div class="box-header">
                                         <h3 class="box-title">Orders</h3>
                                         <div class="box-tools">
@@ -118,11 +130,11 @@
                                     </div>
                                     <div class="box-footer">
                                         <div style="float:left">
-                                            <button class="btn btn-danger" id="cancel">Modify order</button>
+                                            <button class="btn btn-default" id="cancel">Modify order</button>
                                             <button class="btn btn-danger" id="lock">Lock</button>
                                         </div>
                                         <div style="float: right">
-                                            <button id="confirm-orders" class="btn btn-primary">
+                                            <button id="confirm-orders" class="btn btn-danger">
                                                 Confirm order
                                             </button>
                                         </div>
@@ -134,7 +146,7 @@
                     <div class="col-md-6">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="box box-primary">
+                                <div class="box box-danger">
                                     <div class="box-header with-border">
                                         <h3 class="box-title">Recipes</h3>
                                     </div>
@@ -152,7 +164,7 @@
                                             <span class="input-group-addon">How many recipes?</span>
                                             <input type="number" class="form-control" value="1" id="order-quantity">
                                             <div class="input-group-btn">
-                                                <button class="btn btn-primary" id="add-to-orders">Add recipe to list</button>
+                                                <button class="btn btn-danger" id="add-to-orders">Add recipe to list</button>
                                             </div>
                                         </div>
                                     </div>
