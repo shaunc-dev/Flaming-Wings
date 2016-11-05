@@ -541,7 +541,7 @@ if (!isset($_SESSION["guest"])) {
                 
                 <td>
                   <?php
-                  $sql = mysqli_query($connect, "SELECT recipe_name, s.qty, dtSales FROM sales AS s, recipe AS r WHERE s.recipe_id=r.recipe_id AND dtSales BETWEEN '".$_POST['start_date']."' AND '".$_POST['end_date']."' ORDER BY s.qty DESC");
+                  $sql = mysqli_query($connect, "SELECT recipe_name, sd.qty, s.dtSales FROM sales_details AS sd, sales AS s, recipe AS r WHERE sd.recipe_id=r.recipe_id AND s.dtSales BETWEEN '".$_POST['start_date']."' AND '".$_POST['end_date']."' AND sd.sales_id = s.sales_id ORDER BY sd.qty DESC");
                   while($row = mysqli_fetch_array($sql)){
                     echo "<tr>";
                     echo "<td>".$row['recipe_name']."</td>";
