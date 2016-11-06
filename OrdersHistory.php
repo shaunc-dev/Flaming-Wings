@@ -13,6 +13,24 @@
                 margin-top: 20px;
             }
 
+            thead tr th:nth-child(1) {
+                width: 100%;
+            }
+
+            .box-footer > span {
+                float: right;
+            }
+
+            .box-body {
+                max-height: 500px;
+                overflow-y: scroll;
+                overflow-x: hidden;
+            }
+
+            .box-footer {
+                display: block !important;
+            }
+
         </style>
     </head>
     <body class="sidebar-mini skin-red">
@@ -26,28 +44,51 @@
                 </section>
                 <section class="content">
                     <div class="row">
-                        <div class="col-lg-12">
-                            <div class="box box-danger box-solid">
+                        <div class="col-lg-6">
+                            <div class="box box-danger collapsed-box">
                                 <div class="box-header">
-                                    <h4>Order #99</h4>
+                                    <h3 class="box-title">Order #99</h3>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
                                 </div>
                                 <div class="box-body no-padding">
                                     <table class="table table-hover">
                                         <thead>
                                             <tr>
-                                                <th>Qty</th>
-                                                <th>Recipe name</th>
+                                                <th>Recipe</th>
                                                 <th>Price</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>1</td>
-                                                <td>Flaming Wings 1</td>
-                                                <td>2.00</td>
+                                                <td>2 x Bacon</td>
+                                                <td>20.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2 x Bacon</td>
+                                                <td>20.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2 x Bacon</td>
+                                                <td>20.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2 x Bacon</td>
+                                                <td>20.00</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2 x Bacon</td>
+                                                <td>20.00</td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                </div>
+                                <div class="box-footer">
+                                    <strong>Total</strong>
+                                    <span>20.00</span>
                                 </div>
                             </div>
                         </div>
