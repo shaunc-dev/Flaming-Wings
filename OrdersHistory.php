@@ -99,7 +99,7 @@
         <script>
 
             function insertOrder(order) {
-                var $boxTitle = $("<div>", {"class": "box-header"}).html("Order #" + order.id + " " + $("<small>", moment()));
+                var $boxTitle = $("<div>", {"class": "box-header"}).html("Order #" + order.id + " " + $("<small>", moment(order.date)));
             }
 
         </script>
