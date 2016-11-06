@@ -27,3 +27,4 @@ $(document).ready(function() {
 });
 
 </script>
+<script src="plugins/moment/moment.js"></script>

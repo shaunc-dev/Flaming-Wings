@@ -96,5 +96,12 @@
                 </section>
             </div>
         </div>
+        <script>
+
+            function insertOrder(order) {
+                var $boxTitle = $("<div>", {"class": "box-header"}).html("Order #" + order.id + " " + $("<small>", moment()));
+            }
+
+        </script>
     </body>
 </html>
