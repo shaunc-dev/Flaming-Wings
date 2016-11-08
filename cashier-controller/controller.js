@@ -56,7 +56,7 @@ function insertItem(item) {
     // .append("<br>")
     // .append($("<small>").text(item.pieces_left + " pieces left"));
     
-    var $boxTemplate = $("<div>", {"class": "box box-primary box-solid"}).append($itemHeader).append($itemDescription);
+    var $boxTemplate = $("<div>", {"class": "box box-danger box-solid"}).append($itemHeader).append($itemDescription);
     var $columnTemplate = $("<div>", {"class": "col-sm-2 col-md-4 col-lg-4"}).append($boxTemplate);
     
     $boxTemplate.on("click", function() {
@@ -74,6 +74,7 @@ function isUnlocked(boolean) {
         $("#add-to-orders").attr("disabled", true);
         $("#confirm-orders").attr("disabled", true);
     } else {
+        $("#manager-password").val("");
         $("#orders tr td:last-child").css("display", "none");
         $("#lock, #clear").css("display", "none");
         $("#cancel").css("display", "block");
@@ -206,17 +207,21 @@ function initializeListeners() {
         } else {
             var orderQuantity = $("#order-quantity").val();
 
-            addToOrder(
-                { 
-                    name: itemSelected.name,
-                    quantity: orderQuantity,
-                    price: itemSelected.price * orderQuantity
-                }
-            );
+            if (orderQuantity > 0) {
+                addToOrder(
+                    { 
+                        name: itemSelected.name,
+                        quantity: orderQuantity,
+                        price: itemSelected.price * orderQuantity
+                    }
+                );
 
-            itemIds.push(itemSelected.id);
-            itemQuantities.push(orderQuantity);
-            $("#order-quantity").val(1);
+                itemIds.push(itemSelected.id);
+                itemQuantities.push(orderQuantity);
+                $("#order-quantity").val(1);
+            } else  {
+                generateAlert("An item should have a quantity!", "danger");
+            }
         }
     });
 }
