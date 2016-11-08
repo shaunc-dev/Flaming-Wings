@@ -24,7 +24,7 @@
             .box-body {
                 max-height: 500px;
                 overflow-y: scroll;
-                overflow-x: hidden;
+                overflow-x: auto;
             }
 
             .box-footer {
@@ -45,7 +45,7 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-lg-6">
-                            <div class="box box-danger collapsed-box">
+                            <div class="box box-danger">
                                 <div class="box-header">
                                     <h3 class="box-title">Order #99</h3>
                                     <div class="box-tools pull-right">
@@ -91,6 +91,9 @@
                                     <span>20.00</span>
                                 </div>
                             </div>
+                        </div>
+                        <div class="col-lg-6">
+                            
                         </div>
                     </div>
                 </section>
