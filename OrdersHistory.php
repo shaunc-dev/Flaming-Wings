@@ -31,6 +31,22 @@
                 display: block !important;
             }
 
+            .selection {
+                margin-top: 20px;
+                text-align: left;
+            }
+
+            .selection > a {
+                display: block;
+                padding: 4px;
+                color: black;
+            }
+
+            .selection > a.active {
+                color: white;
+                background: rgba(225, 72, 53, 1.0);
+            }
+
         </style>
     </head>
     <body class="sidebar-mini skin-red">
@@ -44,56 +60,307 @@
                 </section>
                 <section class="content">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <div class="box box-danger">
-                                <div class="box-header">
-                                    <h3 class="box-title">Order #99</h3>
-                                    <div class="box-tools pull-right">
-                                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                            <i class="fa fa-plus"></i>
-                                        </button>
+                        <div class="col-lg-9">
+                            <div class="row">
+                                <div class="col-xs-12 col-lg-4">
+                                    <div class="box box-danger">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Order #99</h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body no-padding">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Recipe</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="box-footer">
+                                            <strong>Total</strong>
+                                            <span>20.00</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="box-body no-padding">
-                                    <table class="table table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>Recipe</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>2 x Bacon</td>
-                                                <td>20.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2 x Bacon</td>
-                                                <td>20.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2 x Bacon</td>
-                                                <td>20.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2 x Bacon</td>
-                                                <td>20.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2 x Bacon</td>
-                                                <td>20.00</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                <div class="col-xs-12 col-lg-4">
+                                    <div class="box box-danger">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Order #99</h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body no-padding">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Recipe</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="box-footer">
+                                            <strong>Total</strong>
+                                            <span>20.00</span>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="box-footer">
-                                    <strong>Total</strong>
-                                    <span>20.00</span>
+                                <div class="col-xs-12 col-lg-4">
+                                    <div class="box box-danger">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Order #99</h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body no-padding">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Recipe</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="box-footer">
+                                            <strong>Total</strong>
+                                            <span>20.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <div class="box box-danger">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Order #99</h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body no-padding">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Recipe</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="box-footer">
+                                            <strong>Total</strong>
+                                            <span>20.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <div class="box box-danger">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Order #99</h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body no-padding">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Recipe</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="box-footer">
+                                            <strong>Total</strong>
+                                            <span>20.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-lg-4">
+                                    <div class="box box-danger">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Order #99</h3>
+                                            <div class="box-tools pull-right">
+                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="box-body no-padding">
+                                            <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Recipe</th>
+                                                        <th>Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2 x Bacon</td>
+                                                        <td>20.00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="box-footer">
+                                            <strong>Total</strong>
+                                            <span>20.00</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6">
-                            
+                        <div class="col-lg-3">
+                            <div class="well well-sm">
+                                <h5><strong>Show orders</strong></h5>
+                                <div class="selection">
+                                    <a href="#" class="active">Today</a>
+                                    <a href="#">Last week</a>
+                                    <a href="#">Last month</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
