@@ -39,23 +39,23 @@
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <script>
+    // <script>
 
-      $(document).ready(function () {
-       $("#user_name").blur(function () {
-        var username = $(this).val();
-          if (username == '') {
-            $("#availability").html("");
-          }else{
-            $.ajax({
-            url: "username_validation.php?uname="+username
-            }).done(function( data ) {
-          $("#availability").html(data);
-       }); 
-       } 
-       });
-      });
-    </script>
+    //   $(document).ready(function () {
+    //    $("#user_name").blur(function () {
+    //     var username = $(this).val();
+    //       if (username == '') {
+    //         $("#availability").html("");
+    //       }else{
+    //         $.ajax({
+    //         url: "username_validation.php?uname="+username
+    //         }).done(function( data ) {
+    //       $("#availability").html(data);
+    //    }); 
+    //    } 
+    //    });
+    //   });
+    // </script>
   </head>
   <body class="hold-transition register-page">
     <div class="register-box">
@@ -69,14 +69,22 @@
         <form action="Register1.php" method="post" id="register" onsubmit="return checkPass()">
           <!-- First name --> 
            <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="First name" name="firstName" id="firstName" oninput="makeUsername()"
-            value="<?php if(isset($_POST['firstName'])) echo $_POST['firstName']; ?>" required>
+            <input type="text" class="form-control" placeholder="First name" attribute="name"
+            name="firstName" id="firstName"
+            value="<?php if(isset($_POST['firstName'])) echo $_POST['firstName']; ?>"
+             required>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
 
+            <!-- if more than zero ang length ng username, call check_availability --> 
+          <script>
+
+           
+          </script>
+
           <!-- last name -->
           <div class="form-group has-feedback">
-            <input type="text" class="form-control" placeholder="Last name" name="lastName" id="lastName" oninput="makeUsername()"
+            <input type="text" class="form-control" placeholder="Last name" name="lastName" id="lastName" 
             value="<?php if(isset($_POST['lastName'])) echo $_POST['lastName']; ?>" required>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
           </div>
@@ -99,22 +107,23 @@
           </div>
           <!-- username --> 
           <div class="form-group has-feedback">
-            <input type="UserName" class="form-control" placeholder="Username" name="user_name" pattern=".{6,}" title="Must contain more than six characters"
+            <input type="text" class="form-control" placeholder="Username" name="user_name" id="user_name" attribute="name" pattern=".{6,}" title="Must contain more than six characters"
+            onkeyup="check_availability()"
             value="<?php if(isset($_POST['user_name'])) echo $_POST['user_name']; ?>" required>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            <div id="username_availability_result"></div>
+            <span id="username_availability_result" class="username_availability_result"></span>
 
           </div>
 
           <!-- password --> 
           <div class="form-group has-feedback">
-            <input type="Password" class="form-control" placeholder="Password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
+            <input type="password" class="form-control" placeholder="Password" id="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
 
           <!-- retype/confirm password--> 
           <div class="form-group has-feedback">
-            <input type="Password" class="form-control" placeholder="Retype password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+            <input type="password" class="form-control" placeholder="Retype password" name="confirm_password" id="confirm_password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
             onkeyup="checkPass(); " required>
             <span class="glyphicon glyphicon-log-in form-control-feedback"></span> <span id="confirmMessage" class="confirmMessage"></span>
           </div>
@@ -145,7 +154,21 @@
 
     $("input[name='user_name']").val(name);
     // console.log($("#firstName").val());
+
    });
+
+   // $("#user_name").blur(function () {
+   //   var username = $(this).val();
+   //       if (username == '') {
+   //          $("#availability").html("");
+   //        }else{
+   //         $.ajax({
+   //          url: "username_validation.php?uname="+username
+   //          }).done(function( data ) {
+   //       $("#availability").html(data);
+   //     }); 
+   //           } 
+   //   });
 
    // checkPassword 
 
@@ -188,47 +211,45 @@
   
    //function to check username availability  
 function check_availability(){  
-  
+        
+        //Store the password field objects into variables ...
+          var user_name = document.getElementById('user_name');
+          //Store the Confimation Message Object ...
+          var avail = document.getElementById('username_availability_result');
+          //Set the colors we will be using ...
+          var goodColor = "#66cc66";
+          var badColor = "#ff6666";
         //get the username  
-        var username = $('#username').val();  
+        var username = $("input[name='user_name']").val();  
   
         //use ajax to run the check  
-        $.post("username_validation.php", { username: username },  
-            function(result){  
-                //if the result is 1  
-                if(result == 1){  
-                    //show that the username is available  
-                    $('#username_availability_result').html(username + ' is Available');  
+        $.post("username_validation.php", { "uname": username })  
+            .done(function(result){  
+              console.log(result);
+                //if the result is 1  =
+                if(result == "1"){  
+
+                   //show that the username is NOT available 
+                   user_name.style.backgroundColor = badColor; 
+
+                    $('#username_availability_result').html(username+ ' is Not Available.');
+                   
                 }else{  
-                    //show that the username is NOT available  
-                    $('#username_availability_result').html(username + ' is not Available');  
+                      //show that the username is available  
+                      user_name.style.backgroundColor = goodColor; 
+                    $('#username_availability_result').html(username+' is Available. ');  
                 }  
         });  
         
-  // makeUsername 
-function makeUsername(){
-      // //add mo yung current value ng fname and/or lname sa may username input
-      // //Use jquery API
-     var fName = $('#firstName').val(); 
-      var lName = $('#lastName').val(); 
+}
 
-      if(fName == null && lName == null){ 
-        fName = ""; 
-        lName = ""; 
-      } else { 
+$("input[name='firstName'], input[name='lastName']").focusout(function() {
+            if ($(this).val().length > 0){
+              check_availability(); 
+            } else {
 
-
-      //  // document.getElementsById('user_name')[0].value= fName "_" lName;
-      //  //document.getElementById("user_name").value = "You wrote: " + fName + lName; 
-      //  document.getElementById("user_name").value = username;
-
-   //  $("#lastName").focusout(function(){
-   //     document.getElementById("user_name").value = fName.toLowerCase + lName.toLowerCase; 
-   // }); 
-
-    $('#user_name').text(fName + lName); 
-  }
-  }
+            }
+           });
 
 
       

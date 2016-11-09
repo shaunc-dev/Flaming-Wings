@@ -3,9 +3,7 @@
 <?php
 
 session_start();
-if (!isset($_SESSION["guest"])) {
-  header("login.php");
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -271,8 +269,8 @@ if (!isset($_SESSION["guest"])) {
 
   mysqli_query($connect, $deact_query) or die(mysqli_error($connect)); 
 
-  $sql_query = "INSERT INTO stock(sname, qty, unit_id, ingName_id, pack_id, stocktype_id)
-      VALUES ('" . $_POST["sname"] . "','" . $_POST['qty'] . "','"  . $_POST['unitM'] . "','" . $_POST['ingtype'] . "','" . $_POST['pack_name'] . "','" . $_POST['type'] . "')"; 
+  $sql_query = "INSERT INTO stock(sname, qty, unit_id, ingName_id, pack_id, stocktype_id, deactivate)
+      VALUES ('" . $_POST["sname"] . "','" . $_POST['qty'] . "','"  . $_POST['unitM'] . "','" . $_POST['ingtype'] . "','" . $_POST['pack_name'] . "','" . $_POST['type'] . "', '0')"; 
 
   mysqli_query($connect, $sql_query) or die(mysqli_error($connect)); 
 

@@ -2,8 +2,6 @@
 <?php
 
 session_start();
-if (!isset($_SESSION["guest"])) {
-  header("login.php");
 }
 
 ?>
@@ -124,8 +122,7 @@ if (!isset($_SESSION["guest"])) {
               <!-- UPPER RIGHT CORNER -->
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Brooklyn Beckham</span>
+                  
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
@@ -161,7 +158,10 @@ if (!isset($_SESSION["guest"])) {
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>Brooklyn Beckham</p>
+               <?php 
+                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
+                        while ($row = mysqli_fetch_array($sql)){
+                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -200,11 +200,11 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
-                 <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
+                <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
+                <li><a href="AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
+                <li><a href="EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
+                <li><a href="DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
+                 <li><a href="reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
               </ul>
             </li>
 
@@ -220,11 +220,11 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
+                <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+                <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
+                <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
+                <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
+                <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
               </ul>
             </li>
 
@@ -241,9 +241,9 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
-                <li><a href="http://localhost/Flaming-Wings/VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
-                <li><a href="http://localhost/Flaming-Wings/MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+                <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+                <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
+                <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
               </ul>
             </li>
         <!-- /.sidebar -->
@@ -259,7 +259,7 @@ if (!isset($_SESSION["guest"])) {
 
 
                <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
+                <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
               </ul>
             </li>
       </aside>
@@ -285,7 +285,6 @@ if (!isset($_SESSION["guest"])) {
                   <li class="active"><a href="#manager" data-toggle="tab">Manager</a></li>
                   <li><a href="#stockcontroller" data-toggle="tab">Stock Controller</a></li>
                   <li><a href="#cashier" data-toggle="tab">Cashier</a></li>
-                   <li><a href="#employee" data-toggle="tab">Employee</a></li>
                 </ul>
 
 
@@ -293,27 +292,29 @@ if (!isset($_SESSION["guest"])) {
                 <div class="tab-content">
                  <div class="active tab-pane" id="manager">
                   <table class="table table-bordered">
-                    <tr>
+                    <thead>
                       <th>Last Name</th>
                       <th>First Name</th>
                       <th>Username</th>
-                    </tr>
-                    <tr>
-                      <td>Example </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
-                    <tr>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
-                    <tr>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
+                    </thead>
+                    <tbody>
+                       
 
+                        <?php
+                      
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Manager'"); 
+                           while ($row = mysqli_fetch_array($sql)){
+                          echo "<tr>"; 
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
+                          echo "</tr>";
+                        }
+
+                        ?>
+                      </tbody>
+                 
                   
                   </table>
 
@@ -321,88 +322,68 @@ if (!isset($_SESSION["guest"])) {
 
                   </div><!-- /.tab-pane -->
 
-
+  <!--STOCK CONTROLLER TAB-->
 
                 <div class="tab-pane" id="stockcontroller">
                   <table class="table table-bordered">
-                    <tr>
+                     <thead>
                       <th>Last Name</th>
                       <th>First Name</th>
                       <th>Username</th>
-                    </tr>
-                    <tr>
-                      <td>Lang </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
-                    <tr>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
-                    <tr>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>    
+                    </thead>
+                    <tbody>
+                       
+
+                        <?php
+                      
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Stock Controller'"); 
+                           while ($row = mysqli_fetch_array($sql)){
+                          echo "<tr>"; 
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
+                          echo "</tr>";
+                        }
+
+                        ?>
+                      </tbody>
                   </table>
 
                   </div><!-- /.tab-pane -->
 
 
-
+  <!--CASHIER TAB-->
                  <div class="tab-pane" id="cashier">
                   <table class="table table-bordered">
-                    <tr>
+                     <thead>
                       <th>Last Name</th>
                       <th>First Name</th>
                       <th>Username</th>
-                    </tr>
-                    <tr>
-                      <td>Po </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
-                    <tr>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
-                    <tr>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>    
+                    </thead>
+                    <tbody>
+                       
+
+                        <?php
+                      
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Cashier'"); 
+                           while ($row = mysqli_fetch_array($sql)){
+                          echo "<tr>"; 
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
+                          echo "</tr>";
+                        }
+
+                        ?>
+                      </tbody>
                   </table>
 
                   </div><!-- /.tab-pane -->
 
-
-                <div class="tab-pane" id="employee">
-                  <table class="table table-bordered">
-                    <tr>
-                      <th>Last Name</th>
-                      <th>First Name</th>
-                      <th>Username</th>
-                    </tr>
-                    <tr>
-                      <td>Ito </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
-                    <tr>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>
-                    <tr>
-                      <td> </td>
-                      <td> </td>
-                      <td> </td>
-                    </tr>    
-                  </table>
-
-                  </div><!-- /.tab-pane -->
+ 
+               
 
                   
 
