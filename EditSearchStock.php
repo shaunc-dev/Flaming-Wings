@@ -2,9 +2,7 @@
 <?php
 
 session_start();
-if (!isset($_SESSION["guest"])) {
-  header("login.php");
-}
+
 $_SESSION['varname'] = 'varname';
 
 ?>
@@ -126,25 +124,30 @@ $_SESSION['varname'] = 'varname';
 
 
               <!-- UPPER RIGHT CORNER -->
+             
+               <!-- LOGOUT BUTTON -->
               <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Brooklyn Beckham</span>
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="hidden-xs">
+                 
+                 <?php 
+                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
+                        while ($row = mysqli_fetch_array($sql)){
+                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
+                  </span>
                 </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    <p>
-                      Brooklyn Beckham - Manager
-                      <small>Member since Nov. 2016</small>
-                    </p>
-                </ul>
               </li>
               <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
+
+             <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-user"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  
+                   <li><a href='logout.php'>Logout</a></li>
+                </ul>
+              </li> 
             </ul>
           </div>
         </nav>
@@ -165,7 +168,10 @@ $_SESSION['varname'] = 'varname';
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>Brooklyn Beckham</p>
+               <?php 
+                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
+                        while ($row = mysqli_fetch_array($sql)){
+                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -196,11 +202,11 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
-                 <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
+               <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
+                <li><a href="AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
+                <li><a href="EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
+                <li><a href="DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
+                 <li><a href="reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
               </ul>
             </li>
 
@@ -216,11 +222,11 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
+                 <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+                <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
+                <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
+                <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
+                <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
               </ul>
             </li>
 
@@ -237,9 +243,9 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
-                <li><a href="http://localhost/Flaming-Wings/VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
-                <li><a href="http://localhost/Flaming-Wings/MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+                  <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+                <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
+                <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
               </ul>
             </li>
         <!-- /.sidebar -->
@@ -254,8 +260,8 @@ $_SESSION['varname'] = 'varname';
               </a>
 
 
-               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
+               <ul class="treeview-menu"> <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
+                <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
               </ul>
             </li>
       </aside>
@@ -285,12 +291,13 @@ $_SESSION['varname'] = 'varname';
                     
                     <div class="form-group">
                       <label>Gross Weight</label>
-                      <input type="number" step="any" min="0" class="form-control" id="qty" placeholder="<?php 
-                        $sql = mysqli_query($connect, "select qty from stock where stock_id='".$var_value."';");
-                       while ($row = mysqli_fetch_array($sql)){
-                          echo $row['qty']; }
+                      <input type="number" step="any" min="0" class="form-control" id="qty" value=
+                      <?php 
+                        $sql = mysqli_query($connect, "select qty from stock where stock_id='".$var_value."'");
+                       $row = mysqli_fetch_array($sql);
+                          echo $row['qty'];
                       
-                      ?>" 
+                      ?>
 
                       maxlength="5" name="qty" required>
                     </div>
@@ -299,7 +306,16 @@ $_SESSION['varname'] = 'varname';
                       <label>Unit of Measurement</label>
                       <select class="form-control" name="unitM" required
                       value="<?php if (isset($_POST['unitM']) && !$flag) echo $_POST['unitM']; ?>">
-                        <option value="" disabled selected> -- Unit of Measurement --</option> 
+                   
+                         <option selected="selected" value=" 
+                         <?php
+                            $sql = mysqli_query($connect, "SELECT * FROM unitmeasurement AS u, stock AS s WHERE s.unit_id=u.unit_id AND s.stock_id='".$var_value."'");
+                            while ($row = mysqli_fetch_array($sql)){
+                            echo "<option value=\"" . $row['unit_id'] . "\">" . $row['unit_name'] . "</option>";
+                            }
+                             ?>">
+                        </option> 
+                     
                         <?php
                         $sql = mysqli_query($connect, "SELECT * FROM unitmeasurement");
                         while ($row = mysqli_fetch_array($sql)){
@@ -313,8 +329,15 @@ $_SESSION['varname'] = 'varname';
                       <label>Packaging</label>
                       <select class="form-control" name="pack_name" required
                       value="<?php if (isset($_POST['pack_name']) && !$flag) echo $_POST['pack_name']; ?>">
-                        <option value="" disabled selected> -- Packaging --</option> 
-                     
+                        <option selected="selected" value=" 
+                         <?php
+                            $sql = mysqli_query($connect, "SELECT * FROM unitpackaging, stock WHERE stock.pack_id=unitpackaging.pack_id AND stock.stock_id='".$var_value."'");
+                            while ($row = mysqli_fetch_array($sql)){
+                            echo "<option value=\"" . $row['pack_id'] . "\">" . $row['pack_name'] . "</option>";
+                            }
+                             ?>">
+                        </option> 
+                        
                         <?php
                         $sql = mysqli_query($connect, "SELECT * FROM unitpackaging");
                         while ($row = mysqli_fetch_array($sql)){
@@ -327,7 +350,7 @@ $_SESSION['varname'] = 'varname';
 
                      <div class="form-group">
                       <label for="InputItemName">Stock Name</label>
-                      <input type="text" class="form-control" id="InputItemName" placeholder="<?php 
+                      <input type="text" class="form-control" id="InputItemName" value="<?php 
                         $sql = mysqli_query($connect, "select sname from stock where stock_id='".$var_value."';");
                        while ($row = mysqli_fetch_array($sql)){
                           echo $row['sname']; }
@@ -342,8 +365,14 @@ $_SESSION['varname'] = 'varname';
                       <label>Category/Type</label>
                       <select class="form-control" placeholder="Category/Type" name="type" required
                       value="<?php if (isset($_POST['type']) && !$flag) echo $_POST['type']; ?>">
-                        <option value="" disabled selected> -- Category/Type --</option> //list of stock type from database
-
+                      <option selected="selected" value=" 
+                         <?php
+                            $sql = mysqli_query($connect, "SELECT * FROM stock, stocktype WHERE stock.stocktype_id=stocktype.stocktype_id AND stock.stock_id = '".$var_value."'");
+                            while ($row = mysqli_fetch_array($sql)){
+                            echo "<option value=\"" . $row['stocktype_id'] . "\">" . $row['stock_type'] . "</option>";
+                            }
+                             ?>">
+                        </option> 
                         <?php
                         $sql = mysqli_query($connect, "SELECT * FROM stocktype");
                         while ($row = mysqli_fetch_array($sql)){
@@ -358,7 +387,14 @@ $_SESSION['varname'] = 'varname';
                       <label>Ingredient Type</label>
                       <select class="form-control" placeholder="Ingredient Types" name="ingtype" required
                       value="<?php if (isset($_POST['ingtype']) && !$flag) echo $_POST['ingtype']; ?>">
-                        <option value="" disabled selected> -- Ingredient Types --</option> 
+                        <option selected="selected" value=" 
+                         <?php
+                            $sql = mysqli_query($connect, "SELECT * FROM stock, ingredientname WHERE stock.ingName_id=ingredientname.ingName_id AND stock.stock_id='".$var_value."'");
+                            while ($row = mysqli_fetch_array($sql)){
+                            echo "<option value=\"" . $row['ingName_id'] . "\">" . $row['ing_name'] . "</option>";
+                            }
+                             ?>">
+                        </option> 
                         <?php
                         $sql = mysqli_query($connect, "SELECT * FROM ingredientname");
                         while ($row = mysqli_fetch_array($sql)){

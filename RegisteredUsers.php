@@ -2,15 +2,15 @@
 <?php
 
 session_start();
+}
 
 ?>
+
 <html>
   <head>
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Flaming Wings | Edit Stock</title>
+    <title>Flaming Wings | Registered Users</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -45,12 +45,11 @@ session_start();
     <![endif]-->
 
 
-  <!-- PHP --> 
+   <!-- PHP --> 
    <?PHP 
    include("dbconnection.php")
 
    ?>
-   
 
     <!-- HEADER -->
   </head>
@@ -121,31 +120,24 @@ session_start();
 
 
               <!-- UPPER RIGHT CORNER -->
-          
-               <!-- LOGOUT BUTTON -->
               <li class="dropdown user user-menu">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                  <span class="hidden-xs">
-                 
-                 <?php 
-                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
-                        while ($row = mysqli_fetch_array($sql)){
-                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
-                  </span>
-                </a>
-              </li>
-              <!-- Control Sidebar Toggle Button -->
-
-             <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-user"></i>
+                  
                 </a>
                 <ul class="dropdown-menu">
-                  
-                   <li><a href='logout.php'>Logout</a></li>
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <p>
+                      Brooklyn Beckham - Manager
+                      <small>Member since Nov. 2016</small>
+                    </p>
                 </ul>
-              </li> 
-
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -166,7 +158,6 @@ session_start();
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-             
                <?php 
                       $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
                         while ($row = mysqli_fetch_array($sql)){
@@ -182,8 +173,15 @@ session_start();
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
 
+            <!--USER TYE-->
+            <li class="treeview">
+              <a href="RegisteredUsers.php">
+                <i class="fa fa-user"></i> <span>Users</span> 
+              </a>
+            </li>
+
             <!--DASHBOARD-->
-            <li class="active treeview">
+            <li class="treeview">
               <a href="MAIN.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
               </a>
@@ -193,7 +191,7 @@ session_start();
 
 
 
-          <!---RECIPE -->
+            <!---RECIPE -->
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-book"></i>
@@ -250,7 +248,8 @@ session_start();
             </li>
         <!-- /.sidebar -->
 
-           <!--CONVERSION-->
+        
+         <!--CONVERSION-->
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-calculator"></i> 
@@ -265,78 +264,134 @@ session_start();
             </li>
       </aside>
 
-
-
-       <!--SEARCH STOCK--> 
+           <!--SEARCH--> 
     <div class="content-wrapper">
-      <form action="EditSearchStock.php" method="get" class="sidebar-form">
-            <div class="col-xs-10">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title"><b>SEARCH STOCK</b></h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal">
-                  <div class="box-body">
-                    <div class="form-group">
-                     <!-- <label for="inputQuery" class="col-sm-2 control-label">Stock code</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" id="inputQuery" name="query" placeholder="Enter stock code" required>
-                      </div>-->
+       <section class="content">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-6">
+              <!-- general form elements -->
+               <h3>
+                Registered Users
+               </h3>
 
-                      <label for="inputQuery" class="col-sm-2 control-label">Stock code</label>
-               
-                        <div class="col-sm-8">
-                        <input type="text" class="form-control" id="inputQuery" name="varname" placeholder="Enter stock code">
-                        </div>
-                       
-                      </select>
 
-                    </div>
-                  <div class="box-footer">
-                    <input type="submit" class="btn btn-info pull-right" value="Search"/>
-                  </div><!-- /.box-footer -->
-                </form>
-              </div>
-            </div>
-          </form>
+              <!---START OF WRAPPER-->
 
- <div class="box box-primary">
-            <div class="box-body">
-                  <table id="stocktable" class="table table-bordered table-hover">
+
+           <div class="col-md-50">
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#manager" data-toggle="tab">Manager</a></li>
+                  <li><a href="#stockcontroller" data-toggle="tab">Stock Controller</a></li>
+                  <li><a href="#cashier" data-toggle="tab">Cashier</a></li>
+                </ul>
+
+
+                <!--MANAGER TAB-->
+                <div class="tab-content">
+                 <div class="active tab-pane" id="manager">
+                  <table class="table table-bordered">
                     <thead>
-                      <tr>
-                        <th>Stock Code</th>
-                        <th>Stock Category/Type</th>
-                        <th>Stock Name</th>
-                    <!--    <th>End Inventory</th> -->
-                      
-                      </tr>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
                     </thead>
                     <tbody>
-                      <?php
-                        $stock_code = isset($_GET['stock_code']) ? $_GET['stock_code'] : '';
-                        $sql = mysqli_query($connect, "SELECT stock_id, stock_type, sname FROM stock AS s, stocktype AS type WHERE s.stocktype_id=type.stocktype_id AND deactivate=0");
-                        while ($row = mysqli_fetch_array($sql)){
+                       
+
+                        <?php
+                      
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Manager'"); 
+                           while ($row = mysqli_fetch_array($sql)){
                           echo "<tr>"; 
-                          echo "<td>".$row['stock_id']."</td>"; //stockcode
-                          echo "<td>".$row['stock_type']."</td>"; //type
-                          echo "<td>" .$row['sname']."</a></td>"; //itemname
-                          echo "<td><a href='EditSearchStock.php?varname=".$row['stock_id']."'> Edit</a></td>"; //itemname
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
                           echo "</tr>";
-
                         }
-                         ?>
-                    </tbody>
-                  </table>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
 
+                        ?>
+                      </tbody>
+                 
+                  
+                  </table>
+
+
+
+                  </div><!-- /.tab-pane -->
+
+  <!--STOCK CONTROLLER TAB-->
+
+                <div class="tab-pane" id="stockcontroller">
+                  <table class="table table-bordered">
+                     <thead>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </thead>
+                    <tbody>
+                       
+
+                        <?php
+                      
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Stock Controller'"); 
+                           while ($row = mysqli_fetch_array($sql)){
+                          echo "<tr>"; 
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
+                          echo "</tr>";
+                        }
+
+                        ?>
+                      </tbody>
+                  </table>
+
+                  </div><!-- /.tab-pane -->
+
+
+  <!--CASHIER TAB-->
+                 <div class="tab-pane" id="cashier">
+                  <table class="table table-bordered">
+                     <thead>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </thead>
+                    <tbody>
+                       
+
+                        <?php
+                      
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Cashier'"); 
+                           while ($row = mysqli_fetch_array($sql)){
+                          echo "<tr>"; 
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
+                          echo "</tr>";
+                        }
+
+                        ?>
+                      </tbody>
+                  </table>
+
+                  </div><!-- /.tab-pane -->
+
+ 
+               
+
+                  
+
+             <!-- E N D I N G -->
     </div><!-- ./wrapper -->
           
 
-
-
+          </div><!-- /.tab-pane -->
          
     </div><!-- ./wrapper -->
 
@@ -377,20 +432,5 @@ session_start();
     <script src="dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    <script>
-       $(document).ready(function(e)){ 
-        $.ajax({ 
-          url: "try.php". 
-          data: { 
-            inputQuery : $("#inputQuery").val()
-          },
-
-          dataType : "json", 
-          type : "post", 
-          success: function(data){ 
-            alert(data.myrealarr[0])}; 
-        });
-       }
-    </script>
   </body>
 </html>
