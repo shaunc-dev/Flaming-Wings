@@ -2,9 +2,6 @@
 <?php
 
 session_start();
-if (!isset($_SESSION["guest"])) {
-  header("login.php");
-}
 
 ?>
 <html>
@@ -124,25 +121,31 @@ if (!isset($_SESSION["guest"])) {
 
 
               <!-- UPPER RIGHT CORNER -->
+          
+               <!-- LOGOUT BUTTON -->
               <li class="dropdown user user-menu">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Brooklyn Beckham</span>
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                  <span class="hidden-xs">
+                 
+                 <?php 
+                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
+                        while ($row = mysqli_fetch_array($sql)){
+                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
+                  </span>
                 </a>
-                <ul class="dropdown-menu">
-                  <!-- User image -->
-                  <li class="user-header">
-                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    <p>
-                      Brooklyn Beckham - Manager
-                      <small>Member since Nov. 2016</small>
-                    </p>
-                </ul>
               </li>
               <!-- Control Sidebar Toggle Button -->
-              <li>
-                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-              </li>
+
+             <li class="dropdown notifications-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="fa fa-user"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  
+                   <li><a href='logout.php'>Logout</a></li>
+                </ul>
+              </li> 
+
             </ul>
           </div>
         </nav>
@@ -163,7 +166,11 @@ if (!isset($_SESSION["guest"])) {
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>Brooklyn Beckham</p>
+             
+               <?php 
+                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
+                        while ($row = mysqli_fetch_array($sql)){
+                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -195,11 +202,11 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
-                 <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
+                <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
+                <li><a href="AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
+                <li><a href="EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
+                <li><a href="DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
+                 <li><a href="reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
               </ul>
             </li>
 
@@ -215,11 +222,11 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
+                <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+                <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
+                <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
+                <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
+                <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
               </ul>
             </li>
 
@@ -236,9 +243,9 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
-                <li><a href="http://localhost/Flaming-Wings/VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
-                <li><a href="http://localhost/Flaming-Wings/MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+                <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+                <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
+                <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
               </ul>
             </li>
         <!-- /.sidebar -->
@@ -253,7 +260,7 @@ if (!isset($_SESSION["guest"])) {
 
 
                <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
+                <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
               </ul>
             </li>
       </aside>

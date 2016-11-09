@@ -1,5 +1,5 @@
  <?PHP 
- 
+  session_start(); 
    include("dbconnection.php"); 
    // if the form is submitted or not 
    // if the form is submitted 
@@ -15,11 +15,13 @@
     // if the posted values are equal to the database values, then session will be created 
     if($count == 1){ 
       $_SESSION['user_name'] = $username;
-
+      $_SESSION['firstName'] = $fname;
+      $_SESSION['lastName'] = $lname;
       header("location: main.php");
     } else { 
     // if login credentials doesnt match, user will be shown with an error message
-      $error = "Your Username or Password is invalid."; 
+      //$error = "Your Username or Password is invalid."; 
+        $_SESSION['errMsg'] = "Invalid username or password";
        header("location: log_in.php");
     }
     }

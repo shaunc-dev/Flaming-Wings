@@ -94,11 +94,16 @@
           
           <div class="row">
             <div class="col-xs-15">
-               <center><input type = "submit" value = " Submit "/><br /></center>
+               <center><input type = "submit" value = " Submit "/><br />
              <!--   <div style = "font-size:11px; color:#cc0000; margin-top:10px">
               //  <?php
               //  echo "" .$error . ""?>
               </div>  -->
+                <div id="errMsg" style = "font-size:13px; color:#cc0000; margin-top:10px">
+                <?php if(!empty($_SESSION['errMsg'])) { echo $_SESSION['errMsg']; } ?>
+                </div>
+              <?php unset($_SESSION['errMsg']); ?>
+              </center>
             </div><!-- /.col -->
 
 
