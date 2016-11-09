@@ -42,9 +42,14 @@
                 color: black;
             }
 
-            .selection > a.active {
+            .selection > a.active, .selection > a.active:hover {
                 color: white;
                 background: rgba(225, 72, 53, 1.0);
+            }
+
+            .selection > a:hover {
+                color: white;
+                background: rgba(249, 151, 141, 1.0);
             }
 
         </style>
