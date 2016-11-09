@@ -14,9 +14,13 @@
     $count = mysqli_num_rows($result); 
     // if the posted values are equal to the database values, then session will be created 
     if($count == 1){ 
+      $row = mysqli_fetch_assoc($result); 
+      
       $_SESSION['user_name'] = $username;
       $_SESSION['firstName'] = $fname;
       $_SESSION['lastName'] = $lname;
+      $_SESSION["type"] = $row['user_type_id'];  
+      
       header("location: main.php");
     } else { 
     // if login credentials doesnt match, user will be shown with an error message
