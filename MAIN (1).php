@@ -58,7 +58,7 @@
         <a href="MAIN.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <!-- logo for regular state and mobile devices -->
-          <img src="logo-transparent.png" alt="Mountain View" style="width:200px;height:50px;">
+          <img src="logoo.jpg" alt="Mountain View" style="width:200px;height:50px;">
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -117,10 +117,8 @@
 
 
               <!-- UPPER RIGHT CORNER -->
-
-              <!-- LOGOUT BUTTON -->
               <li class="dropdown user user-menu">
-                <a class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <span class="hidden-xs">
                  
                  <?php 
@@ -131,19 +129,18 @@
                 </a>
               </li>
               <!-- Control Sidebar Toggle Button -->
-
-             <li class="dropdown notifications-menu">
+              <li>
+              <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-user"></i>
+                       <i class="fa fa-user"></i>
                 </a>
                 <ul class="dropdown-menu">
-                  
-                   <li><a href='logout.php'>Logout</a></li>
-                </ul>
-              </li> 
-
-
-              </div>
+                  <li>
+                   <li>
+                      <a href='logout.php'>Logout</a>
+                  </li>
+              </ul>
+          </div>
         </nav>
       </header>
 
@@ -198,11 +195,11 @@
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
-                <li><a href="AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
-                <li><a href="EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
-                <li><a href="DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
-                <li><a href="Reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
               </ul>
             </li>
 
@@ -218,11 +215,11 @@
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
-                <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
-                <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
-                <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
-                <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
               </ul>
             </li>
 
@@ -239,9 +236,9 @@
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
-                <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
-                <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+                <li><a href="http://localhost/Flaming-Wings/InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+                <li><a href="http://localhost/Flaming-Wings/VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
+                <li><a href="http://localhost/Flaming-Wings/MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
               </ul>
             </li>
         <!-- /.sidebar -->
@@ -256,25 +253,9 @@
 
 
                <ul class="treeview-menu">
-                <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
+                <li><a href="http://localhost/Flaming-Wings/Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
               </ul>
             </li>
-
-        <!--USERS-->
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-user"></i> 
-                <span>Users</span> 
-                <span class="label label-primary pull-right"></span>
-              </a>
-
-
-               <ul class="treeview-menu">
-                <li><a href="RegisteredUsers.php"><i class="fa fa-circle-o"></i>Registered Users</a></li>
-              </ul>
-            </li>
-
-
       </aside>
 
 
@@ -299,7 +280,8 @@
         </section>
 
      <section class="content">
-       <?php echo "<h5> Hey " . $_SESSION['user_name'] . "! </h5>"; ?>
+       <?php echo "<h5> Hey " . $_SESSION['user_name'] . "! </h5>"; 
+              echo "<a href='logout.php'>Logout</a>";?>
           <!-- Small boxes (Stat box) -->
           <div class="row">
 

@@ -285,13 +285,27 @@ while ($row = mysqli_fetch_array($result)) {
               <div class="box box-primary">
                 <div class="box-header">
                   <h3><?php echo $row["recipe_name"];?></h3>
-                  <input type="text" class="form-control" id="InputRecipeName" placeholder="Enter recipe name" name="recipe_name" required
-                      value="<?php if (isset($_POST['recipe_name'])) echo $_POST['recipe_name']; ?>">
-                      
+                  <input type="text" class="form-control" id="InputRecipeName" name="recipe_name" required
+                      value="<?php 
+                      $rname = mysqli_query($connect, "SELECT recipe_name from recipe where recipe_id = '".$var_value."'"); 
+                    
+                       while ($row = mysqli_fetch_array($rname)){
+                        echo "". $row['recipe_name'] . ""; 
+                       }
+                       ?>"></input>
+                     
+
                   <label>Category/Type</label>
-                    <select class="form-control" name="recipe_type" id="InputRecipeType" required>
-                        <option value="" disabled selected> -- Category/Type --</option> 
+                    <select class="form-control" name="recipe_type" id="InputRecipeType" required> 
+                        <option selected="selected" value="
                          <?php
+                            $sql = mysqli_query($connect, "SELECT recipe_type, type.recipe_typeid FROM recipetype AS type, recipe AS r WHERE r.recipe_typeid=type.recipe_typeid AND r.recipe_id='".$var_value."'");
+                            while ($row = mysqli_fetch_array($sql)){
+                            echo "<option value=\"" . $row['recipe_typeid'] . "\">" . $row['recipe_type'] . "</option>";
+                            }
+                             ?>" 
+                        </option> 
+                        <?php
                             $sql = mysqli_query($connect, "SELECT * FROM recipetype");
                             while ($row = mysqli_fetch_array($sql)){
                             echo "<option value=\"" . $row['recipe_typeid'] . "\">" . $row['recipe_type'] . "</option>";
