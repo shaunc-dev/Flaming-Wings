@@ -14,7 +14,7 @@
                 $.post("cashier-controller/check.php")
                 .done(function(data) {
                     if (data == "false") {
-                        window.location.replace("http://localhost/Flaming-Wings/login.php");
+                        window.location.replace("http://localhost/Flaming-Wings/log_in.php");
                     }
                 });
             });
