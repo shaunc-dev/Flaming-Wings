@@ -66,15 +66,13 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-lg-9">
-                            <div class="row">
-                                <div class="col-xs-12 col-lg-4">
+                            <div class="row" id="orders">
+                                <!--<div class="col-xs-12 col-lg-4">
                                     <div class="box box-danger">
                                         <div class="box-header">
                                             <h3 class="box-title">Order #99</h3>
-                                            <div class="box-tools pull-right">
-                                                <button type="button" class="btn btn-box-tool" data-widget="collapse">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
+                                            <div class="pull-right">
+                                                <small id="date">October 9, 2016</small>
                                             </div>
                                         </div>
                                         <div class="box-body no-padding">
@@ -354,7 +352,7 @@
                                             <span>20.00</span>
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -374,7 +372,19 @@
         <script>
 
             function insertOrder(order) {
-                var $boxTitle = $("<div>", {"class": "box-header"}).html("Order #" + order.id + " " + $("<small>", moment(order.date)));
+                var $columnTemplate = $("<div>", {"class": "col-xs-12 col-lg-4"});
+                var $boxTemplate = $("<div>", {"class": "box box-danger"})
+                var $boxHeader = $("<div>", {"class": "box-header"})
+                .append($("<h3>", {"class": "box-title"}).html("Order #" + order.id))
+                .append($("<small>", {"class": "pull-right"}).html("October 9, 2016"));
+
+                $boxTemplate.append($boxHeader);
+                $("#orders").append($columnTemplate.html($boxTemplate));
+
+            }
+
+            for (var i = 0; i < 9; i++) {
+                insertOrder({"id": i, "date": "2016-11-9"});
             }
 
         </script>
