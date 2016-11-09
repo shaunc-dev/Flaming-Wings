@@ -384,7 +384,15 @@
             }
 
             for (var i = 0; i < 9; i++) {
-                insertOrder({"id": i, "date": "2016-11-9"});
+                insertOrder(
+                    {
+                        "id": i,
+                        "date": "2016-11-9",
+                        "orders": {
+                            
+                        }
+                    }
+                );
             }
 
         </script>
