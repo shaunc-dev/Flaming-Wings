@@ -99,11 +99,12 @@
 
                 var $boxHeader = $("<div>", {"class": "box-header"})
                 .append($("<h3>", {"class": "box-title"}).html("Order #" + order.id))
-                .append($("<small>", {"class": "pull-right"}).html("October 9, 2016"));
+                .append($("<small>", {"class": "pull-right"}).html(moment()));
 
                 var $boxBody = $("<div>", {"class": "box-body no-padding"});
 
                 // Table contents
+
                 var $table = $("<table>", {"class": "table table-responsive"});
                 var $tableHead = $("<thead>")
                 .append($("<tr>")
@@ -111,8 +112,21 @@
                     .append($("<th>").html("Recipe name"))
                     .append($("<th>").html("Price"))
                 );
+                
+                var $tableBody = $("<tbody>");
 
-                $table.append($tableHead);
+                for (var i = 0; i < order.orders.length; i++) {
+                    $tableBody.append($("<tr>")
+                        .append($("<td>").html(order.orders[i].qty))
+                        .append($("<td>").html(order.orders[i].recipe_name))
+                        .append($("<td>").html(order.orders[i].price))
+                    );
+                }
+
+                // end of table contents
+
+                // merging all of the parts of the box class
+                $table.append($tableHead).append($tableBody);
                 $boxBody.append($table);
 
                 $boxTemplate.append($boxHeader).append($boxBody);
@@ -124,10 +138,13 @@
                 insertOrder(
                     {
                         "id": i,
-                        "date": "2016-11-9",
-                        "orders": {
-                            
-                        }
+                        "date": "2016-11-09",
+                        "orders": [
+                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
+                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
+                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
+                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00}
+                        ]
                     }
                 );
             }
