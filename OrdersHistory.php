@@ -94,12 +94,17 @@
         <script>
 
             function insertOrder(order) {
-                var $columnTemplate = $("<div>", {"class": "col-xs-12 col-lg-4"});
-                var $boxTemplate = $("<div>", {"class": "box box-danger"})
+                var $columnTemplate = $("<div>", {"class": "col-xs-12"});
+                var $boxTemplate = $("<div>", {"class": "box box-danger collapsed-box"})
 
                 var $boxHeader = $("<div>", {"class": "box-header"})
-                .append($("<h3>", {"class": "box-title"}).html("Order #" + order.id))
-                .append($("<small>", {"class": "pull-right"}).html(moment()));
+                .append($("<h3>", {"class": "box-title"})
+                    .html("Order #" + order.id).append($("<small>", {"style": "margin-left: 10px"}).html(moment(order.date).format("MMMM D, YYYY"))))
+                .append($("<div>", {"class": "box-tools pull-right"})
+                    .html($("<button>", {"class": "btn btn-box-tool", "data-widget": "collapse", "type": "button"})
+                        .html($("<i>", {"class": "fa fa-plus"}))
+                        )
+                    );
 
                 var $boxBody = $("<div>", {"class": "box-body no-padding"});
 
