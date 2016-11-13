@@ -35,10 +35,6 @@
                 width: 85%;
             }
 
-            .box-footer {
-                display: block !important;
-            }
-
             .selection {
                 margin-top: 20px;
                 text-align: left;
@@ -107,6 +103,9 @@
                     );
 
                 var $boxBody = $("<div>", {"class": "box-body no-padding"});
+                var $boxFooter = $("<div>", {"class": "box-footer"})
+                .append($("<strong>").html("Total"))
+                .append($("<span>", {"class": "pull-right"}).html(order.total.toFixed(2)));
 
                 // Table contents
 
@@ -121,7 +120,8 @@
                 var $tableBody = $("<tbody>");
 
                 for (var i = 0; i < order.orders.length; i++) {
-                    $tableBody.append($("<tr>")
+                    $tableBody
+                    .append($("<tr>")
                         .append($("<td>").html(order.orders[i].qty))
                         .append($("<td>").html(order.orders[i].recipe_name))
                         .append($("<td>").html(order.orders[i].price.toFixed(2)))
@@ -134,7 +134,7 @@
                 $table.append($tableHead).append($tableBody);
                 $boxBody.append($table);
 
-                $boxTemplate.append($boxHeader).append($boxBody);
+                $boxTemplate.append($boxHeader).append($boxBody).append($boxFooter);
                 $("#orders").append($columnTemplate.html($boxTemplate));
 
             }
@@ -149,7 +149,8 @@
                             {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
                             {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
                             {"qty": 1, "recipe_name": "Bacon", "price": 250.00}
-                        ]
+                        ],
+                        "total": 1000.00
                     }
                 );
             }
