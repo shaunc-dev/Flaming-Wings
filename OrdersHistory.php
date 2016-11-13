@@ -44,6 +44,7 @@
                 display: block;
                 padding: 4px;
                 color: black;
+                cursor: pointer;
             }
 
             .selection > a.active, .selection > a.active:hover {
@@ -77,9 +78,9 @@
                             <div class="well well-sm">
                                 <h5><strong>Show orders</strong></h5>
                                 <div class="selection">
-                                    <a href="#" class="active">Today</a>
-                                    <a href="#">Last week</a>
-                                    <a href="#">Last month</a>
+                                    <a data-value="now" class="active">Today</a>
+                                    <a data-value="lweek">Last week</a>
+                                    <a data-value="lmonth">Last month</a>
                                 </div>
                             </div>
                         </div>
@@ -139,6 +140,47 @@
 
             }
 
+            function removeOrders() {
+                $("#orders *").remove();
+            }
+
+            function initializeListeners() {
+                $(".selection > a").on("click", function() {
+                    $(".selection > a").removeAttr("class");
+                    $(this).attr("class", "active");
+                    removeOrders();
+                    processDate($(this).data("value"));
+                });
+            }
+
+            function getOrdersFromDate(min, max) {
+                $.post("getHistory.php", {"start": min, "end": max}).done(function(data) {
+                    for (var i = 0; i < data.history.length; i++) {
+                        insertOrder(data[i]);
+                    }
+                });
+            }
+
+            function processDate(date) {
+                if (date.toLowerCase() == "now") {
+                    var today = moment().format("YYYY-MM-DD");
+
+                    getOrdersFromDate(today, null);
+                } else if (date.toLowerCase() == "lmonth") {
+                    var min = moment().subtract(1, "month").format("YYYY-MM-01");
+                    var max = moment().subtract(1, "month").format("YYYY-MM-" + moment().subtract(1, "month").daysInMonth());
+
+                    getOrdersFromDate(min, max);
+                } else if (date.toLowerCase() == "lweek") {
+                    var min = moment(moment().subtract(1, "week").format("YYYY-MM-DD")).day("Sunday").format("YYYY-MM-DD");
+                    var max = moment(moment().subtract(1, "week").format("YYYY-MM-DD")).day("Saturday").format("YYYY-MM-DD");
+
+                    getOrdersFromDate(min, max);
+                } else {
+                    console.log("date is null");
+                }
+            }
+
             for (var i = 0; i < 9; i++) {
                 insertOrder(
                     {
@@ -154,6 +196,8 @@
                     }
                 );
             }
+
+            initializeListeners();
 
         </script>
     </body>
