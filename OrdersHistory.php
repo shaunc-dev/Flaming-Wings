@@ -32,7 +32,7 @@
             }
 
             thead > tr > th:nth-child(2) {
-                width: 60%;
+                width: 85%;
             }
 
             .box-footer {
@@ -124,7 +124,7 @@
                     $tableBody.append($("<tr>")
                         .append($("<td>").html(order.orders[i].qty))
                         .append($("<td>").html(order.orders[i].recipe_name))
-                        .append($("<td>").html(order.orders[i].price))
+                        .append($("<td>").html(order.orders[i].price.toFixed(2)))
                     );
                 }
 
