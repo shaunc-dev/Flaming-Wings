@@ -2,7 +2,7 @@
 <?php
 
 session_start();
-}
+
 
 ?>
 
