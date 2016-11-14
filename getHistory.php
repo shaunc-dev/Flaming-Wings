@@ -16,14 +16,17 @@ function queryCondition($endDate = "") {
 
     // $startDate = $_POST["start"];
     // $endDate = $_POST["end"];
-    $startDate = "2016-11-04";
-    $endDate = "2016-11-09";
+    $startDate = "2016-11-14";
+    $endDate = "";
 
-    $sales_query = $connect->prepare("select * from sales where dtSales".queryCondition($endDate));
+    $sales_query = $connect->prepare("select * from sales where date(dtSales)".queryCondition($endDate));
     $orders_query = $connect->prepare("select sd.sales_id, r.recipe_name, sum(sd.qty) as qty, sum(r.price * sd.qty) as price 
     from sales s, sales_details sd, recipe r 
     where sd.sales_details_id = s.sales_id && sd.recipe_id = r.recipe_id && sd.sales_id = ?
     group by recipe_name;");
+
+    echo "select * from sales where dtSales".queryCondition($endDate);
+    echo "<br>";
 
     if ($endDate == "") {
         $sales_query->bind_param("s", $startDate);
