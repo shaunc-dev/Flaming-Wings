@@ -5,9 +5,10 @@ require ("cashier-controller/connect.php");
 if (isset($_POST["start"], $_POST["end"])) {
 
     $data = array();
+    $data["history"] = array();
 
-    $startDate = $connect->real_escape_string($_POST["start"]);
-    $endDate = $connect->real_escape_string($_POST["end"]);
+    $startDate = $_POST["start"];
+    $endDate = $_POST["end"];
 
     $sales_query = "";
 
@@ -43,12 +44,12 @@ if (isset($_POST["start"], $_POST["end"])) {
             array_push($object["orders"], $orders);
         }
 
-        array_push($data, $object);
+        array_push($data["history"], $object);
 
     }
 
     echo json_encode($data);
-      
+
 }
 
 ?>

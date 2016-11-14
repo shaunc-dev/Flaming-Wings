@@ -102,11 +102,13 @@
                         .html($("<i>", {"class": "fa fa-plus"}))
                         )
                     );
+                var total = order.total;
+                var toFixedTotal = parseFloat(total).toFixed(2);
 
                 var $boxBody = $("<div>", {"class": "box-body no-padding"});
                 var $boxFooter = $("<div>", {"class": "box-footer"})
                 .append($("<strong>").html("Total"))
-                .append($("<span>", {"class": "pull-right"}).html(order.total.toFixed(2)));
+                .append($("<span>", {"class": "pull-right"}).html(toFixedTotal));
 
                 // Table contents
 
@@ -121,11 +123,13 @@
                 var $tableBody = $("<tbody>");
 
                 for (var i = 0; i < order.orders.length; i++) {
+                    var price = order.orders[i].price;
+                    var toFixedPrice = parseFloat(price).toFixed(2);
                     $tableBody
                     .append($("<tr>")
                         .append($("<td>").html(order.orders[i].qty))
                         .append($("<td>").html(order.orders[i].recipe_name))
-                        .append($("<td>").html(order.orders[i].price.toFixed(2)))
+                        .append($("<td>").html(toFixedPrice))
                     );
                 }
 
@@ -151,12 +155,25 @@
                     removeOrders();
                     processDate($(this).data("value"));
                 });
+
+                $(".selection > a:first-child").trigger("click");
             }
 
             function getOrdersFromDate(min, max) {
-                $.post("getHistory.php", {"start": min, "end": max}).done(function(data) {
-                    for (var i = 0; i < data.history.length; i++) {
-                        insertOrder(data[i]);
+                console.log("s: " + min + " e: " + max);
+                $.ajax({
+                    url: "getHistory.php", 
+                    data: {"start": min, "end": max},
+                    dataType: "json",
+                    method: "POST"})
+                .done(function(data) {
+                    console.log(data);
+                    if (data.history.length == 0) {
+                        console.log("data is empty");
+                    } else {
+                        for (var i = 0; i < data.history.length; i++) {
+                            insertOrder(data.history[i]);
+                        }
                     }
                 });
             }
@@ -165,7 +182,7 @@
                 if (date.toLowerCase() == "now") {
                     var today = moment().format("YYYY-MM-DD");
 
-                    getOrdersFromDate(today, null);
+                    getOrdersFromDate(today, "");
                 } else if (date.toLowerCase() == "lmonth") {
                     var min = moment().subtract(1, "month").format("YYYY-MM-01");
                     var max = moment().subtract(1, "month").format("YYYY-MM-" + moment().subtract(1, "month").daysInMonth());
@@ -181,21 +198,6 @@
                 }
             }
 
-            for (var i = 0; i < 9; i++) {
-                insertOrder(
-                    {
-                        "id": i,
-                        "date": "2016-11-09",
-                        "orders": [
-                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
-                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
-                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
-                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00}
-                        ],
-                        "total": 1000.00
-                    }
-                );
-            }
 
             initializeListeners();
 
