@@ -32,11 +32,7 @@
             }
 
             thead > tr > th:nth-child(2) {
-                width: 60%;
-            }
-
-            .box-footer {
-                display: block !important;
+                width: 85%;
             }
 
             .selection {
@@ -48,6 +44,7 @@
                 display: block;
                 padding: 4px;
                 color: black;
+                cursor: pointer;
             }
 
             .selection > a.active, .selection > a.active:hover {
@@ -81,9 +78,9 @@
                             <div class="well well-sm">
                                 <h5><strong>Show orders</strong></h5>
                                 <div class="selection">
-                                    <a href="#" class="active">Today</a>
-                                    <a href="#">Last week</a>
-                                    <a href="#">Last month</a>
+                                    <a data-value="now" class="active">Today</a>
+                                    <a data-value="lweek">Last week</a>
+                                    <a data-value="lmonth">Last month</a>
                                 </div>
                             </div>
                         </div>
@@ -105,8 +102,13 @@
                         .html($("<i>", {"class": "fa fa-plus"}))
                         )
                     );
+                var total = order.total;
+                var toFixedTotal = parseFloat(total).toFixed(2);
 
                 var $boxBody = $("<div>", {"class": "box-body no-padding"});
+                var $boxFooter = $("<div>", {"class": "box-footer"})
+                .append($("<strong>").html("Total"))
+                .append($("<span>", {"class": "pull-right"}).html(toFixedTotal));
 
                 // Table contents
 
@@ -121,10 +123,13 @@
                 var $tableBody = $("<tbody>");
 
                 for (var i = 0; i < order.orders.length; i++) {
-                    $tableBody.append($("<tr>")
+                    var price = order.orders[i].price;
+                    var toFixedPrice = parseFloat(price).toFixed(2);
+                    $tableBody
+                    .append($("<tr>")
                         .append($("<td>").html(order.orders[i].qty))
                         .append($("<td>").html(order.orders[i].recipe_name))
-                        .append($("<td>").html(order.orders[i].price))
+                        .append($("<td>").html(toFixedPrice))
                     );
                 }
 
@@ -134,25 +139,67 @@
                 $table.append($tableHead).append($tableBody);
                 $boxBody.append($table);
 
-                $boxTemplate.append($boxHeader).append($boxBody);
+                $boxTemplate.append($boxHeader).append($boxBody).append($boxFooter);
                 $("#orders").append($columnTemplate.html($boxTemplate));
 
             }
 
-            for (var i = 0; i < 9; i++) {
-                insertOrder(
-                    {
-                        "id": i,
-                        "date": "2016-11-09",
-                        "orders": [
-                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
-                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
-                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00},
-                            {"qty": 1, "recipe_name": "Bacon", "price": 250.00}
-                        ]
-                    }
-                );
+            function removeOrders() {
+                $("#orders *").remove();
             }
+
+            function initializeListeners() {
+                $(".selection > a").on("click", function() {
+                    $(".selection > a").removeAttr("class");
+                    $(this).attr("class", "active");
+                    removeOrders();
+                    processDate($(this).data("value"));
+                });
+
+                $(".selection > a:first-child").trigger("click");
+            }
+
+            function getOrdersFromDate(min, max) {
+                console.log("s: " + min + " e: " + max);
+                $.ajax({
+                    url: "getHistory.php", 
+                    data: {"start": min, "end": max},
+                    dataType: "json",
+                    method: "POST"})
+                .done(function(data) {
+                    console.log(data);
+                    if (data.history.length == 0) {
+                        console.log("data is empty");
+                    } else {
+                        for (var i = 0; i < data.history.length; i++) {
+                            insertOrder(data.history[i]);
+                        }
+                    }
+                });
+            }
+
+            function processDate(date) {
+                if (date.toLowerCase() == "now") {
+                    var today = moment().format("YYYY-MM-DD");
+
+                    getOrdersFromDate(today, "");
+                } else if (date.toLowerCase() == "lmonth") {
+                    var min = moment().subtract(1, "month").format("YYYY-MM-01");
+                    var max = moment().subtract(1, "month").format("YYYY-MM-" + moment().subtract(1, "month").daysInMonth());
+
+                    getOrdersFromDate(min, max);
+                } else if (date.toLowerCase() == "lweek") {
+                    var min = moment(moment().subtract(1, "week").format("YYYY-MM-DD")).day("Sunday").format("YYYY-MM-DD");
+                    var max = moment(moment().subtract(1, "week").format("YYYY-MM-DD")).day("Saturday").format("YYYY-MM-DD");
+
+                    getOrdersFromDate(min, max);
+                } else {
+                    console.log("date is null");
+                }
+            }
+
+
+            initializeListeners();
 
         </script>
     </body>
