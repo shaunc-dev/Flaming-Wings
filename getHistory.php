@@ -48,6 +48,7 @@ if (isset($_POST["start"], $_POST["end"])) {
 
     }
 
+    $connect->close();
     echo json_encode($data);
 
 }
