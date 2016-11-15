@@ -101,5 +101,27 @@
             <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
         </ul>
     </li>
+
+    <li class="treeview">
+        <a><i class="fa fa-line-chart"></i>
+        Sales</a>
+        <ul class="treeview-menu">
+            <li><a href="summary.php"><i class="fa fa-circle-o"></i>Summary</a></li>
+            <li><a href="ordershistory.php"><i class="fa fa-circle-o"></i>Orders History</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a><i class="fa fa-user"></i>
+        Users
+        </a>
+
+        <ul class="treeview-menu">
+            <li>
+                <a href="registeredusers.php"><i class="fa fa-circle-o"></i>Registered users</a>
+                <a href="register.php"><i class="fa fa-circle-o"></i>Add user</a>
+            </li>
+        </ul>
+    </li>
     </section>
 </aside>
