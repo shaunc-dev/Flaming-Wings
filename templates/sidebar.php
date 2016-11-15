@@ -118,7 +118,8 @@
 
         <ul class="treeview-menu">
             <li>
-                <a href="registeredusers.php"><i class="fa fa-circle-o"></i>Registered Users</a>
+                <a href="registeredusers.php"><i class="fa fa-circle-o"></i>Registered users</a>
+                <a href="register.php"><i class="fa fa-circle-o"></i>Add user</a>
             </li>
         </ul>
     </li>
