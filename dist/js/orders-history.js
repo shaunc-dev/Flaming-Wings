@@ -53,7 +53,7 @@ function insertOrder(order) {
 }
 
 function removeOrders() {
-    $("#orders *").remove();
+    $("#orders *:not(#no-orders)").remove();
 }
 
 function initializeListeners() {
@@ -68,7 +68,6 @@ function initializeListeners() {
 }
 
 function getOrdersFromDate(min, max) {
-    console.log("s: " + min + " e: " + max);
     $.ajax({
         url: "getHistory.php", 
         data: {"start": min, "end": max},
@@ -77,7 +76,7 @@ function getOrdersFromDate(min, max) {
     .done(function(data) {
         console.log(data);
         if (data.history.length == 0) {
-            console.log("data is empty");
+            $("#no-orders").css("display", "block");
         } else {
             for (var i = 0; i < data.history.length; i++) {
                 insertOrder(data.history[i]);
