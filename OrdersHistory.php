@@ -92,19 +92,7 @@
                                 <div class="col-xs-12">
                                     <div class="well well-sm">
                                         <h5><strong>Ordered items</strong></h5>
-                                        <div class="tally">
-                                            <?php for ($i = 0; $i < 7; $i++) { ?>
-
-                                            <div class="row">
-                                                <div class="col-xs-8">
-                                                    Chicken
-                                                </div>
-                                                <div class="col-xs-4">
-                                                    <strong style="float: right;">4</strong>
-                                                </div>
-                                            </div>
-                                            
-                                            <?php } ?>
+                                        <div class="tally" style="margin-top: 20px;">
                                         </div>
                                     </div>
                                 </div>

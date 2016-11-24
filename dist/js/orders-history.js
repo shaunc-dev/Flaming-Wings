@@ -52,8 +52,53 @@ function insertOrder(order) {
 
 }
 
+function placeTally(talliedOrder) {
+    var $row = $("<div>", {"class": "row", "style": "margin-bottom: 8px;"});
+    var $recipeColumn = $("<div>", {"class": "col-xs-8"})
+        .html(talliedOrder.recipe_name);
+    var $quantityColumn = $("<div>", {"class": "col-xs-4"})
+        .html($("<strong>", {"style": "float: right;"}).html(talliedOrder.qty));
+
+    $row.append($recipeColumn).append($quantityColumn);
+    $(".tally").append($row);
+}
+
+function tallyOrders(orders) {
+    var tallyArray = new Array();
+    for (var i = 0; i < orders.length; i++) {
+        for (var j = 0; j < orders[i].orders.length; j++) {
+            console.log("Currently in: " + orders[i].orders[j].recipe_name + " at Order #" + orders.id);
+            if (tallyArray.length == 0) {
+                console.log("creating first object...");
+                var orderItem = new Object();
+                orderItem.recipe_name = orders[i].orders[j].recipe_name;
+                orderItem.qty =  parseInt(orders[i].orders[j].qty);
+                tallyArray.push(orderItem);
+            } else {
+                for (var k = 0; k < tallyArray.length; k++) {
+                    if (tallyArray[k].recipe_name.toString() == orders[i].orders[j].recipe_name.toString()) {
+                        console.log(tallyArray[k].recipe_name + " to " + orders[i].orders[j].recipe_name);
+                        tallyArray[k].qty += parseInt(orders[i].orders[j].qty);
+                    } else {
+                        console.log("creating object...");
+                        var orderItem = new Object();
+                        orderItem.recipe_name = orders[i].orders[j].recipe_name;
+                        orderItem.qty = parseInt(orders[i].orders[j].qty);
+                        tallyArray.push(orderItem);
+                    }
+                }
+            }
+        }
+    }
+
+    for (var i = 0; i < tallyArray.length; i++) {
+        placeTally(tallyArray[i]);
+    }
+}
+
 function removeOrders() {
     $("#orders *:not(#no-orders)").remove();
+    $(".tally *").remove();
 }
 
 function initializeListeners() {
@@ -75,6 +120,7 @@ function getOrdersFromDate(min, max) {
         method: "POST"})
     .done(function(data) {
         console.log(data);
+        tallyOrders(data.history);
         if (data.history.length == 0) {
             $("#no-orders").css("display", "block");
         } else {
