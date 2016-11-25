@@ -72,9 +72,6 @@
                     <div class="row">
                         <div class="col-lg-9">
                             <div class="row" id="orders">
-                                <div class="col-xs-12" id="no-orders" style="height: 100%; display: none">
-                                    <div style="margin: 0 auto;">There are no records</div>
-                                </div>
                             </div>
                         </div>
                         <div class="col-lg-3">

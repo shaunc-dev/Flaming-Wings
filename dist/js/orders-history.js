@@ -64,28 +64,29 @@ function placeTally(talliedOrder) {
 }
 
 function tallyOrders(orders) {
+    console.log(orders);
     var tallyArray = new Array();
-    for (var i = 0; i < orders.length; i++) {
-        for (var j = 0; j < orders[i].orders.length; j++) {
-            console.log("Currently in: " + orders[i].orders[j].recipe_name + " at Order #" + orders.id);
-            if (tallyArray.length == 0) {
-                console.log("creating first object...");
-                var orderItem = new Object();
-                orderItem.recipe_name = orders[i].orders[j].recipe_name;
-                orderItem.qty =  parseInt(orders[i].orders[j].qty);
-                tallyArray.push(orderItem);
+
+    // getting all orders first then extracting only the name and quantity
+    for (var i = 0; i < orders.length; i++) { // orders
+        for (var j = 0; j < orders[i].orders.length; j++) { // order details
+            var orderTally = new Object();
+            orderTally.recipe_name = orders[i].orders[j].recipe_name;
+            orderTally.qty = orders[i].orders[j].qty;
+            tallyArray.push(orderTally);
+        }
+    }
+
+    // combining all order quantities
+    for (var i = 0; i < tallyArray.length; i++) {
+        for (var j = 0; j < tallyArray.length; j++) {
+            if (i == j) {
+                j++;
             } else {
-                for (var k = 0; k < tallyArray.length; k++) {
-                    if (tallyArray[k].recipe_name.toString() == orders[i].orders[j].recipe_name.toString()) {
-                        console.log(tallyArray[k].recipe_name + " to " + orders[i].orders[j].recipe_name);
-                        tallyArray[k].qty += parseInt(orders[i].orders[j].qty);
-                    } else {
-                        console.log("creating object...");
-                        var orderItem = new Object();
-                        orderItem.recipe_name = orders[i].orders[j].recipe_name;
-                        orderItem.qty = parseInt(orders[i].orders[j].qty);
-                        tallyArray.push(orderItem);
-                    }
+                if (tallyArray[i].recipe_name.trim() == tallyArray[j].recipe_name.trim()) {
+                    tallyArray[i].qty = parseInt(tallyArray[i].qty) + parseInt(tallyArray[j].qty);
+                    tallyArray.splice(j, 1);
+                    j = 0;
                 }
             }
         }
@@ -93,6 +94,7 @@ function tallyOrders(orders) {
 
     for (var i = 0; i < tallyArray.length; i++) {
         placeTally(tallyArray[i]);
+        // console.log(tallyArray[i]);
     }
 }
 
@@ -120,7 +122,7 @@ function getOrdersFromDate(min, max) {
         method: "POST"})
     .done(function(data) {
         console.log(data);
-        tallyOrders(data.history);
+        setTimeout(function() { tallyOrders(data.history) }, 0);
         if (data.history.length == 0) {
             $("#no-orders").css("display", "block");
         } else {
