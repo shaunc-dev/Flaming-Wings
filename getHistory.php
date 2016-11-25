@@ -13,9 +13,9 @@ if (isset($_POST["start"], $_POST["end"])) {
     $sales_query = "";
 
     if ($endDate == "") {
-        $sales_query = "select * from sales where date(dtSales) = '".$startDate."'";
+        $sales_query = "select * from sales where date(dtSales) = '".$startDate."' order by dtSales desc";
     } else {
-        $sales_query = "select * from sales where date(dtSales) between '".$startDate."' and '".$endDate."'";
+        $sales_query = "select * from sales where date(dtSales) between '".$startDate."' and '".$endDate."' order by dtSales desc";
     }
 
     $sales_result = $connect->query($sales_query);
