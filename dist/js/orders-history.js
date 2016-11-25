@@ -52,8 +52,55 @@ function insertOrder(order) {
 
 }
 
+function placeTally(talliedOrder) {
+    var $row = $("<div>", {"class": "row", "style": "margin-bottom: 8px;"});
+    var $recipeColumn = $("<div>", {"class": "col-xs-8"})
+        .html(talliedOrder.recipe_name);
+    var $quantityColumn = $("<div>", {"class": "col-xs-4"})
+        .html($("<strong>", {"style": "float: right;"}).html(talliedOrder.qty));
+
+    $row.append($recipeColumn).append($quantityColumn);
+    $(".tally").append($row);
+}
+
+function tallyOrders(orders) {
+    console.log(orders);
+    var tallyArray = new Array();
+
+    // getting all orders first then extracting only the name and quantity
+    for (var i = 0; i < orders.length; i++) { // orders
+        for (var j = 0; j < orders[i].orders.length; j++) { // order details
+            var orderTally = new Object();
+            orderTally.recipe_name = orders[i].orders[j].recipe_name;
+            orderTally.qty = orders[i].orders[j].qty;
+            tallyArray.push(orderTally);
+        }
+    }
+
+    // combining all order quantities
+    for (var i = 0; i < tallyArray.length; i++) {
+        for (var j = 0; j < tallyArray.length; j++) {
+            if (i == j) {
+                j++;
+            } else {
+                if (tallyArray[i].recipe_name.trim() == tallyArray[j].recipe_name.trim()) {
+                    tallyArray[i].qty = parseInt(tallyArray[i].qty) + parseInt(tallyArray[j].qty);
+                    tallyArray.splice(j, 1);
+                    j = 0;
+                }
+            }
+        }
+    }
+
+    for (var i = 0; i < tallyArray.length; i++) {
+        placeTally(tallyArray[i]);
+        // console.log(tallyArray[i]);
+    }
+}
+
 function removeOrders() {
-    $("#orders *").remove();
+    $("#orders *:not(#no-orders)").remove();
+    $(".tally *").remove();
 }
 
 function initializeListeners() {
@@ -68,7 +115,6 @@ function initializeListeners() {
 }
 
 function getOrdersFromDate(min, max) {
-    console.log("s: " + min + " e: " + max);
     $.ajax({
         url: "getHistory.php", 
         data: {"start": min, "end": max},
@@ -76,8 +122,9 @@ function getOrdersFromDate(min, max) {
         method: "POST"})
     .done(function(data) {
         console.log(data);
+        setTimeout(function() { tallyOrders(data.history) }, 0);
         if (data.history.length == 0) {
-            console.log("data is empty");
+            $("#no-orders").css("display", "block");
         } else {
             for (var i = 0; i < data.history.length; i++) {
                 insertOrder(data.history[i]);

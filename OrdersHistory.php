@@ -75,12 +75,23 @@
                             </div>
                         </div>
                         <div class="col-lg-3">
-                            <div class="well well-sm">
-                                <h5><strong>Show orders</strong></h5>
-                                <div class="selection">
-                                    <a data-value="now" class="active">Today</a>
-                                    <a data-value="lweek">Last week</a>
-                                    <a data-value="lmonth">Last month</a>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="well well-sm">
+                                        <h5><strong>Show orders</strong></h5>
+                                        <div class="selection">
+                                            <a data-value="now" class="active">Today</a>
+                                            <a data-value="lweek">Last week</a>
+                                            <a data-value="lmonth">Last month</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <div class="well well-sm">
+                                        <h5><strong>Ordered items</strong></h5>
+                                        <div class="tally" style="margin-top: 20px;">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
