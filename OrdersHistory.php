@@ -27,6 +27,11 @@
                 overflow-x: auto;
             }
 
+            .selection-container {
+                height: auto;
+                overflow-y: hidden;
+            }
+
             thead > tr > th:first-child {
                 width: 10%;
             }
@@ -36,7 +41,6 @@
             }
 
             .selection {
-                margin-top: 20px;
                 text-align: left;
             }
 
@@ -77,19 +81,27 @@
                         <div class="col-lg-3">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="well well-sm">
-                                        <h5><strong>Show orders</strong></h5>
-                                        <div class="selection">
-                                            <a data-value="now" class="active">Today</a>
-                                            <a data-value="lweek">Last week</a>
-                                            <a data-value="lmonth">Last month</a>
+                                    <div class="box box-danger">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Show orders</h3>
+                                        </div>
+                                        <div class="box-body selection-container">
+                                            <div class="selection">
+                                                <a data-value="now" class="active">Today</a>
+                                                <a data-value="lweek">Last week</a>
+                                                <a data-value="lmonth">Last month</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="well well-sm">
-                                        <h5><strong>Ordered items</strong></h5>
-                                        <div class="tally" style="margin-top: 20px;">
+                                    <div class="box box-danger">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Ordered items</h3>
+                                        </div>
+                                        <div class="box-body">
+                                            <div class="tally">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
