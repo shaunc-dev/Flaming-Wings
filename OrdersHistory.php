@@ -62,6 +62,12 @@
                 background: rgba(249, 151, 141, 1.0);
             }
 
+            .tally1, .tally2 {
+                border: 1px lightgray solid;
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+
         </style>
     </head>
     <body class="sidebar-mini skin-red">
@@ -102,8 +108,11 @@
                                         </div>
                                         <div class="box-body selection-container">
                                             <div class="tally1">
+                                                <strong>Shift 1 (8:00 am - 4:00 pm)</strong>
                                             </div>
+                                            
                                             <div class="tally2">
+                                                <strong>Shift 2 (3:00 pm - 11:00 pm)</strong>
                                             </div>
                                         </div>
                                     </div>

@@ -53,7 +53,7 @@ function insertOrder(order) {
 }
 
 function placeTally(talliedOrder, shift) {
-    var $row = $("<div>", {"class": "row", "style": "margin-bottom: 8px;"});
+    var $row = $("<div>", {"class": "row", "style": "margin-bottom: 4px; margin-top: 4px;"});
     var $recipeColumn = $("<div>", {"class": "col-xs-8"})
         .html(talliedOrder.recipe_name);
     var $quantityColumn = $("<div>", {"class": "col-xs-4"})
@@ -103,8 +103,7 @@ function tallyOrders(orders) {
 
 function removeOrders() {
     $("#orders *:not(#no-orders)").remove();
-    $(".tally1 *").remove();
-    $(".tally2 *").remove();
+    $(".tally1 *:not(strong), .tally2 *:not(strong)").remove();
 }
 
 function initializeListeners() {
