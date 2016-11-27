@@ -68,14 +68,14 @@ function initializeListeners() {
 }
 
 function getOrdersFromDate(min, max) {
-    console.log("s: " + min + " e: " + max);
+    // console.log("s: " + min + " e: " + max);
     $.ajax({
         url: "getHistory.php", 
         data: {"start": min, "end": max},
         dataType: "json",
         method: "POST"})
     .done(function(data) {
-        console.log(data);
+        // console.log(data);
         if (data.history.length == 0) {
             console.log("data is empty");
         } else {

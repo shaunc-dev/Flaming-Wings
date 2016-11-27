@@ -35,3 +35,4 @@ $(document).ready(function() {
 
 </script>
 <script src="plugins/moment/moment.js"></script>
+<script src="plugins/chartjs/Chart.min.js"></script>
