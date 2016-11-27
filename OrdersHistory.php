@@ -30,6 +30,7 @@
             .selection-container {
                 height: auto;
                 overflow-y: hidden;
+                overflow-x: hidden;
             }
 
             thead > tr > th:first-child {
@@ -99,7 +100,7 @@
                                         <div class="box-header">
                                             <h3 class="box-title">Ordered items</h3>
                                         </div>
-                                        <div class="box-body">
+                                        <div class="box-body selection-container">
                                             <div class="tally">
                                             </div>
                                         </div>
