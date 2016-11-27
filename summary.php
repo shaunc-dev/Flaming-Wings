@@ -27,6 +27,16 @@
                 background: rgba(249, 151, 141, 1.0);
             }
 
+            #sales-performance {
+                width: 100%;
+            }
+
+            @media print {
+                #sales-performance {
+                    width: 50%;
+                }
+            }
+
         </style>
     </head>
     <body class="sidebar-mini skin-red">
@@ -47,7 +57,7 @@
                                     <small>Comparing today and yesterday</small>
                                 </div>
                                 <div class="box-body">
-                                    
+                                    <canvas id="sales-performance"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -69,6 +79,9 @@
                 </section>
             </div>
         </div>
-         <script src="dist/js/orders-history.js"></script>
+        <script src="dist/js/orders-history.js"></script>
+        <script>
+            processSummary();
+        </script>
     </body>
 </html>

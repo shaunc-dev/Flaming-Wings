@@ -1,3 +1,6 @@
+var jsonData;
+var jsonDataToCompare;
+
 function insertOrder(order) {
     var $columnTemplate = $("<div>", {"class": "col-xs-12"});
     var $boxTemplate = $("<div>", {"class": "box box-danger collapsed-box"})
@@ -75,15 +78,20 @@ function getOrdersFromDate(min, max) {
         dataType: "json",
         method: "POST"})
     .done(function(data) {
-        // console.log(data);
-        if (data.history.length == 0) {
-            console.log("data is empty");
-        } else {
-            for (var i = 0; i < data.history.length; i++) {
-                insertOrder(data.history[i]);
-            }
-        }
+        jsonData = data;
+        processHistory();
     });
+}
+        
+
+function processHistory() {
+    if (jsonData.history.length == 0) {
+        console.log("data is empty");
+    } else {
+        for (var i = 0; i < jsonData.history.length; i++) {
+            insertOrder(jsonData.history[i]);
+        }
+    }
 }
 
 function processDate(date) {
@@ -104,6 +112,34 @@ function processDate(date) {
     } else {
         console.log("date is null");
     }
+}
+
+function processSummary() {
+    var chart = new Chart($("#sales-performance"), {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 1
+            },
+
+            {
+                label: ['# of Shauns'],
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
 }
 
 
