@@ -52,7 +52,7 @@ function insertOrder(order) {
 
 }
 
-function placeTally(talliedOrder) {
+function placeTally(talliedOrder, shift) {
     var $row = $("<div>", {"class": "row", "style": "margin-bottom: 8px;"});
     var $recipeColumn = $("<div>", {"class": "col-xs-8"})
         .html(talliedOrder.recipe_name);
@@ -60,7 +60,9 @@ function placeTally(talliedOrder) {
         .html($("<strong>", {"style": "float: right;"}).html(talliedOrder.qty));
 
     $row.append($recipeColumn).append($quantityColumn);
-    $(".tally").append($row);
+    $row.appendTo(".tally" + shift);
+    // $(".tally" + shift).append($row);
+    // $(".tally2").append($row);
 }
 
 function tallyOrders(orders) {
@@ -93,14 +95,16 @@ function tallyOrders(orders) {
     }
 
     for (var i = 0; i < tallyArray.length; i++) {
-        placeTally(tallyArray[i]);
+        placeTally(tallyArray[i], 1);
+        placeTally(tallyArray[i], 2);
         // console.log(tallyArray[i]);
     }
 }
 
 function removeOrders() {
     $("#orders *:not(#no-orders)").remove();
-    $(".tally *").remove();
+    $(".tally1 *").remove();
+    $(".tally2 *").remove();
 }
 
 function initializeListeners() {

@@ -101,7 +101,9 @@
                                             <h3 class="box-title">Ordered items</h3>
                                         </div>
                                         <div class="box-body selection-container">
-                                            <div class="tally">
+                                            <div class="tally1">
+                                            </div>
+                                            <div class="tally2">
                                             </div>
                                         </div>
                                     </div>
