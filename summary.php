@@ -2,12 +2,12 @@
 <html>
     <head>
         <title>Summary of Sales</title>
-        <?php include ('templates/imports.php');
+        <?php include ('templates/imports.php'); ?>
     </head>
-    <body>
+    <body class="skin-red">
         <div class="wrapper">
-            <?php include('templates/navbar.php');
-            <?php include('templates/sidebar.php');
+            <?php include('templates/navbar.php'); ?>
+            <?php include('templates/sidebar.php'); ?>
             
             <div class="content-wrapper">
                 <section class="content-header">
