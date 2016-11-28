@@ -1,3 +1,8 @@
+/**
+ * inserts receipt to the order list
+ * @param order the order that should be inserted
+ */
+
 function insertOrder(order) {
     var $columnTemplate = $("<div>", {"class": "col-xs-12"});
     var $boxTemplate = $("<div>", {"class": "box box-danger collapsed-box"})
@@ -52,19 +57,30 @@ function insertOrder(order) {
 
 }
 
-function placeTally(talliedOrder) {
-    var $row = $("<div>", {"class": "row", "style": "margin-bottom: 8px;"});
+/**
+ * placing tallies to their appropriate shiftSeparation
+ * @param talliedOrder the tallied data
+ * @param shift the shift of the orders
+ */
+
+function placeTally(talliedOrder, shift) {
+    var $row = $("<div>", {"class": "row", "style": "margin-bottom: 4px; margin-top: 4px;"});
     var $recipeColumn = $("<div>", {"class": "col-xs-8"})
         .html(talliedOrder.recipe_name);
     var $quantityColumn = $("<div>", {"class": "col-xs-4"})
         .html($("<strong>", {"style": "float: right;"}).html(talliedOrder.qty));
 
     $row.append($recipeColumn).append($quantityColumn);
-    $(".tally").append($row);
+    $row.appendTo(".tally" + shift);
 }
 
-function tallyOrders(orders) {
-    console.log(orders);
+/**
+ * organizing and tallying orders
+ * @param orders the order data
+ * @param shift check what shift the order is (accepts only 1 or 2 (1st shift or 2nd shift)) 
+ */
+
+function tallyOrders(orders, shift) {
     var tallyArray = new Array();
 
     // getting all orders first then extracting only the name and quantity
@@ -93,15 +109,22 @@ function tallyOrders(orders) {
     }
 
     for (var i = 0; i < tallyArray.length; i++) {
-        placeTally(tallyArray[i]);
-        // console.log(tallyArray[i]);
+        placeTally(tallyArray[i], shift);
     }
 }
 
+/**
+ * resetting orders and the tally
+ */
+
 function removeOrders() {
     $("#orders *:not(#no-orders)").remove();
-    $(".tally *").remove();
+    $(".tally1 *:not(strong), .tally2 *:not(strong)").remove();
 }
+
+/**
+ * initializing all button listeners on the page
+ */
 
 function initializeListeners() {
     $(".selection > a").on("click", function() {
@@ -114,6 +137,42 @@ function initializeListeners() {
     $(".selection > a:first-child").trigger("click");
 }
 
+/**
+ * separating the orders to their shifts
+ * @param history the history data from the server (as JSON)
+ */
+
+function shiftSeparation(history) {
+    var shift1 = new Array();
+    var shift2 = new Array();
+
+    for (var i = 0; i < history.length; i++) {
+        var isShift1 = false;
+
+        for (var hour = 8; hour <= 15; hour++) {
+            if (moment(history[i].date).hour() == hour) {
+                isShift1 = true;
+                break;
+            }
+        }
+
+        if (isShift1 == true) {
+            shift1.push(history[i]);
+        } else {
+            shift2.push(history[i]);
+        }
+    }
+
+    setTimeout(function() {tallyOrders(shift1, 1)}, 0);
+    setTimeout(function() {tallyOrders(shift2, 2)}, 0);
+}
+
+/**
+ * gets order history from the server given the range
+ * @param min the minimum date range (accepts only YYYY-MM-DD format)
+ * @param max the maximum date range (accepts only YYYY-MM-DD format)
+ */
+
 function getOrdersFromDate(min, max) {
     $.ajax({
         url: "getHistory.php", 
@@ -121,8 +180,7 @@ function getOrdersFromDate(min, max) {
         dataType: "json",
         method: "POST"})
     .done(function(data) {
-        console.log(data);
-        setTimeout(function() { tallyOrders(data.history) }, 0);
+        setTimeout(function() { shiftSeparation(data.history) }, 0);
         if (data.history.length == 0) {
             $("#no-orders").css("display", "block");
         } else {
@@ -132,6 +190,11 @@ function getOrdersFromDate(min, max) {
         }
     });
 }
+
+/**
+ * converts the button values to dates for processing
+ * @param date the button value
+ */
 
 function processDate(date) {
     if (date.toLowerCase() == "now") {

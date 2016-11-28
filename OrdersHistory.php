@@ -27,6 +27,12 @@
                 overflow-x: auto;
             }
 
+            .selection-container {
+                height: auto;
+                overflow-y: hidden;
+                overflow-x: hidden;
+            }
+
             thead > tr > th:first-child {
                 width: 10%;
             }
@@ -36,7 +42,6 @@
             }
 
             .selection {
-                margin-top: 20px;
                 text-align: left;
             }
 
@@ -55,6 +60,12 @@
             .selection > a:hover {
                 color: white;
                 background: rgba(249, 151, 141, 1.0);
+            }
+
+            .tally1, .tally2 {
+                border: 1px lightgray solid;
+                padding: 10px;
+                margin-bottom: 20px;
             }
 
         </style>
@@ -77,19 +88,32 @@
                         <div class="col-lg-3">
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="well well-sm">
-                                        <h5><strong>Show orders</strong></h5>
-                                        <div class="selection">
-                                            <a data-value="now" class="active">Today</a>
-                                            <a data-value="lweek">Last week</a>
-                                            <a data-value="lmonth">Last month</a>
+                                    <div class="box box-danger">
+                                        <div class="box-header with-border">
+                                            <h3 class="box-title">Show orders</h3>
+                                        </div>
+                                        <div class="box-body selection-container">
+                                            <div class="selection">
+                                                <a data-value="now" class="active">Today</a>
+                                                <a data-value="lweek">Last week</a>
+                                                <a data-value="lmonth">Last month</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <div class="well well-sm">
-                                        <h5><strong>Ordered items</strong></h5>
-                                        <div class="tally" style="margin-top: 20px;">
+                                    <div class="box box-danger">
+                                        <div class="box-header">
+                                            <h3 class="box-title">Ordered items</h3>
+                                        </div>
+                                        <div class="box-body selection-container">
+                                            <div class="tally1">
+                                                <strong>Shift 1 (8:00 am - 3:00 pm)</strong>
+                                            </div>
+                                            
+                                            <div class="tally2">
+                                                <strong>Shift 2 (3:01 pm - 11:00 pm)</strong>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
