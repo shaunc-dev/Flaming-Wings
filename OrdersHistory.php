@@ -108,11 +108,11 @@
                                         </div>
                                         <div class="box-body selection-container">
                                             <div class="tally1">
-                                                <strong>Shift 1 (8:00 am - 4:00 pm)</strong>
+                                                <strong>Shift 1 (8:00 am - 3:00 pm)</strong>
                                             </div>
                                             
                                             <div class="tally2">
-                                                <strong>Shift 2 (3:00 pm - 11:00 pm)</strong>
+                                                <strong>Shift 2 (3:01 pm - 11:00 pm)</strong>
                                             </div>
                                         </div>
                                     </div>

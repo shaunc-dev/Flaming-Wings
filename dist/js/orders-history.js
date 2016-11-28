@@ -65,7 +65,7 @@ function placeTally(talliedOrder, shift) {
     // $(".tally2").append($row);
 }
 
-function tallyOrders(orders) {
+function tallyOrders(orders, shift) {
     console.log(orders);
     var tallyArray = new Array();
 
@@ -95,8 +95,8 @@ function tallyOrders(orders) {
     }
 
     for (var i = 0; i < tallyArray.length; i++) {
-        placeTally(tallyArray[i], 1);
-        placeTally(tallyArray[i], 2);
+        placeTally(tallyArray[i], shift);
+        // placeTally(tallyArray[i], 2);
         // console.log(tallyArray[i]);
     }
 }
@@ -117,6 +117,33 @@ function initializeListeners() {
     $(".selection > a:first-child").trigger("click");
 }
 
+function shiftSeparation(history) {
+    var shift1 = new Array();
+    var shift2 = new Array();
+
+    console.log(history);
+
+    for (var i = 0; i < history.length; i++) {
+        var isShift1 = false;
+
+        for (var hour = 8; hour <= 15; hour++) {
+            if (moment(history[i].date).hour() == hour) {
+                isShift1 = true;
+                break;
+            }
+        }
+
+        if (isShift1 == true) {
+            shift1.push(history[i]);
+        } else {
+            shift2.push(history[i]);
+        }
+    }
+
+    setTimeout(function() {tallyOrders(shift1, 1)}, 0);
+    setTimeout(function() {tallyOrders(shift2, 2)}, 0);
+}
+
 function getOrdersFromDate(min, max) {
     $.ajax({
         url: "getHistory.php", 
@@ -125,7 +152,7 @@ function getOrdersFromDate(min, max) {
         method: "POST"})
     .done(function(data) {
         console.log(data);
-        setTimeout(function() { tallyOrders(data.history) }, 0);
+        setTimeout(function() { shiftSeparation(data.history) }, 0);
         if (data.history.length == 0) {
             $("#no-orders").css("display", "block");
         } else {
