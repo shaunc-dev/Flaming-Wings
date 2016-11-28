@@ -1,3 +1,8 @@
+/**
+ * inserts receipt to the order list
+ * @param order the order that should be inserted
+ */
+
 function insertOrder(order) {
     var $columnTemplate = $("<div>", {"class": "col-xs-12"});
     var $boxTemplate = $("<div>", {"class": "box box-danger collapsed-box"})
@@ -52,6 +57,12 @@ function insertOrder(order) {
 
 }
 
+/**
+ * placing tallies to their appropriate shiftSeparation
+ * @param talliedOrder the tallied data
+ * @param shift the shift of the orders
+ */
+
 function placeTally(talliedOrder, shift) {
     var $row = $("<div>", {"class": "row", "style": "margin-bottom: 4px; margin-top: 4px;"});
     var $recipeColumn = $("<div>", {"class": "col-xs-8"})
@@ -61,9 +72,13 @@ function placeTally(talliedOrder, shift) {
 
     $row.append($recipeColumn).append($quantityColumn);
     $row.appendTo(".tally" + shift);
-    // $(".tally" + shift).append($row);
-    // $(".tally2").append($row);
 }
+
+/**
+ * organizing and tallying orders
+ * @param orders the order data
+ * @param shift check what shift the order is (accepts only 1 or 2 (1st shift or 2nd shift)) 
+ */
 
 function tallyOrders(orders, shift) {
     console.log(orders);
@@ -96,15 +111,21 @@ function tallyOrders(orders, shift) {
 
     for (var i = 0; i < tallyArray.length; i++) {
         placeTally(tallyArray[i], shift);
-        // placeTally(tallyArray[i], 2);
-        // console.log(tallyArray[i]);
     }
 }
+
+/**
+ * resetting orders and the tally
+ */
 
 function removeOrders() {
     $("#orders *:not(#no-orders)").remove();
     $(".tally1 *:not(strong), .tally2 *:not(strong)").remove();
 }
+
+/**
+ * initializing all button listeners on the page
+ */
 
 function initializeListeners() {
     $(".selection > a").on("click", function() {
@@ -116,6 +137,11 @@ function initializeListeners() {
 
     $(".selection > a:first-child").trigger("click");
 }
+
+/**
+ * separating the orders to their shifts
+ * @param history the history data from the server (as JSON)
+ */
 
 function shiftSeparation(history) {
     var shift1 = new Array();
@@ -144,6 +170,12 @@ function shiftSeparation(history) {
     setTimeout(function() {tallyOrders(shift2, 2)}, 0);
 }
 
+/**
+ * gets order history from the server given the range
+ * @param min the minimum date range (accepts only YYYY-MM-DD format)
+ * @param max the maximum date range (accepts only YYYY-MM-DD format)
+ */
+
 function getOrdersFromDate(min, max) {
     $.ajax({
         url: "getHistory.php", 
@@ -162,6 +194,11 @@ function getOrdersFromDate(min, max) {
         }
     });
 }
+
+/**
+ * converts the button values to dates for processing
+ * @param date the button value
+ */
 
 function processDate(date) {
     if (date.toLowerCase() == "now") {
