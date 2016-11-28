@@ -81,7 +81,6 @@ function placeTally(talliedOrder, shift) {
  */
 
 function tallyOrders(orders, shift) {
-    console.log(orders);
     var tallyArray = new Array();
 
     // getting all orders first then extracting only the name and quantity
@@ -147,8 +146,6 @@ function shiftSeparation(history) {
     var shift1 = new Array();
     var shift2 = new Array();
 
-    console.log(history);
-
     for (var i = 0; i < history.length; i++) {
         var isShift1 = false;
 
@@ -183,7 +180,6 @@ function getOrdersFromDate(min, max) {
         dataType: "json",
         method: "POST"})
     .done(function(data) {
-        console.log(data);
         setTimeout(function() { shiftSeparation(data.history) }, 0);
         if (data.history.length == 0) {
             $("#no-orders").css("display", "block");
