@@ -299,7 +299,6 @@
         </section>
 
      <section class="content">
-       <?php echo "<h5> Hey " . $_SESSION['user_name'] . "! </h5>"; ?>
           <!-- Small boxes (Stat box) -->
           <div class="row">
 
