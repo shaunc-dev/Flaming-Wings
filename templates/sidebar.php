@@ -8,7 +8,10 @@
             <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-            <p>Brooklyn Beckham</p>
+                <?php 
+                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
+                        while ($row = mysqli_fetch_array($sql)){
+                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
             <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
     </div>

@@ -1,12 +1,12 @@
-<!DOCTYPE html>
-<?php
-
+<?php 
 session_start();
-if (!isset($_SESSION["guest"])) {
-  header("login.php");
+if (!isset($_SESSION['user_name'])) {
+  header("log_in.php");
 }
-
 ?>
+
+<!DOCTYPE html>
+
 <html>
   <head>
     <meta charset="utf-8">
@@ -64,7 +64,7 @@ if (!isset($_SESSION["guest"])) {
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="http://localhost/Flaming Wings/MAIN.php" class="logo">
+        <a href="MAIN.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <!-- logo for regular state and mobile devices -->
           <img src="logoo.jpg" alt="Mountain View" style="width:200px;height:50px;">
@@ -325,7 +325,7 @@ if (!isset($_SESSION["guest"])) {
                      
                        <?php
                         $stock_code = isset($_GET['recipe_name']) ? $_GET['recipe_name'] : '';
-                          $sql = mysqli_query($connect, "SELECT recipe_id, recipe.recipe_name, recipe_type FROM recipe, recipetype WHERE deactivate = 0 AND recipe.recipe_typeid=recipetype.recipe_typeid order by recipe.recipe_id DESC");
+                          $sql = mysqli_query($connect, "SELECT recipe_id, recipe.recipe_name, recipe_type FROM recipe, recipetype WHERE deactivate != 1 AND recipe.recipe_typeid=recipetype.recipe_typeid order by recipe.recipe_id DESC");
                         while ($row = mysqli_fetch_array($sql)){
                           echo "<tr>"; 
                           echo "<td>".$row['recipe_id']."</td>"; //recipe id

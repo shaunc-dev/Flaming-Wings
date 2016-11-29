@@ -3,7 +3,7 @@
 
 session_start();
 if (!isset($_SESSION["guest"])) {
-  header("login.php");
+  header("log_in.php");
 }
 
 ?>
@@ -281,10 +281,9 @@ if (!isset($_SESSION["guest"])) {
                         <!-- SELECT SUM(r.qty) AS qty, sname, s.stock_id, pack_name FROM replenishstock AS r, stock AS s, unitpackaging AS p WHERE s.stock_id=r.stock_id AND p.pack_id=s.pack_id GROUP BY s.stock_id-->
                         
                         <?php
-                          
+                          //SELECT COALESCE(SUM(r.qty), 0) - COALESCE(SUM(w.qty), 0) AS qty, sname FROM replenishstock AS r, withdrawstock AS w, stock AS s WHERE s.stock_id=w.stock_id AND r.stock_id=s.stock_id AND s.stock_id='".$var_value."'
                        
-                        $sql = mysqli_query($connect, "SELECT SUM(r.qty) AS qty, sname, s.stock_id, pack_name, s.qty AS sqty, unit_name FROM replenishstock AS r, stock AS s, unitpackaging AS p, unitmeasurement AS u WHERE s.stock_id=r.stock_id AND p.pack_id=s.pack_id AND s.unit_id=u.unit_id GROUP BY s.stock_id
-");
+                        $sql = mysqli_query($connect, "SELECT SUM(r.qty) AS qty, sname, s.stock_id, pack_name, s.qty AS sqty, unit_name FROM replenishstock AS r, stock AS s, unitpackaging AS p, unitmeasurement AS u WHERE s.stock_id=r.stock_id AND p.pack_id=s.pack_id AND s.unit_id=u.unit_id GROUP BY s.stock_id");
                         while ($row = mysqli_fetch_array($sql)){
                         echo "<option value=\"" . $row['stock_id'] . "\">".$row['stock_id']. " -- ".$row['sname']. " -- " .$row['qty']. " ".$row['pack_name']. " (" .$row['sqty']. " " .$row['unit_name']. ")</option>"; 
                         }

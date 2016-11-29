@@ -362,11 +362,9 @@ if (!isset($_SESSION["guest"])) {
               </div><!-- /.box -->
                 <div class="box-footer">
      
-                    <a href="AddIngType.php" class="btn btn-primary" role="button">Add Ingredient Type</a>
+                    <a href="AddIngType.php" class="btn btn-primary" role="button" style="float: right;">Add Ingredient Type</a>
                      <button type="button" id="IngredientAdd" class="btn btn-primary">Add Ingredient</button>
-                    <input type="submit" class="btn btn-primary" value="ADD RECIPE" />
-                   
-
+                 
                    
                   </div>
 
@@ -392,10 +390,18 @@ if (!isset($_SESSION["guest"])) {
                       </tr>
                     </thead>
                     <tbody id="ingredients">
+                      
                     </tbody>
+
                   </table>
+                     <div class="box-footer">
+                  <input type="submit" class="btn btn-primary" value="ADD RECIPE" />
+
+                   
+                  </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+
             </div>
 
 </form>
@@ -447,6 +453,7 @@ if (!isset($_SESSION["guest"])) {
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+           
             </div>
 
     
@@ -501,7 +508,13 @@ if (!isset($_SESSION["guest"])) {
     $(document).ready(function() { 
         $("#IngredientAdd").on("click", function() {
           console.log($("#AddIngredient").val());
-          $("#ingredients").append("<tr><td>"+ $("#AddIngredient option:selected").text() +"<input type='hidden' name='ingname[]' value="+ $("#AddIngredient").val() +" /></td><td>"+ $("#UOM option:selected").text() +"<input type='hidden' name='uomname[]' value='"+ $("#UOM").val() +"'/></td><td>"+ $("#InputQty").val() +"<input type='hidden' name='qtyname[]' value="+ $("#InputQty").val() +" /></td></tr>");
+          $("#ingredients").append("<tr><td>"+ $("#AddIngredient option:selected").text() +"<input type='hidden' name='ingname[]' value="+ $("#AddIngredient").val() +" /></td><td>"+ $("#UOM option:selected").text() +"<input type='hidden' name='uomname[]' value='"+ $("#UOM").val() +"'/></td><td>"+ $("#InputQty").val() +"<input type='hidden' name='qtyname[]' value="+ $("#InputQty").val() +" /></td></td>"+"<td><button type='button' class='IngredientDelete'><i class='fa fa-trash-o' aria-hidden='true'></i></button></td></td></tr>");
+
+//javascript to remove an ingredient
+           $(".IngredientDelete").on("click", function() {
+            $(this).parent().parent().remove();
+          }); 
+
         });
     });
 

@@ -265,7 +265,7 @@ session_start();
 
 //$_SESSION['var_value'] = $_GET['stock_id'];
  $var_value = $_POST['EditButton']; 
-  $deact_query = "UPDATE stock SET deactivate=1 WHERE stock_id='".$var_value."'"; 
+  $deact_query = "UPDATE stock SET deactivate='1' WHERE stock_id='".$var_value."'"; 
 
   mysqli_query($connect, $deact_query) or die(mysqli_error($connect)); 
 

@@ -315,7 +315,7 @@ if (!isset($_SESSION["guest"])) {
                         <option value="" disabled selected> -- Employees --</option> 
                      
                         <?php
-                        $sql = mysqli_query($connect, "SELECT * FROM users");
+                        $sql = mysqli_query($connect, "SELECT * FROM users u, employee_type type WHERE type.employee_type='Stock Controller' AND type.user_type_id= u.user_type_id");
                         while ($row = mysqli_fetch_array($sql)){
                         echo "<option value=\"" . $row['user_id'] . "\">" . $row['user_name'] . "</option>";
                         }
