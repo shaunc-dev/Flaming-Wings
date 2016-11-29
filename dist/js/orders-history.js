@@ -9,7 +9,9 @@ function insertOrder(order) {
 
     var $boxHeader = $("<div>", {"class": "box-header"})
     .append($("<h3>", {"class": "box-title"})
-        .html("Order #" + order.id).append($("<small>", {"style": "margin-left: 10px"}).html(moment(order.date).format("MMMM D, YYYY"))))
+        .html("Order #" + order.id).append($("<small>", {"style": "margin-left: 10px"})
+        .html(moment(order.date).format("MMMM D, YYYY"))
+            .append(", " + moment(order.date).format("h:m A"))))
     .append($("<div>", {"class": "box-tools pull-right"})
         .html($("<button>", {"class": "btn btn-box-tool", "data-widget": "collapse", "type": "button"})
             .html($("<i>", {"class": "fa fa-plus"}))
