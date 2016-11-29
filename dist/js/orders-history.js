@@ -4,6 +4,9 @@
  */
 
 var total_tally = 0;
+// var jsonData;
+// var jsonDataToCompare;
+// >>>>>>> feature-sales
 
 function insertOrder(order) {
     var $columnTemplate = $("<div>", {"class": "col-xs-12"});
@@ -186,7 +189,9 @@ function shiftSeparation(history) {
  */
 
 function getOrdersFromDate(min, max) {
+
     var history;
+
     $.ajax({
         url: "getHistory.php", 
         data: {"start": min, "end": max},
@@ -204,6 +209,17 @@ function getOrdersFromDate(min, max) {
             }
         }
     });
+}
+        
+
+function processHistory() {
+    if (jsonData.history.length == 0) {
+        console.log("data is empty");
+    } else {
+        for (var i = 0; i < jsonData.history.length; i++) {
+            insertOrder(jsonData.history[i]);
+        }
+    }
 }
 
 function setupDateBoxes(history) {
@@ -251,6 +267,34 @@ function processDate(date) {
     } else {
         console.log("date is null");
     }
+}
+
+function processSummary() {
+    var chart = new Chart($("#sales-performance"), {
+        type: 'bar',
+        data: {
+            labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+            datasets: [{
+                label: '# of Votes',
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255,99,132,1)',
+                borderWidth: 1
+            },
+
+            {
+                label: ['# of Shauns'],
+                data: [12, 19, 3, 5, 2, 3],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
 }
 
 

@@ -9,6 +9,13 @@
 <!-- Theme style -->
 <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
 <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+<style>
+
+.treeview > a {
+    cursor: pointer;
+}
+
+</style>
 <!-- AdminLTE Skins. Choose a skin from the css/skins
         folder instead of downloading all of them to reduce the load. -->
 
@@ -23,8 +30,9 @@
 <script>
 
 $(document).ready(function() {
-        $.widget.bridge('uibutton', $.ui.button);
+    $.widget.bridge('uibutton', $.ui.button);
 });
 
 </script>
 <script src="plugins/moment/moment.js"></script>
+<script src="plugins/chartjs/Chart.min.js"></script>
