@@ -1,5 +1,12 @@
 <!DOCTYPE HTML>
 <html>
+
+<?php
+
+session_start();
+
+?>
+
     <head>
         <title>Point of Sales</title>
 
@@ -9,6 +16,12 @@
         <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
         <script src="dist/js/jquery.js"></script>
+
+             <!-- PHP --> 
+       <?PHP 
+       include("dbconnection.php")
+
+       ?>
         <script>
             $(window).on("load", function() {
                 $.post("cashier-controller/check.php")
