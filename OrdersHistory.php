@@ -89,7 +89,14 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-lg-9">
-                            <div class="row" id="orders">
+                            <div class="box box-danger" data-value="2016-11-25">
+                                <div class="box-header">
+                                    <h3 class="box-title">November 25, 2016 orders</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row" id="orders">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
