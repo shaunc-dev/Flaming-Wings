@@ -62,10 +62,17 @@
                 background: rgba(249, 151, 141, 1.0);
             }
 
-            .tally1, .tally2 {
+            .tally1, .tally2, .total-tally {
                 border: 1px lightgray solid;
                 padding: 10px;
                 margin-bottom: 20px;
+            }
+
+            .total-tally {
+                border: none;
+                padding-top: 0;
+                padding-bottom: 5px;
+                margin-bottom: 0;
             }
 
         </style>
@@ -82,7 +89,14 @@
                 <section class="content">
                     <div class="row">
                         <div class="col-lg-9">
-                            <div class="row" id="orders">
+                            <div class="box box-danger" data-value="2016-11-25">
+                                <div class="box-header">
+                                    <h3 class="box-title">November 25, 2016 orders</h3>
+                                </div>
+                                <div class="box-body">
+                                    <div class="row" id="orders">
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-lg-3">
@@ -113,6 +127,10 @@
                                             
                                             <div class="tally2">
                                                 <strong>Shift 2 (3:01 pm - 11:00 pm)</strong>
+                                            </div>
+                                            <div class="total-tally">
+                                                <strong>Total</strong>
+                                                <span class="pull-right" id="total-tally">0</span>
                                             </div>
                                         </div>
                                     </div>

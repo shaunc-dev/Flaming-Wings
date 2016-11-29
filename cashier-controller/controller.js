@@ -57,7 +57,7 @@ function insertItem(item) {
     // .append($("<small>").text(item.pieces_left + " pieces left"));
     
     var $boxTemplate = $("<div>", {"class": "box box-danger box-solid"}).append($itemHeader).append($itemDescription);
-    var $columnTemplate = $("<div>", {"class": "col-sm-2 col-md-4 col-lg-4"}).append($boxTemplate);
+    var $columnTemplate = $("<div>", {"class": "col-sm-2 col-md-4 col-lg-2"}).append($boxTemplate);
     
     $boxTemplate.on("click", function() {
         selectItem($itemDescription, item);
@@ -134,7 +134,7 @@ function sendOrders(finalizedOrders) {
         success: function(data) {
             console.log(data);
             if (data == "success") {
-                generateAlert("Customer's order is confirmed!", "success");
+                generateAlert("Order's confirmed!", "success");
                 reInitializeOrders();
             }
         },
@@ -165,7 +165,7 @@ function initializeListeners() {
     $("#clear").on("click", function() {
         reInitializeOrders();
         isUnlocked(false);
-        generateAlert("Order has been cancelled!", "danger");
+        generateAlert("Order's cancelled!", "danger");
     });
 
     $("#lock").on("click", function() {
@@ -250,7 +250,7 @@ function generateAlert(message, alertType) {
 
     setTimeout(function() {
         $(".alert").fadeOut();
-    }, 5000);
+    }, 1500);
 }
 
 // initialize everything below

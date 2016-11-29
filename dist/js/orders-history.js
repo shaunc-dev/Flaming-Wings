@@ -3,13 +3,17 @@
  * @param order the order that should be inserted
  */
 
+var total_tally = 0;
+
 function insertOrder(order) {
     var $columnTemplate = $("<div>", {"class": "col-xs-12"});
     var $boxTemplate = $("<div>", {"class": "box box-danger collapsed-box"})
 
     var $boxHeader = $("<div>", {"class": "box-header"})
     .append($("<h3>", {"class": "box-title"})
-        .html("Order #" + order.id).append($("<small>", {"style": "margin-left: 10px"}).html(moment(order.date).format("MMMM D, YYYY"))))
+        .html("Order #" + order.id).append($("<small>", {"style": "margin-left: 10px"})
+        .html(moment(order.date).format("MMMM D, YYYY"))
+            .append(", " + moment(order.date).format("h:m A"))))
     .append($("<div>", {"class": "box-tools pull-right"})
         .html($("<button>", {"class": "btn btn-box-tool", "data-widget": "collapse", "type": "button"})
             .html($("<i>", {"class": "fa fa-plus"}))
@@ -44,6 +48,8 @@ function insertOrder(order) {
             .append($("<td>").html(order.orders[i].recipe_name))
             .append($("<td>").html(toFixedPrice))
         );
+
+        total_tally += parseInt(order.orders[i].qty);
     }
 
     // end of table contents
@@ -54,6 +60,8 @@ function insertOrder(order) {
 
     $boxTemplate.append($boxHeader).append($boxBody).append($boxFooter);
     $("#orders").append($columnTemplate.html($boxTemplate));
+
+    $("#total-tally").html(total_tally);
 
 }
 
@@ -111,6 +119,8 @@ function tallyOrders(orders, shift) {
     for (var i = 0; i < tallyArray.length; i++) {
         placeTally(tallyArray[i], shift);
     }
+
+    $("#total-tally").html(total_tally);
 }
 
 /**
@@ -120,6 +130,8 @@ function tallyOrders(orders, shift) {
 function removeOrders() {
     $("#orders *:not(#no-orders)").remove();
     $(".tally1 *:not(strong), .tally2 *:not(strong)").remove();
+    total_tally = 0;
+    $("#total-tally").html(total_tally);
 }
 
 /**
@@ -134,7 +146,7 @@ function initializeListeners() {
         processDate($(this).data("value"));
     });
 
-    $(".selection > a:first-child").trigger("click");
+    $(".selection > a:nth-child(2)").trigger("click");
 }
 
 /**
@@ -174,13 +186,16 @@ function shiftSeparation(history) {
  */
 
 function getOrdersFromDate(min, max) {
+    var history;
     $.ajax({
         url: "getHistory.php", 
         data: {"start": min, "end": max},
         dataType: "json",
         method: "POST"})
     .done(function(data) {
-        setTimeout(function() { shiftSeparation(data.history) }, 0);
+        history = data;
+        // setupDateBoxes(history.history);
+        shiftSeparation(data.history);
         if (data.history.length == 0) {
             $("#no-orders").css("display", "block");
         } else {
@@ -189,6 +204,28 @@ function getOrdersFromDate(min, max) {
             }
         }
     });
+}
+
+function setupDateBoxes(history) {
+    console.log(history);
+    var historyArray = history;
+    for (var i = 0; i < historyArray.length; i++) {
+        for (var j = 0; j < historyArray.length; j++) {
+            if (i == j) {
+                j++;
+            } else {
+                if (moment(historyArray[i].date).format("YYYY-MM-DD") == moment(historyArray[j].date).format("YYYY-MM-DD")) {
+                    historyArray.splice(j, 1);
+                }
+            }
+        }
+    }
+
+    console.log(history);
+    // console.log(historyArray);
+    // historyArray.splice(0, 1);
+    // console.log(historyArray);
+
 }
 
 /**
