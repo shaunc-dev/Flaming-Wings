@@ -35,6 +35,11 @@
                 position: relative;
                 z-index: 1;
             }
+
+            .alert-overlay {
+                position: fixed;
+                bottom: 5%; 
+            }
             
             #lock, #clear {
                 display: none;
@@ -90,7 +95,7 @@
             <?php include("templates/navbar.php"); ?>
             <div class="content-wrapper">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box box-danger box-solid">
@@ -143,7 +148,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="box box-danger">
