@@ -2,29 +2,8 @@
 
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Flaming Wings | Registration Page</title>
-    <!-- Tell the browser to be responsive to screen width -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.5 -->
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-   
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
-    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-    <script src="dist/js/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="dist/js/app.min.js"></script>
+    <?php include ("templates/imports.php"); ?>
 
        <!-- PHP --> 
    <?PHP 
@@ -38,24 +17,6 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-   <script>
-
-    //   $(document).ready(function () {
-    //    $("#user_name").blur(function () {
-    //     var username = $(this).val();
-    //       if (username == '') {
-    //         $("#availability").html("");
-    //       }else{
-    //         $.ajax({
-    //         url: "username_validation.php?uname="+username
-    //         }).done(function( data ) {
-    //       $("#availability").html(data);
-    //    }); 
-    //    } 
-    //    });
-    //   });
-    // </script>
   </head>
   <body class="hold-transition register-page">
     <div class="register-box">
