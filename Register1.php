@@ -17,6 +17,6 @@
 
   mysqli_query($connect, $sql_query);
  
- header ("Refresh: 3; url=Register.php"); 
+ header ("Refresh: 3; url=RegisteredUsers.php"); 
 
 ?>
