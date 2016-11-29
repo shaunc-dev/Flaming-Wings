@@ -57,7 +57,7 @@ function insertItem(item) {
     // .append($("<small>").text(item.pieces_left + " pieces left"));
     
     var $boxTemplate = $("<div>", {"class": "box box-danger box-solid"}).append($itemHeader).append($itemDescription);
-    var $columnTemplate = $("<div>", {"class": "col-sm-2 col-md-3 col-lg-3"}).append($boxTemplate);
+    var $columnTemplate = $("<div>", {"class": "col-sm-2 col-md-4 col-lg-2"}).append($boxTemplate);
     
     $boxTemplate.on("click", function() {
         selectItem($itemDescription, item);

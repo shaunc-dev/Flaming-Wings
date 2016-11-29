@@ -90,7 +90,7 @@
             
         </style>
     </head>
-    <body class="layout-boxed skin-red">
+    <body class="skin-red">
         <div class="wrapper">
             <?php include("templates/navbar.php"); ?>
             <div class="content-wrapper">
