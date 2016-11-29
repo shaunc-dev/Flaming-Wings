@@ -3,6 +3,8 @@
  * @param order the order that should be inserted
  */
 
+var total_tally = 0;
+
 function insertOrder(order) {
     var $columnTemplate = $("<div>", {"class": "col-xs-12"});
     var $boxTemplate = $("<div>", {"class": "box box-danger collapsed-box"})
@@ -46,7 +48,11 @@ function insertOrder(order) {
             .append($("<td>").html(order.orders[i].recipe_name))
             .append($("<td>").html(toFixedPrice))
         );
+
+        total_tally += parseInt(order.orders[i].qty);
     }
+
+    console.log(total_tally);
 
     // end of table contents
 
@@ -56,6 +62,8 @@ function insertOrder(order) {
 
     $boxTemplate.append($boxHeader).append($boxBody).append($boxFooter);
     $("#orders").append($columnTemplate.html($boxTemplate));
+
+    $("#total-tally").html(total_tally);
 
 }
 
@@ -113,6 +121,8 @@ function tallyOrders(orders, shift) {
     for (var i = 0; i < tallyArray.length; i++) {
         placeTally(tallyArray[i], shift);
     }
+
+    $("#total-tally").html(total_tally);
 }
 
 /**
@@ -122,6 +132,8 @@ function tallyOrders(orders, shift) {
 function removeOrders() {
     $("#orders *:not(#no-orders)").remove();
     $(".tally1 *:not(strong), .tally2 *:not(strong)").remove();
+    total_tally = 0;
+    $("#total-tally").html(total_tally);
 }
 
 /**
