@@ -1,10 +1,9 @@
+<?php 
+session_start();
+?>
+
 <!DOCTYPE html>
 <?php
-
-session_start();
-if (!isset($_SESSION["guest"])) {
-  header("login.php");
-}
 
 $_SESSION['varname'] = 'varname';
 ?>
@@ -55,6 +54,15 @@ $_SESSION['varname'] = 'varname';
    include("dbconnection.php");
 
    ?>
+
+   <style type="text/css">
+        .IngredientDelete {
+            background: none;
+            color: red;
+            border: none;
+            font-size: 1.5em;
+        }
+   </style>
 
    
 
@@ -198,11 +206,11 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
+                <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
+                <li><a href="AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
+                <li><a href="EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
+                <li><a href="DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
+                <li><a href="reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
               </ul>
             </li>
 
@@ -218,11 +226,11 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
+                <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+                <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
+                <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
+                <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
+                <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
               </ul>
             </li>
 
@@ -239,9 +247,9 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
-                <li><a href="http://localhost/Flaming-Wings/VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
-                <li><a href="http://localhost/Flaming-Wings/MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+                <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+                <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
+                <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
               </ul>
             </li>
         <!-- /.sidebar -->
@@ -256,7 +264,7 @@ $_SESSION['varname'] = 'varname';
 
 
                <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
+                <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
              
               </ul>
             </li>
@@ -278,14 +286,17 @@ while ($row = mysqli_fetch_array($result)) {
 
 
 ?>
+
+
        <form action ="EditTheRecipeUpdate.php" method ="post">
        <div class="row">
             <div class="col-md-6">
               <div class="col-xs-12">
+                 <a href="EditRecipe.php"><< Back</a>
               <div class="box box-primary">
                 <div class="box-header">
                   <h3><?php echo $row["recipe_name"];?></h3>
-                  <input type="text" class="form-control" id="InputRecipeName" name="recipe_name" required
+                  <input type="text" class="form-control" id="recipe_name" name="recipe_name" required
                       value="<?php 
                       $rname = mysqli_query($connect, "SELECT recipe_name from recipe where recipe_id = '".$var_value."'"); 
                     
@@ -296,15 +307,14 @@ while ($row = mysqli_fetch_array($result)) {
                      
 
                   <label>Category/Type</label>
-                    <select class="form-control" name="recipe_type" id="InputRecipeType" required> 
-                        <option selected="selected" value="
+                    <select class="form-control" name="recipe_type" id="recipe_type" required> 
+                    
                          <?php
                             $sql = mysqli_query($connect, "SELECT recipe_type, type.recipe_typeid FROM recipetype AS type, recipe AS r WHERE r.recipe_typeid=type.recipe_typeid AND r.recipe_id='".$var_value."'");
                             while ($row = mysqli_fetch_array($sql)){
                             echo "<option value=\"" . $row['recipe_typeid'] . "\">" . $row['recipe_type'] . "</option>";
                             }
                              ?>" 
-                        </option> 
                         <?php
                             $sql = mysqli_query($connect, "SELECT * FROM recipetype");
                             while ($row = mysqli_fetch_array($sql)){
@@ -326,6 +336,7 @@ while ($row = mysqli_fetch_array($result)) {
 
                 <div class="box-body">
                   <table id="recentlyadded" class="table table-bordered table-hover">
+                    <label>Add New Ingredients</label>
                     <thead>
                       <tr>
                         <th>Ingredients</th>
@@ -333,11 +344,89 @@ while ($row = mysqli_fetch_array($result)) {
                         <th>Quantity</th>
                       </tr>
                     </thead>
-                    <tbody id="ingredients">
-                      <?php
+                    <tbody id="ing">
+                  
+                        <!--- NEW INGREDIENTS FOR RECIPE --> 
 
-                      $query2 = "SELECT ri.qty myqty, unit_name unitname, ing_name ingname FROM recipeingredients ri, recipe r, ingredientname i, unitmeasurement u
-                       WHERE ri.recipe_id = '".$var_value."' && i.ingName_id = ri.ingName_id && u.unit_id = ri.unit_id && r.recipe_id = ri.recipe_id";
+                      <tr>
+
+                    
+                      <td> 
+                    <select class="form-control" id="AddIngredient" name="ing_name" value="<?php if (isset($_POST['ing_name'])) echo $_POST['ing_name']; ?>">  
+                      <option value="" disabled selected>Ingredients</option>
+                      <?php
+                            $sql = mysqli_query($connect, "SELECT * FROM ingredientname");
+                            while ($row = mysqli_fetch_array($sql)){
+                            echo "<option value=\"" . $row['ingName_id'] . "\">" . $row['ing_name'] . "</option>";
+                            }
+                             ?>"> <!--list of measurements from database -->
+                           
+                      </select>     </td>
+
+
+                    <td>
+                    <select class="form-control" id="UOM" name="unitM" value="<?php if (isset($_POST['unitM'])) echo $_POST['unitM']; ?>" > 
+                      <option value="" disabled selected>Unit of Measurement</option> 
+                          <?php
+                            $sql = mysqli_query($connect, "SELECT * FROM unitmeasurement");
+                            while ($row = mysqli_fetch_array($sql)){
+                            echo "<option value=\"" . $row['unit_id'] . "\">" . $row['unit_name'] . "</option>";
+                            }
+                             ?>"
+                      </option> <!-- list of measurements from database -->
+                          
+                      </select> </td>
+                                        
+                
+
+                         <td> 
+                    <input type="number" class="form-control" id="InputQty" placeholder="Quantity" name="qty" value="<?php if(isset($_POST['qty'])) echo $_POST['qty']; ?>" ></td>
+                      
+
+                      </tr>
+
+                  
+
+
+                    </tbody>
+
+                  </table>
+
+                  <br>
+                  <!-- button to add ingredient --> 
+                  <button type="button" id="IngredientAdd" class="btn btn-primary">Add Ingredient</button>
+                 
+                <button type="submit" class="btn btn-primary" name="varname" value="<?php echo $_GET['varname'] ;?>" href="EditTheRecipeUpdate.php" style="float: right;">EDIT RECIPE</button>
+                </div><!-- /.box-body -->
+              </div><!-- /.box -->
+            </div>
+      
+
+    </div><!-- ./wrapper -->
+
+            <div class="row">
+            <div class="col-md-6">
+              <div class="col-xs-12">
+              </br>
+              <div class="box box-primary">
+                <div class="box-header">
+                  <h3 class="box-title"><b>CURRENT INGREDIENTS FOR RECIPE</b></h3>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <table id="recentlyadded" class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th>Ingredient</th>
+                        <th>Unit of Measurement</th>
+                        <th>Quantity</th>
+                      </tr>
+                    </thead>
+                    <tbody id="ingredients">
+                          <?php
+
+                      $query2 = "SELECT ri.qty myqty, unit_name unitname, ing_name ingname, i.ingName_id ingName_id, ri.unit_id
+                      FROM recipeingredients ri, recipe r, ingredientname i, unitmeasurement u
+                      WHERE ri.recipe_id = '".$var_value."'  && i.ingName_id = ri.ingName_id && u.unit_id = ri.unit_id && r.recipe_id = ri.recipe_id";
                       $result2 = mysqli_query($connect, $query2) or die (mysqli_error($connect));
 
                       while ($row2 = mysqli_fetch_array($result2)) {
@@ -345,78 +434,42 @@ while ($row = mysqli_fetch_array($result)) {
 
                       <tr>
                         <td>
-                          <?php echo $row2["ingname"];  ?>
-
-
-
-
-
+                            <?php                                  
+                                  echo "<p name='ingname[]' value=\"" . $row2['ingname'] . "\">" . $row2['ingname'] . "</p>";  
+                                  echo "<input id='ingname' type='hidden' name='ingname[]' value=\"" . $row2['ingname'] . "\" />"; 
+                               ?>
+                       <!--    <?php //echo "p name='ingname[]' id='ingname'" . $row2["ingname"] . "</p>"?>
+                          <input name="ingname[]" id="ingname" value="<?php // echo $row2['ingname']; ?>" />  -->
                         </td>
 
                         <td>
-                          <?php echo $row2["unitname"];  ?>
+                           <select class="form-control" name="uomname[]" id="uomname">
+                                
+                               <?php                                  
+                                  echo "<option selected value=\"" . $row2['unit_id'] . "\">" . $row2['unitname'] . "</option>";  
+                             
+                                $sql = mysqli_query($connect, "SELECT * FROM unitmeasurement");
+                                while ($row3 = mysqli_fetch_array($sql)){
+                                echo "<option value=\"" . $row3['unit_id'] . "\">" . $row3['unit_name'] . "</option>";
+                                }
+                                 ?>
 
-
-
-
-
+                          </select>
+                     
                         </td>
 
                         <td>
-                          <?php echo $row2["myqty"];  ?>
-                           
-
-
-                       
-
+                               <input type="number" step="any" min="0" class="form-control" id="qtyname" value="<?php echo $row2["myqty"];?>" maxlength="5" name="qtyname[]" required />
                         </td>
+                      <td>
+                        <button type="button" class="IngredientDelete"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                      </td>
                       </tr>
                         <?php
                       }
 
                       ?>
 
-
-
-                    <!--- INGREDIENTS --> 
-
-                    
-                    <table id="addingredient" class="table table-bordered table-hover" name="ingTable">
-                     <tr name="ingTable">
-
-                    
-           
-
-                    </tbody>
-                  </table>
-
-                  <br>
-                  <a href="EditRecipe.php" class="btn btn-primary" role="button">Go Back to Edit Recipe</a>
-                <button type="submit" class="btn btn-primary" name="varname" value="<?php echo $_GET['varname'] ;?>">NEXT</button>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-            </div>
-     
-
-    </div><!-- ./wrapper -->
-
-            <div class="row">
-            <div class="col-md-6">
-              <div class="col-xs-12">
-              <div class="box box-primary">
-                <div class="box-header">
-                  <h3 class="box-title"><b>RECENTLY ADDED INGREDIENTS FOR RECIPE</b></h3>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <table id="recentlyadded" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th>Ingredient</th>
-                          <th>Unit of Measurement</th>
-                        <th>Quantity</th>
-                      </tr>
-                    </thead>
-                    <tbody id="ingredients">
                     </tbody>
                   </table>
                 </div><!-- /.box-body -->
@@ -432,46 +485,36 @@ while ($row = mysqli_fetch_array($result)) {
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-      $.widget.bridge('uibutton', $.ui.button);
-    </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <!-- Morris.js charts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-    <script src="plugins/morris/morris.min.js"></script>
-    <!-- Sparkline -->
-    <script src="plugins/sparkline/jquery.sparkline.min.js"></script>
-    <!-- jvectormap -->
-    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="plugins/knob/jquery.knob.js"></script>
-    <!-- daterangepicker -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
-    <script src="plugins/daterangepicker/daterangepicker.js"></script>
-    <!-- datepicker -->
-    <script src="plugins/datepicker/bootstrap-datepicker.js"></script>
-    <!-- Bootstrap WYSIHTML5 -->
-    <script src="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
-    <!-- Slimscroll -->
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
-    <!-- FastClick -->
-    <script src="plugins/fastclick/fastclick.min.js"></script>
-    <!-- AdminLTE App -->
     <script src="dist/js/app.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
 
     <script>
         function editRecipe(str) {
         var e = document.getElementById(EditAddIngredient).selectedIndex.value;
         //var strUser = e.
 
-        Console.log(e);
+        console.log(e);
     }
+    </script>
+
+    <script>
+        $("#IngredientAdd").on("click", function() {
+          console.log($("#AddIngredient").val());
+          $("#ingredients").append("<tr><td>"+ $("#AddIngredient option:selected").text() +"<input type='hidden' name='ingname[]' id='ingname' value="+ $("#AddIngredient").val() +" /></td><td>"+ $("#UOM option:selected").text() +"<input type='hidden' id='uomname' name='uomname[]' value='"+ $("#UOM").val() +"'/></td><td>"+ $("#InputQty").val() +"<input type='hidden' name='qtyname[]' id='qtyname' value="+ $("#InputQty").val() +" /></td></td>"+"<td><button type='button' class='IngredientDelete'><i class='fa fa-trash-o' aria-hidden='true'></i></button></td></td></tr>");
+
+//javascript to remove an ingredient  
+          $(".IngredientDelete").on("click", function() {
+              $(this).parent().parent().remove();
+          });
+        });
+
+        $(".IngredientDelete").on("click", function() {
+            $(this).parent().parent().remove();
+        });
     </script>
 
 

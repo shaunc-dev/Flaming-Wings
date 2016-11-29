@@ -304,17 +304,17 @@ $_SESSION['varname'] = 'varname';
                     
                     <div class="form-group">
                       <label>Unit of Measurement</label>
-                      <select class="form-control" name="unitM" required
+                      <select class="form-control" name="unitM" id="unitM" required
                       value="<?php if (isset($_POST['unitM']) && !$flag) echo $_POST['unitM']; ?>">
                    
-                         <option selected="selected" value=" 
+                      
                          <?php
                             $sql = mysqli_query($connect, "SELECT * FROM unitmeasurement AS u, stock AS s WHERE s.unit_id=u.unit_id AND s.stock_id='".$var_value."'");
                             while ($row = mysqli_fetch_array($sql)){
                             echo "<option value=\"" . $row['unit_id'] . "\">" . $row['unit_name'] . "</option>";
                             }
-                             ?>">
-                        </option> 
+                             ?>
+                       
                      
                         <?php
                         $sql = mysqli_query($connect, "SELECT * FROM unitmeasurement");
@@ -327,17 +327,16 @@ $_SESSION['varname'] = 'varname';
 
                     <div class="form-group">
                       <label>Packaging</label>
-                      <select class="form-control" name="pack_name" required
+                      <select class="form-control" name="pack_name" id="pack_name" required
                       value="<?php if (isset($_POST['pack_name']) && !$flag) echo $_POST['pack_name']; ?>">
-                        <option selected="selected" value=" 
+                      
                          <?php
                             $sql = mysqli_query($connect, "SELECT * FROM unitpackaging, stock WHERE stock.pack_id=unitpackaging.pack_id AND stock.stock_id='".$var_value."'");
                             while ($row = mysqli_fetch_array($sql)){
                             echo "<option value=\"" . $row['pack_id'] . "\">" . $row['pack_name'] . "</option>";
                             }
-                             ?>">
-                        </option> 
-                        
+                             ?>
+                      
                         <?php
                         $sql = mysqli_query($connect, "SELECT * FROM unitpackaging");
                         while ($row = mysqli_fetch_array($sql)){
@@ -355,7 +354,7 @@ $_SESSION['varname'] = 'varname';
                        while ($row = mysqli_fetch_array($sql)){
                           echo $row['sname']; }
                       
-                      ?>"  maxlength="30" name="sname" required
+                      ?>"  maxlength="60" name="sname" required
                       value="<?php if (isset($_POST['sname']) && !$flag) echo $_POST['sname']; ?>">
                     </div>
                  
@@ -363,16 +362,16 @@ $_SESSION['varname'] = 'varname';
                      
                      <div class="form-group">
                       <label>Category/Type</label>
-                      <select class="form-control" placeholder="Category/Type" name="type" required
+                      <select class="form-control" placeholder="Category/Type" name="type" id="type" required
                       value="<?php if (isset($_POST['type']) && !$flag) echo $_POST['type']; ?>">
-                      <option selected="selected" value=" 
+                   
                          <?php
                             $sql = mysqli_query($connect, "SELECT * FROM stock, stocktype WHERE stock.stocktype_id=stocktype.stocktype_id AND stock.stock_id = '".$var_value."'");
                             while ($row = mysqli_fetch_array($sql)){
                             echo "<option value=\"" . $row['stocktype_id'] . "\">" . $row['stock_type'] . "</option>";
                             }
-                             ?>">
-                        </option> 
+                             ?>
+                     
                         <?php
                         $sql = mysqli_query($connect, "SELECT * FROM stocktype");
                         while ($row = mysqli_fetch_array($sql)){
@@ -385,16 +384,16 @@ $_SESSION['varname'] = 'varname';
                   
                      <div class="form-group">
                       <label>Ingredient Type</label>
-                      <select class="form-control" placeholder="Ingredient Types" name="ingtype" required
+                      <select class="form-control" placeholder="Ingredient Types" name="ingtype" id="ingtype" required
                       value="<?php if (isset($_POST['ingtype']) && !$flag) echo $_POST['ingtype']; ?>">
-                        <option selected="selected" value=" 
+                       
                          <?php
                             $sql = mysqli_query($connect, "SELECT * FROM stock, ingredientname WHERE stock.ingName_id=ingredientname.ingName_id AND stock.stock_id='".$var_value."'");
                             while ($row = mysqli_fetch_array($sql)){
                             echo "<option value=\"" . $row['ingName_id'] . "\">" . $row['ing_name'] . "</option>";
                             }
-                             ?>">
-                        </option> 
+                             ?>
+                      
                         <?php
                         $sql = mysqli_query($connect, "SELECT * FROM ingredientname");
                         while ($row = mysqli_fetch_array($sql)){

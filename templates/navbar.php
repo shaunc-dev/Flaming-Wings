@@ -18,17 +18,27 @@
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                        <span class="hidden-xs">Brooklyn Beckham</span>
+                        <?php 
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
+                        while ($row = mysqli_fetch_array($sql)){
+                        echo "<span class='hidden-xs'>" . $row['firstName'] . " " . $row['lastName'] .  "</span>";}?> 
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
                             <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                             <p>
-                                Brooklyn Beckham - Manager
-                                <small>Member since Nov. 2016</small>
+                                <?php 
+                                    $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
+                                    while ($row = mysqli_fetch_array($sql)){
+                                    echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
                             </p>
                         </li>
+                        <li class="user-footer">
+                          <div class="pull-right">
+                             <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
+                           </div>
+                      </li>
                     </ul>
                 </li>
             </ul>
