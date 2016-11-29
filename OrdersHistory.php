@@ -1,3 +1,11 @@
+<?php 
+
+session_start(); 
+include("dbconnection.php");
+
+?>
+
+<!DOCTYPE HTML>
 <html>
     <head>
         <title>Flaming Wings | Orders History</title>
