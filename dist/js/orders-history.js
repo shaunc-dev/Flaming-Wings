@@ -52,8 +52,6 @@ function insertOrder(order) {
         total_tally += parseInt(order.orders[i].qty);
     }
 
-    console.log(total_tally);
-
     // end of table contents
 
     // merging all of the parts of the box class
