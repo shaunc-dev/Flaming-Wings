@@ -3,19 +3,13 @@
 
 session_start();
 
-$_SESSION['varname'] = 'varname';
-
 ?>
 
 <html>
-   <?php
-      $var_value = $_GET['varname']; 
-      ?>
-
-
+  <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Flaming Wings | Edit Stock</title>
+    <title>Flaming Wings | Registered Users</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -49,14 +43,15 @@ $_SESSION['varname'] = 'varname';
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
    <!-- PHP --> 
    <?PHP 
    include("dbconnection.php")
 
    ?>
+
     <!-- HEADER -->
   </head>
-  
   <body class="hold-transition skin-red sidebar-mini">
     <div class="wrapper">
 
@@ -124,30 +119,24 @@ $_SESSION['varname'] = 'varname';
 
 
               <!-- UPPER RIGHT CORNER -->
-             
-               <!-- LOGOUT BUTTON -->
               <li class="dropdown user user-menu">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                  <span class="hidden-xs">
-                 
-                 <?php 
-                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
-                        while ($row = mysqli_fetch_array($sql)){
-                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
-                  </span>
-                </a>
-              </li>
-              <!-- Control Sidebar Toggle Button -->
-
-             <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-user"></i>
+                  
                 </a>
                 <ul class="dropdown-menu">
-                  
-                   <li><a href='logout.php'>Logout</a></li>
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <p>
+                      Brooklyn Beckham - Manager
+                      <small>Member since Nov. 2016</small>
+                    </p>
                 </ul>
-              </li> 
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -183,8 +172,15 @@ $_SESSION['varname'] = 'varname';
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
 
+            <!--USER TYE-->
+            <li class="treeview">
+              <a href="RegisteredUsers.php">
+                <i class="fa fa-user"></i> <span>Users</span> 
+              </a>
+            </li>
+
             <!--DASHBOARD-->
-            <li class="active treeview">
+            <li class="treeview">
               <a href="MAIN.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
               </a>
@@ -193,7 +189,8 @@ $_SESSION['varname'] = 'varname';
 
 
 
-   <!---RECIPE -->
+
+            <!---RECIPE -->
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-book"></i>
@@ -202,7 +199,7 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-               <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
+                <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
                 <li><a href="AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
                 <li><a href="EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
                 <li><a href="DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
@@ -222,7 +219,7 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-                 <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+                <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
                 <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
                 <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
                 <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
@@ -243,15 +240,15 @@ $_SESSION['varname'] = 'varname';
               </a>
 
               <ul class="treeview-menu">
-                  <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+                <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
                 <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
                 <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
               </ul>
             </li>
         <!-- /.sidebar -->
 
-          
-           <!--CONVERSION-->
+        
+         <!--CONVERSION-->
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-calculator"></i> 
@@ -260,193 +257,141 @@ $_SESSION['varname'] = 'varname';
               </a>
 
 
-               <ul class="treeview-menu"> <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
+               <ul class="treeview-menu">
                 <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
               </ul>
             </li>
       </aside>
-       <!--SEARCH--> 
+
+           <!--SEARCH--> 
     <div class="content-wrapper">
-      
-   
-           <section class="content">
+       <section class="content">
           <div class="row">
+            <!-- left column -->
             <div class="col-md-6">
-                <a href="EditStock.php"> << Go Back</a>
-              <div class="box">
-                <div class="box-header">
+              <!-- general form elements -->
+               <h3>
+                Registered Users
+               </h3>
 
-                  <h3 class="box-title"><b>Edit Stock<?php 
-                    $sql = mysqli_query($connect, "SELECT sname FROM stock AS s WHERE stock_id ='".$var_value."';");
-                       while ($row = mysqli_fetch_array($sql)){
-                          echo "<h3>" .$row['sname']."</h3>"; }
 
-                     
-                     ?>
-                   </b>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                   <!-- form start -->
-                <form role="form" action="EditStock2.php" method="post">
-                    
-                    <div class="form-group">
-                      <label>Gross Weight</label>
-                      <input type="number" step="any" min="0" class="form-control" id="qty" value=
-                      <?php 
-                        $sql = mysqli_query($connect, "select qty from stock where stock_id='".$var_value."'");
-                       $row = mysqli_fetch_array($sql);
-                          echo $row['qty'];
-                      
-                      ?>
+              <!---START OF WRAPPER-->
 
-                      maxlength="5" name="qty" required>
-                    </div>
-                    
-                    <div class="form-group">
-                      <label>Unit of Measurement</label>
-                      <select class="form-control" name="unitM" id="unitM" required
-                      value="<?php if (isset($_POST['unitM']) && !$flag) echo $_POST['unitM']; ?>">
-                   
-                      
-                         <?php
-                            $sql = mysqli_query($connect, "SELECT * FROM unitmeasurement AS u, stock AS s WHERE s.unit_id=u.unit_id AND s.stock_id='".$var_value."'");
-                            while ($row = mysqli_fetch_array($sql)){
-                            echo "<option value=\"" . $row['unit_id'] . "\">" . $row['unit_name'] . "</option>";
-                            }
-                             ?>
+
+           <div class="col-md-50">
+              <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                  <li class="active"><a href="#manager" data-toggle="tab">Manager</a></li>
+                  <li><a href="#stockcontroller" data-toggle="tab">Stock Controller</a></li>
+                  <li><a href="#cashier" data-toggle="tab">Cashier</a></li>
+                </ul>
+
+
+                <!--MANAGER TAB-->
+                <div class="tab-content">
+                 <div class="active tab-pane" id="manager">
+                  <table class="table table-bordered">
+                    <thead>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </thead>
+                    <tbody>
                        
-                     
-                        <?php
-                        $sql = mysqli_query($connect, "SELECT * FROM unitmeasurement");
-                        while ($row = mysqli_fetch_array($sql)){
-                        echo "<option value=\"" . $row['unit_id'] . "\">" . $row['unit_name'] . "</option>";
-                        }
-                         ?>
-                      </select>
-                    </div>
 
-                    <div class="form-group">
-                      <label>Packaging</label>
-                      <select class="form-control" name="pack_name" id="pack_name" required
-                      value="<?php if (isset($_POST['pack_name']) && !$flag) echo $_POST['pack_name']; ?>">
-                      
-                         <?php
-                            $sql = mysqli_query($connect, "SELECT * FROM unitpackaging, stock WHERE stock.pack_id=unitpackaging.pack_id AND stock.stock_id='".$var_value."'");
-                            while ($row = mysqli_fetch_array($sql)){
-                            echo "<option value=\"" . $row['pack_id'] . "\">" . $row['pack_name'] . "</option>";
-                            }
-                             ?>
-                      
                         <?php
-                        $sql = mysqli_query($connect, "SELECT * FROM unitpackaging");
-                        while ($row = mysqli_fetch_array($sql)){
-                        echo "<option value=\"" . $row['pack_id'] . "\">" . $row['pack_name'] . "</option>";
-                        }
-                         ?>
-                      </select>
-                    </div>
-                    
-
-                     <div class="form-group">
-                      <label for="InputItemName">Stock Name</label>
-                      <input type="text" class="form-control" id="InputItemName" value="<?php 
-                        $sql = mysqli_query($connect, "select sname from stock where stock_id='".$var_value."';");
-                       while ($row = mysqli_fetch_array($sql)){
-                          echo $row['sname']; }
                       
-                      ?>"  maxlength="60" name="sname" required
-                      value="<?php if (isset($_POST['sname']) && !$flag) echo $_POST['sname']; ?>">
-                    </div>
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Manager'"); 
+                           while ($row = mysqli_fetch_array($sql)){
+                          echo "<tr>"; 
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
+                          echo "</tr>";
+                        }
+
+                        ?>
+                      </tbody>
                  
                   
-                     
-                     <div class="form-group">
-                      <label>Category/Type</label>
-                      <select class="form-control" placeholder="Category/Type" name="type" id="type" required
-                      value="<?php if (isset($_POST['type']) && !$flag) echo $_POST['type']; ?>">
-                   
-                         <?php
-                            $sql = mysqli_query($connect, "SELECT * FROM stock, stocktype WHERE stock.stocktype_id=stocktype.stocktype_id AND stock.stock_id = '".$var_value."'");
-                            while ($row = mysqli_fetch_array($sql)){
-                            echo "<option value=\"" . $row['stocktype_id'] . "\">" . $row['stock_type'] . "</option>";
-                            }
-                             ?>
-                     
-                        <?php
-                        $sql = mysqli_query($connect, "SELECT * FROM stocktype");
-                        while ($row = mysqli_fetch_array($sql)){
-                        echo "<option value=\"" . $row['stocktype_id'] . "\">" . $row['stock_type'] . "</option>";
-                        }
-                         ?>
-                   
-                      </select>
-                    </div>
-                  
-                     <div class="form-group">
-                      <label>Ingredient Type</label>
-                      <select class="form-control" placeholder="Ingredient Types" name="ingtype" id="ingtype" required
-                      value="<?php if (isset($_POST['ingtype']) && !$flag) echo $_POST['ingtype']; ?>">
+                  </table>
+
+
+
+                  </div><!-- /.tab-pane -->
+
+  <!--STOCK CONTROLLER TAB-->
+
+                <div class="tab-pane" id="stockcontroller">
+                  <table class="table table-bordered">
+                     <thead>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </thead>
+                    <tbody>
                        
-                         <?php
-                            $sql = mysqli_query($connect, "SELECT * FROM stock, ingredientname WHERE stock.ingName_id=ingredientname.ingName_id AND stock.stock_id='".$var_value."'");
-                            while ($row = mysqli_fetch_array($sql)){
-                            echo "<option value=\"" . $row['ingName_id'] . "\">" . $row['ing_name'] . "</option>";
-                            }
-                             ?>
-                      
+
                         <?php
-                        $sql = mysqli_query($connect, "SELECT * FROM ingredientname");
-                        while ($row = mysqli_fetch_array($sql)){
-                        echo "<option value=\"" . $row['ingName_id'] . "\">" . $row['ing_name'] . "</option>";
+                      
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Stock Controller'"); 
+                           while ($row = mysqli_fetch_array($sql)){
+                          echo "<tr>"; 
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
+                          echo "</tr>";
                         }
-                         ?>
-                   
-                      </select>
-                    </div>
+
+                        ?>
+                      </tbody>
+                  </table>
+
+                  </div><!-- /.tab-pane -->
+
+
+  <!--CASHIER TAB-->
+                 <div class="tab-pane" id="cashier">
+                  <table class="table table-bordered">
+                     <thead>
+                      <th>Last Name</th>
+                      <th>First Name</th>
+                      <th>Username</th>
+                    </thead>
+                    <tbody>
+                       
+
+                        <?php
+                      
+                        $sql = mysqli_query($connect, "SELECT firstName, lastName, user_name, employee_type FROM users u, employee_type type WHERE u.user_type_id=type.user_type_id AND employee_type='Cashier'"); 
+                           while ($row = mysqli_fetch_array($sql)){
+                          echo "<tr>"; 
+                          echo "<td>".$row['firstName']."</td>"; //firstName
+                          echo "<td>".$row['lastName']."</td>"; //lastName
+                          echo "<td>".$row['user_name']."</td>"; //username
+                      
+                          echo "</tr>";
+                        }
+
+                        ?>
+                      </tbody>
+                  </table>
+
+                  </div><!-- /.tab-pane -->
+
+ 
+               
+
                   
-                
 
-
-                  </div><!-- /.box-body -->
-
-                  <div class="box-footer">
-                    <button type="submit" class="btn btn-primary" name="EditButton" value="<?php echo $var_value; ?>">Edit Stock</button>
-                  </div>
-                </form>
-
-            </div><!-- ./wrapper -->
+             <!-- E N D I N G -->
+    </div><!-- ./wrapper -->
           
 
           </div><!-- /.tab-pane -->
          
-    </div><!-- ./wrapper -->
-                 
-
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-           
-          </div>
-
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-
-              
-                   
-             
-              
-       
-
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-
-
-      </div><!-- /.content-wrapper -->
-     
-
-
-      <!-- Add the sidebar's background. This div must be placed
-           immediately after the control sidebar -->
-      <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->

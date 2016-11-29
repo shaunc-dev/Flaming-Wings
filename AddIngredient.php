@@ -226,11 +226,11 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
-                <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
+                <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
+                <li><a href="AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
+                <li><a href="EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
+                <li><a href="DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
+                <li><a href="reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
               </ul>
             </li>
 
@@ -246,11 +246,11 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
-                <li><a href="http://localhost/Flaming-Wings/WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
+                <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+                <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
+                <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
+                <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
+                <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
               </ul>
             </li>
 
@@ -267,9 +267,9 @@ if (!isset($_SESSION["guest"])) {
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="http://localhost/Flaming-Wings/InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
-                 <li><a href="http://localhost/Flaming-Wings/VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
-                <li><a href="http://localhost/Flaming-Wings/MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+                <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+                 <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
+                <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
               </ul>
             </li>
         <!-- /.sidebar -->
@@ -362,11 +362,9 @@ if (!isset($_SESSION["guest"])) {
               </div><!-- /.box -->
                 <div class="box-footer">
      
-                    <a href="AddIngType.php" class="btn btn-primary" role="button">Add Ingredient Type</a>
+                    <a href="AddIngType.php" class="btn btn-primary" role="button" style="float: right;">Add Ingredient Type</a>
                      <button type="button" id="IngredientAdd" class="btn btn-primary">Add Ingredient</button>
-                    <input type="submit" class="btn btn-primary" value="ADD RECIPE" />
-                   
-
+                 
                    
                   </div>
 
@@ -392,10 +390,18 @@ if (!isset($_SESSION["guest"])) {
                       </tr>
                     </thead>
                     <tbody id="ingredients">
+                      
                     </tbody>
+
                   </table>
+                     <div class="box-footer">
+                  <input type="submit" class="btn btn-primary" value="ADD RECIPE" />
+
+                   
+                  </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+
             </div>
 
 </form>
@@ -447,6 +453,7 @@ if (!isset($_SESSION["guest"])) {
                   </table>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
+           
             </div>
 
     
@@ -501,7 +508,13 @@ if (!isset($_SESSION["guest"])) {
     $(document).ready(function() { 
         $("#IngredientAdd").on("click", function() {
           console.log($("#AddIngredient").val());
-          $("#ingredients").append("<tr><td>"+ $("#AddIngredient option:selected").text() +"<input type='hidden' name='ingname[]' value="+ $("#AddIngredient").val() +" /></td><td>"+ $("#UOM option:selected").text() +"<input type='hidden' name='uomname[]' value='"+ $("#UOM").val() +"'/></td><td>"+ $("#InputQty").val() +"<input type='hidden' name='qtyname[]' value="+ $("#InputQty").val() +" /></td></tr>");
+          $("#ingredients").append("<tr><td>"+ $("#AddIngredient option:selected").text() +"<input type='hidden' name='ingname[]' value="+ $("#AddIngredient").val() +" /></td><td>"+ $("#UOM option:selected").text() +"<input type='hidden' name='uomname[]' value='"+ $("#UOM").val() +"'/></td><td>"+ $("#InputQty").val() +"<input type='hidden' name='qtyname[]' value="+ $("#InputQty").val() +" /></td></td>"+"<td><button type='button' class='IngredientDelete'><i class='fa fa-trash-o' aria-hidden='true'></i></button></td></td></tr>");
+
+//javascript to remove an ingredient
+           $(".IngredientDelete").on("click", function() {
+            $(this).parent().parent().remove();
+          }); 
+
         });
     });
 

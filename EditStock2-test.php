@@ -1,14 +1,14 @@
-<!DOCTYPE html>
+
+
 <?php
 
 session_start();
 
+
 ?>
-<html>
-  <head>
+<!DOCTYPE html>
 
-
-    <meta charset="utf-8">
+   <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Flaming Wings | Edit Stock</title>
     <!-- Tell the browser to be responsive to screen width -->
@@ -28,7 +28,7 @@ session_start();
     <link rel="stylesheet" href="plugins/iCheck/flat/blue.css">
     <!-- Morris chart -->
     <link rel="stylesheet" href="plugins/morris/morris.css">
-    <!-- jvectormap -->
+    <!-- jvectormap --
     <link rel="stylesheet" href="plugins/jvectormap/jquery-jvectormap-1.2.2.css">
     <!-- Date Picker -->
     <link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
@@ -44,22 +44,20 @@ session_start();
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-
-  <!-- PHP --> 
+   <!-- PHP --> 
    <?PHP 
    include("dbconnection.php")
 
    ?>
-   
-
     <!-- HEADER -->
   </head>
+  
   <body class="hold-transition skin-red sidebar-mini">
     <div class="wrapper">
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="MAIN.php" class="logo">
+        <a href="http://localhost/Flaming-Wings/MAIN.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <!-- logo for regular state and mobile devices -->
           <img src="logoo.jpg" alt="Mountain View" style="width:200px;height:50px;">
@@ -121,31 +119,25 @@ session_start();
 
 
               <!-- UPPER RIGHT CORNER -->
-          
-               <!-- LOGOUT BUTTON -->
               <li class="dropdown user user-menu">
-                <a class="dropdown-toggle" data-toggle="dropdown">
-                  <span class="hidden-xs">
-                 
-                 <?php 
-                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
-                        while ($row = mysqli_fetch_array($sql)){
-                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
-                  </span>
-                </a>
-              </li>
-              <!-- Control Sidebar Toggle Button -->
-
-             <li class="dropdown notifications-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                      <i class="fa fa-user"></i>
+                  <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                  <span class="hidden-xs">Brooklyn Beckham</span>
                 </a>
                 <ul class="dropdown-menu">
-                  
-                   <li><a href='logout.php'>Logout</a></li>
+                  <!-- User image -->
+                  <li class="user-header">
+                    <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                    <p>
+                      Brooklyn Beckham - Manager
+                      <small>Member since Nov. 2016</small>
+                    </p>
                 </ul>
-              </li> 
-
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li>
+                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+              </li>
             </ul>
           </div>
         </nav>
@@ -166,11 +158,7 @@ session_start();
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-             
-               <?php 
-                      $sql = mysqli_query($connect, "SELECT firstName, lastName FROM users WHERE user_name = '".$_SESSION['user_name']."'"); 
-                        while ($row = mysqli_fetch_array($sql)){
-                        echo "<p>" . $row['firstName'] . " " . $row['lastName'] .  "</p>";}?> 
+              <p>Brooklyn Beckham</p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -184,7 +172,7 @@ session_start();
 
             <!--DASHBOARD-->
             <li class="active treeview">
-              <a href="MAIN.php">
+              <a href="http://localhost/Flaming-Wings/MAIN.php">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> 
               </a>
             </li>
@@ -192,8 +180,7 @@ session_start();
 
 
 
-
-          <!---RECIPE -->
+   <!---RECIPE -->
             <li class="treeview">
               <a href="#">
                 <i class="fa fa-book"></i>
@@ -202,11 +189,11 @@ session_start();
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
-                <li><a href="AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
-                <li><a href="EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
-                <li><a href="DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
-                 <li><a href="reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/SearchRecipe.php"><i class="fa fa-circle-o"></i> Search Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/AddRecipe.php"><i class="fa fa-circle-o"></i> Add Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/EditRecipe.php"><i class="fa fa-circle-o"></i> Edit Recipe</a></li>
+                <li><a href="http://localhost/Flaming-Wings/DeactivateRecipe.php"><i class="fa fa-circle-o"></i> Deactivate Recipe</a></li>
+                 <li><a href="http://localhost/Flaming-Wings/reactivaterecipe.php"><i class="fa fa-circle-o"></i> Reactivate Recipe</a></li>
               </ul>
             </li>
 
@@ -222,11 +209,11 @@ session_start();
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
-                <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
-                <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
-                <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
-                <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
+                <li><a href="http://localhost/Flaming-Wings/WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
               </ul>
             </li>
 
@@ -243,13 +230,14 @@ session_start();
               </a>
 
               <ul class="treeview-menu">
-                <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
-                <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
-                <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+                <li><a href="http://localhost/Flaming-Wings/InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+                <li><a href="http://localhost/Flaming-Wings/VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
+                <li><a href="http://localhost/Flaming-Wings/MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
               </ul>
             </li>
         <!-- /.sidebar -->
 
+          
            <!--CONVERSION-->
             <li class="treeview">
               <a href="#">
@@ -260,91 +248,73 @@ session_start();
 
 
                <ul class="treeview-menu">
-                <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
+                <li><a href="http://localhost/Flaming-Wings/Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
               </ul>
             </li>
       </aside>
+<html>
+<body>
+
+ <div class="content-wrapper">
+       <section class="content">
+         <div class="box box-primary">
 
 
+<?php 
+  include("dbconnection.php"); 
 
-       <!--SEARCH STOCK--> 
-    <div class="content-wrapper">
-      <form action="EditSearchStock.php" method="get" class="sidebar-form">
-            <div class="col-xs-10">
-            <div class="box box-info">
-                <div class="box-header with-border">
-                  <h3 class="box-title"><b>SEARCH STOCK</b></h3>
-                </div><!-- /.box-header -->
-                <!-- form start -->
-                <form class="form-horizontal">
-                  <div class="box-body">
-                    <div class="form-group">
-                     <!-- <label for="inputQuery" class="col-sm-2 control-label">Stock code</label>
-                      <div class="col-sm-8">
-                        <input type="text" class="form-control" id="inputQuery" name="query" placeholder="Enter stock code" required>
-                      </div>-->
+//$_SESSION['var_value'] = $_GET['stock_id'];
+ $var_value = $_POST['EditButton']; 
+  // $deact_query = "UPDATE stock SET deactivate='1' WHERE stock_id='".$var_value."'"; 
 
-                      <label for="inputQuery" class="col-sm-2 control-label">Stock code</label>
-               
-                        <div class="col-sm-8">
-                        <input type="text" class="form-control" id="inputQuery" name="varname" placeholder="Enter stock code">
-                        </div>
-                       
-                      </select>
+  // mysqli_query($connect, $deact_query) or die(mysqli_error($connect)); 
 
-                    </div>
-                  <div class="box-footer">
-                    <input type="submit" class="btn btn-info pull-right" value="Search"/>
-                  </div><!-- /.box-footer -->
-                </form>
-              </div>
-            </div>
-          </form>
+  // $sql_query = "INSERT INTO stock(sname, qty, unit_id, ingName_id, pack_id, stocktype_id, deactivate)
+  //     VALUES ('" . $_POST["sname"] . "','" . $_POST['qty'] . "','"  . $_POST['unitM'] . "','" . $_POST['ingtype'] . "','" . $_POST['pack_name'] . "','" . $_POST['type'] . "', '0')"; 
 
- <div class="box box-primary">
-            <div class="box-body">
-                  <table id="stocktable" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th>Stock Code</th>
-                        <th>Stock Category/Type</th>
-                        <th>Stock Name</th>
-                    <!--    <th>End Inventory</th> -->
-                      
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                        $stock_code = isset($_GET['stock_code']) ? $_GET['stock_code'] : '';
-                        $sql = mysqli_query($connect, "SELECT stock_id, stock_type, sname 
-                          FROM stock AS s, stocktype AS type 
-                          WHERE s.stocktype_id=type.stocktype_id 
-                          AND deactivate= '0' 
-                          ORDER BY stock_id DESC");
-                        while ($row = mysqli_fetch_array($sql)){
-                          echo "<tr>"; 
-                          echo "<td>".$row['stock_id']."</td>"; //stockcode
-                          echo "<td>".$row['stock_type']."</td>"; //type
-                          echo "<td>" .$row['sname']."</a></td>"; //itemname
-                          echo "<td><a href='EditSearchStock.php?varname=".$row['stock_id']."'> Edit</a></td>"; //itemname
-                          echo "</tr>";
-
-                        }
-                         ?>
-                    </tbody>
-                  </table>
-                </div><!-- /.box-body -->
-              </div><!-- /.box -->
-
-    </div><!-- ./wrapper -->
-          
+  // mysqli_query($connect, $sql_query) or die(mysqli_error($connect)); 
 
 
+  // $stock_query = "SELECT stock_id FROM stock WHERE sname='" . $_POST["sname"] . "'"; 
+  // $stock_id = mysqli_query($connect, $stock_query); 
 
-         
-    </div><!-- ./wrapper -->
+  // while ($row = mysqli_fetch_array($stock_id)){
+  //        $sid = $row->$stock_id;
 
-    <!-- jQuery 2.1.4 -->
+  //         $withdrawsql = "INSERT INTO `withdrawstock` (`withdraw_id`, `dtWithdrawn`, `qty`, `stock_id`, `remarks`, `user_id`) VALUES (NULL, CURRENT_TIMESTAMP, '0', '".$sid."', '', '0')"; 
+    
+  // mysqli_query($connect, $withdrawsql); 
+ 
+  // $replenishsql = "INSERT INTO `replenishstock` (`replenish_id`, `dtReceived`, `qty`, `stock_id`, `remarks`, `user_id`) VALUES (NULL, CURRENT_TIMESTAMP, '0', '".$sid."', '', '0')"; 
+    
+  // mysqli_query($connect, $replenishsql); 
+
+  echo $_POST["sname"]; 
+   echo $_POST['qty']; 
+   echo  $_POST['unitM']; 
+ echo  $_POST['ingtype'];
+  
+
+    
+      
+ 
+
+?>
+        Edited stock! The new stock code is <?php 
+                    $sql = mysqli_query($connect, "SELECT stock_id FROM stock ORDER BY stock_id DESC LIMIT 1;");
+                       while ($row = mysqli_fetch_array($sql)){
+                          echo "<h3>" .$row['stock_id']."</h3>"; }
+
+                     
+                     ?>
+        If the page does not reload in 3 secs, <a href="EditStock.php">click here.</a>
+
+   
+      </div>
+        </section>
+      </div>
+</body>
+ <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
@@ -381,20 +351,5 @@ session_start();
     <script src="dist/js/pages/dashboard.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    <script>
-       $(document).ready(function(e)){ 
-        $.ajax({ 
-          url: "try.php". 
-          data: { 
-            inputQuery : $("#inputQuery").val()
-          },
-
-          dataType : "json", 
-          type : "post", 
-          success: function(data){ 
-            alert(data.myrealarr[0])}; 
-        });
-       }
-    </script>
   </body>
 </html>
