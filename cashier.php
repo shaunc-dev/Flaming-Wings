@@ -1,3 +1,10 @@
+<?php 
+
+session_start(); 
+include ("dbconnection.php");
+
+?>
+
 <!DOCTYPE HTML>
 <html>
     <head>
