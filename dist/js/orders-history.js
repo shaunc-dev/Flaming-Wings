@@ -198,8 +198,6 @@ function getOrdersFromDate(min, max) {
         dataType: "json",
         method: "POST"})
     .done(function(data) {
-        history = data;
-        // setupDateBoxes(history.history);
         shiftSeparation(data.history);
         if (data.history.length == 0) {
             $("#no-orders").css("display", "block");
