@@ -110,6 +110,7 @@ function tallyOrders(orders, shift) {
                 if (tallyArray[i].recipe_name.trim() == tallyArray[j].recipe_name.trim()) {
                     tallyArray[i].qty = parseInt(tallyArray[i].qty) + parseInt(tallyArray[j].qty);
                     tallyArray.splice(j, 1);
+                    i = 0;
                     break;
                 }
             }
