@@ -1,3 +1,5 @@
+<?php if ($_SESSION["user_id"] == 2) { ?>
+
 <!--UPPER LEFT CORNER-->
 <aside class="main-sidebar">
 <!-- sidebar: style can be found in sidebar.less -->
@@ -128,3 +130,5 @@
     </li>
     </section>
 </aside>
+
+<?php } ?>
