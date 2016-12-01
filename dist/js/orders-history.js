@@ -149,7 +149,8 @@ function initializeListeners() {
         processDate($(this).data("value"));
     });
 
-    $(".selection > a:nth-child(2)").trigger("click");
+    $(".selection > a:nth-child(1)").trigger("click");
+    $("#date").val(moment().format("YYYY-MM-DD"));
 }
 
 /**
@@ -198,8 +199,6 @@ function getOrdersFromDate(min, max) {
         dataType: "json",
         method: "POST"})
     .done(function(data) {
-        history = data;
-        // setupDateBoxes(history.history);
         shiftSeparation(data.history);
         if (data.history.length == 0) {
             $("#no-orders").css("display", "block");
