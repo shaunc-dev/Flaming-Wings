@@ -118,7 +118,7 @@ include("dbconnection.php");
                                 </div>
                                 <div class="col-xs-12">
                                     <div class="box box-danger">
-                                        <div class="box-header">
+                                        <div class="box-header with-border">
                                             <h3 class="box-title">Ordered items</h3>
                                         </div>
                                         <div class="box-body selection-container">
@@ -135,6 +135,24 @@ include("dbconnection.php");
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <form action="generate-sales-report.php" method="post">
+                                        <div class="box box-danger">
+                                            <div class="box-header with-border">
+                                                <h3 class="box-title">Generate sales report</h3>
+                                            </div>
+                                            <div class="box-body" style="height: auto; overflow-y: hidden;">
+                                                <div class="form-group">
+                                                    <label for="date">Choose a date</label>
+                                                    <input type="date" class="form-control" name="sales-report-date" id="date">
+                                                </div>
+                                            </div>
+                                            <div class="box-footer" style="text-align: right;">
+                                                <button class="btn btn-default" type="submit">Print</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
