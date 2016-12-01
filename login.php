@@ -24,7 +24,7 @@
 
 	  if ($_SESSION["type"] == 2) {
 		  header("Location: main.php");
-      } else if ($_SESSION["type"] == 1 || $_SESSION[""] == 3) {
+      } else if ($_SESSION["type"] == 1 || $_SESSION["type"] == 3) {
 		  header("Location: cashier.php");
 	  } else if ($_SESSION["type"] == 4) {
 		  header("Location: SearchStock.php");
