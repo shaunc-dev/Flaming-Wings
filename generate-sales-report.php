@@ -88,9 +88,8 @@ function getReport($date = "") {
                 </div>
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-xs-12">
-                        <strong>Date: </strong>
+                        <strong>Report Date: </strong>
                         <span><?=date("F d, Y", strtotime(str_replace('/','-', $_POST["sales-report-date"])))?></span>
-                        <!--<span><?=$_POST["sales-report-date"]?></span>-->
                     </div>
                     <div class="col-xs-12">
                         <strong>Total orders: </strong>
