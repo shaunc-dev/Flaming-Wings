@@ -107,7 +107,7 @@
 
     <li class="treeview">
         <a><i class="fa fa-line-chart"></i>
-        Sales</a>
+        <span>Sales</span></a>
         <ul class="treeview-menu">
             <li><a href="summary.php"><i class="fa fa-circle-o"></i>Summary</a></li>
             <li><a href="ordershistory.php"><i class="fa fa-circle-o"></i>Orders History</a></li>
@@ -116,7 +116,7 @@
 
     <li class="treeview">
         <a><i class="fa fa-user"></i>
-        Users
+        <span>Users</span>
         </a>
 
         <ul class="treeview-menu">
