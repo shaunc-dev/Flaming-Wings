@@ -13,7 +13,7 @@ function insertOrder(order) {
     .append($("<h3>", {"class": "box-title"})
         .html("Order #" + order.id).append($("<small>", {"style": "margin-left: 10px"})
         .html(moment(order.date).format("MMMM D, YYYY"))
-            .append(", " + moment(order.date).format("h:m A"))))
+            .append(", " + moment(order.date).format("h:mm A"))))
     .append($("<div>", {"class": "box-tools pull-right"})
         .html($("<button>", {"class": "btn btn-box-tool", "data-widget": "collapse", "type": "button"})
             .html($("<i>", {"class": "fa fa-plus"}))
@@ -110,7 +110,7 @@ function tallyOrders(orders, shift) {
                 if (tallyArray[i].recipe_name.trim() == tallyArray[j].recipe_name.trim()) {
                     tallyArray[i].qty = parseInt(tallyArray[i].qty) + parseInt(tallyArray[j].qty);
                     tallyArray.splice(j, 1);
-                    j = 0;
+                    break;
                 }
             }
         }
@@ -161,7 +161,6 @@ function shiftSeparation(history) {
 
     for (var i = 0; i < history.length; i++) {
         var isShift1 = false;
-
         for (var hour = 8; hour <= 15; hour++) {
             if (moment(history[i].date).hour() == hour) {
                 isShift1 = true;
