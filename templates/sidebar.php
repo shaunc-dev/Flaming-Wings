@@ -123,45 +123,46 @@
             </li>
         </ul>
     </li>
+
+    <?php } else if ($_SESSION["type"] == 4) { ?>
+
+    <li class="treeview">
+        <a href="#">
+        <i class="fa fa-files-o"></i>
+        <span>Stocks</span>
+        <span class="label label-primary pull-right"></span>
+        </a>
+
+        <ul class="treeview-menu">
+            <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
+            <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
+            <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
+            <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
+            <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
+        </ul>
+    </li>
+
+
+
+
+
+        <!--INVENTORY REPORTS-->
+        <li class="treeview">
+        <a href="#">
+        <i class="fa fa-folder"></i>
+        <span>Inventory Reports</span>
+        <span class="label label-primary pull-right"></span>
+        </a>
+
+        <ul class="treeview-menu">
+            <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
+            <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
+            <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+        </ul>
+    </li>
+
+    <?php } ?>
+
     </section>
 </aside>
-
-<?php } else if ($_SESSION["type"] == 4) { ?>
-
-<li class="treeview">
-    <a href="#">
-    <i class="fa fa-files-o"></i>
-    <span>Stocks</span>
-    <span class="label label-primary pull-right"></span>
-    </a>
-
-    <ul class="treeview-menu">
-        <li><a href="SearchStock.php"><i class="fa fa-circle-o"></i> Search Stock</a></li>
-        <li><a href="AddStock.php"><i class="fa fa-circle-o"></i> Add new Stock</a></li>
-        <li><a href="ReplenishStock.php"><i class="fa fa-circle-o"></i> Replenish Stock</a></li>
-        <li><a href="EditStock.php"><i class="fa fa-circle-o"></i> Edit Stock</a></li>
-        <li><a href="WithdrawStock.php"><i class="fa fa-circle-o"></i> Withdraw Stock</a></li>
-    </ul>
-</li>
-
-
-
-
-
-    <!--INVENTORY REPORTS-->
-    <li class="treeview">
-    <a href="#">
-    <i class="fa fa-folder"></i>
-    <span>Inventory Reports</span>
-    <span class="label label-primary pull-right"></span>
-    </a>
-
-    <ul class="treeview-menu">
-        <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
-        <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
-        <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
-    </ul>
-</li>
-
-<?php } ?>
 
