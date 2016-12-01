@@ -21,8 +21,17 @@
       $_SESSION['firstName'] = $fname;
       $_SESSION['lastName'] = $lname;
       $_SESSION["type"] = $row['user_type_id'];  
-      
-      header("location: main.php");
+
+	  if ($_SESSION["type"] == 2) {
+		  header("Location: main.php");
+      } else if ($_SESSION["type"] == 1 || $_SESSION[""] == 3) {
+		  header("Location: cashier.php");
+	  } else if ($_SESSION["type"] == 4) {
+		  header("Location: SearchStock.php");
+	  } else {
+		  header("Location: log_in.php");
+	  }
+
     } else { 
     // if login credentials doesnt match, user will be shown with an error message
       //$error = "Your Username or Password is invalid."; 
