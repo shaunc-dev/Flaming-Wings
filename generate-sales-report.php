@@ -64,6 +64,10 @@ function getReport($date = "") {
         }
 
         @media print {
+            .btn {
+                display: none;
+            }
+            
             img[src='logoo.png'] {
                 width: 400px;
             }
@@ -132,6 +136,9 @@ function getReport($date = "") {
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-xs-12">
                         <h3 style="text-align: center;"># End of report</h3>
+                    </div>
+                    <div class="col-xs-12">
+                        <button onclick="window.print" class="btn btn-danger">Print</button>
                     </div>
                 </div>
             </main>

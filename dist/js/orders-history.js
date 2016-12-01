@@ -146,7 +146,8 @@ function initializeListeners() {
         processDate($(this).data("value"));
     });
 
-    $(".selection > a:nth-child(2)").trigger("click");
+    $(".selection > a:nth-child(1)").trigger("click");
+    $("#date").val(moment().format("YYYY-MM-DD"));
 }
 
 /**
