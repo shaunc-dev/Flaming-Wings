@@ -1,6 +1,6 @@
 <?php 
 
-session_start(); 
+session_start();
 include ("dbconnection.php");
 
 ?>
@@ -100,6 +100,7 @@ include ("dbconnection.php");
     <body class="skin-red">
         <div class="wrapper">
             <?php include("templates/navbar.php"); ?>
+            <?php if ($_SESSION["type"] == 2) { include("templates/sidebar.php"); } ?>
             <div class="content-wrapper">
                 <div class="row">
                     <div class="col-md-4">
