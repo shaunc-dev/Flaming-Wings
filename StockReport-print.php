@@ -36,7 +36,7 @@
         <!-- Table row -->
      <div class="col-xs-6">
           <div class="table-responsive">
-             <h3 class="box-title"><b>Stock Report for <?php $month = date("F Y"); echo $month;?></b>
+             <h3 class="box-title"><b>Stock Report for <?php $month = date("F Y"); echo $month;?></h3></b>
               </br></br>
 
 

@@ -5,7 +5,7 @@ session_start();
 <!DOCTYPE html>
 <?php
 
-$_SESSION['varname'] = 'varname';
+$_SESSION['varname'] = $_GET['varname'];
 ?>
 
 <html>
@@ -168,13 +168,17 @@ while ($row = mysqli_fetch_array($result)) {
                   </table>
 
                   <br>
+                    <p><strong>Note:</strong> If the ingredient does not exist in the dropdown list, click <a href="AddIngType.php" id="addingtype" style="color:red">here.</a></p>
                   <!-- button to add ingredient --> 
                   <button type="button" id="IngredientAdd" class="btn btn-primary">Add Ingredient</button>
                  
                 <button type="submit" class="btn btn-primary" name="varname" value="<?php echo $_GET['varname'] ;?>" href="EditTheRecipeUpdate.php" style="float: right;">EDIT RECIPE</button>
                 </div><!-- /.box-body -->
+
               </div><!-- /.box -->
+
             </div>
+
       
 
     </div><!-- ./wrapper -->

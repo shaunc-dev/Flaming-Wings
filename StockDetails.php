@@ -182,20 +182,7 @@ if (!isset($_SESSION["guest"])) {
                  
                     </tbody>
 
-                    <tfoot>
-                      <tr>
-                        <th>TOTAL: 
-                          <?php
-                          $replenish_stock = mysqli_query($connect, "SELECT SUM(replenishstock.qty) AS replenish_stock FROM replenishstock, stock WHERE stock.stock_id='".$var_value."' AND replenishstock.stock_id=stock.stock_id"); 
-                          $numrows = mysqli_num_rows($replenish_stock); 
-                          echo "<td>" .$numrows['replenish_stock']. "</td>"; 
-                          ?>
-                        </th> 
-                        <th></th> 
-                        <th></th> 
-                        <th></th> 
-                      </tr>
-                    </tfoot>
+                
                    </div>
                  </div>
             

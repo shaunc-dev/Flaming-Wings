@@ -138,6 +138,8 @@ session_start();
       <a href="AddStock.php" class="btn btn-info" role="button"><< Go Back to Add Stock</a>
     </br></br>
       <a href="AddRecipe.php" class="btn btn-info" role="button"><< Go Back to Add Recipe</a>
+    </br></br>
+      <a href="EditTheRecipe.php?varname=<?=$_SESSION['varname']?>" class="btn btn-info" role="button"><< Go Back to Edit Recipe</a>
       
 
   
