@@ -121,11 +121,12 @@ session_start();
                 </form>
               </div><!-- /.box -->
                 <div class="box-footer">
-     
-                    <a href="AddIngType.php" class="btn btn-primary" role="button" style="float: right;">Add Ingredient Type</a>
+                     <p><strong>Note:</strong> If the ingredient does not exist in the dropdown list, click <a href="AddIngType.php" id="addingtype" style="color:red">here.</a></p>
+                   
                      <button type="button" id="IngredientAdd" class="btn btn-primary">Add Ingredient</button>
                  
-                   
+                    <input type="submit" class="btn btn-primary" style="float:right" value="ADD RECIPE" />
+
                   </div>
 
 
@@ -155,8 +156,7 @@ session_start();
 
                   </table>
                      <div class="box-footer">
-                  <input type="submit" class="btn btn-primary" value="ADD RECIPE" />
-
+                 
                    
                   </div>
                 </div><!-- /.box-body -->
