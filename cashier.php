@@ -134,18 +134,18 @@ session_start();
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-3">
-                                                VAT
-                                            </div>
-                                            <div class="col-xs-9" style="text-align: right">
-                                                <span id="vat">12%</span>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-3">
                                                 Subtotal
                                             </div>
                                             <div class="col-xs-9" style="text-align: right">
                                                 ₱ <span id="subtotal">0.00</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                VAT
+                                            </div>
+                                            <div class="col-xs-9" style="text-align: right">
+                                                <span id="vat">12%</span>
                                             </div>
                                         </div>
                                     </div>
