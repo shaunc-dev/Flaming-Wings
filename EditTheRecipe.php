@@ -215,7 +215,7 @@ while ($row = mysqli_fetch_array($result)) {
                         <td>
                             <?php                                  
                                   echo "<p name='ingname[]' value=\"" . $row2['ingname'] . "\">" . $row2['ingname'] . "</p>";  
-                                  echo "<input id='ingname' type='hidden' name='ingname[]' value=\"" . $row2['ingname'] . "\" />"; 
+                                  echo "<input id='ingname' type='hidden' name='ingname[]' value=\"" . $row2['ingName_id'] . "\" />"; 
                                ?>
                        <!--    <?php //echo "p name='ingname[]' id='ingname'" . $row2["ingname"] . "</p>"?>
                           <input name="ingname[]" id="ingname" value="<?php // echo $row2['ingname']; ?>" />  -->
