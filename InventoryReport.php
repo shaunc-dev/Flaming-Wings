@@ -61,7 +61,7 @@ if (!isset($_SESSION["guest"])) {
                         <th>Stock Code</th>
                         <th>Stock Category/Type</th>
                         <th>Stock Name</th>
-                        <th>Current Quantity</th>
+                        <th>Current Stock</th>
                     <!--    <th>End Inventory</th> -->
                       
                       </tr>
