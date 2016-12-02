@@ -137,7 +137,7 @@ function getReport($date = "") {
                         <h3 style="text-align: center;"># End of report</h3>
                     </div>
                     <div class="col-xs-12">
-                        <button onclick="window.print" class="btn btn-danger">Print</button>
+                        <button onclick="window.print()" class="btn btn-danger">Print</button>
                     </div>
                 </div>
             </main>
