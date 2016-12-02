@@ -16,7 +16,7 @@
         $sales_id = $connect->insert_id;
         $statement = $connect->prepare("insert into sales_details (sales_id, recipe_id, qty) values ('".$sales_id."', ?, ?)");
         $get_ingredient = $connect->prepare("select ingName_id, qty from recipeingredients where recipe_id = ?");
-        $get_qty_from_stock = $connect->prepare("select qty, stock_id, sname from stock where ingName_id = ?");
+        $get_qty_from_stock = $connect->prepare("select qty, stock_id, sname from stock where ingName_id = ? && deactivate = '0'");
         $update_qty_in_stock = $connect->prepare("insert into withdrawstock (qty, stock_id, remarks, user_id) values (?, ?, ?, '".$user_id."');");
 
         if (!$get_ingredient) {
@@ -55,14 +55,14 @@
                             } else {
                                 while ($row = $get_qty_from_stock_result->fetch_assoc()) {
                                     $new_stock_quantity = $recipe_quantity * $received_quantities[$i];
-                                    $update_qty_in_stock->bind_param('iis', $new_stock_quantity, $row["stock_id"], "Withdrawn stock: {$row["sname"]}");
+                                    $remark_text = "Withdrawn stock: {$row["sname"]}";
+                                    $update_qty_in_stock->bind_param('iis', $new_stock_quantity, $row["stock_id"], $remark_text);
                                     $update_qty_in_stock->execute();
 
                                     if (!$update_qty_in_stock) {
                                         $status = $connect->error;
                                     } else {
                                         $status = 'success';
-                                        $update_qty_in_stock->close();
                                     }
                                 }
                             }
@@ -75,6 +75,7 @@
         $statement->close();
         $get_ingredient->close();
         $get_qty_from_stock->close();
+        $update_qty_in_stock->close();
     
     }
 
