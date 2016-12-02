@@ -1,7 +1,9 @@
 <?php
 
     require('connect.php');
+    session_start();
     $status = "";
+    $user_id = $_SESSION["user_id"];
 
     if (isset($_POST["id"]) && isset($_POST["quantity"])) {
         // inserting the timestamp, and to get the sales_id
@@ -14,8 +16,8 @@
         $sales_id = $connect->insert_id;
         $statement = $connect->prepare("insert into sales_details (sales_id, recipe_id, qty) values ('".$sales_id."', ?, ?)");
         $get_ingredient = $connect->prepare("select ingName_id, qty from recipeingredients where recipe_id = ?");
-        $get_qty_from_stock = $connect->prepare("select qty, stock_id from stock where ingName_id = ?");
-        $update_qty_in_stock = $connect->prepare("update stock set qty = ? where stock_id = ?");
+        $get_qty_from_stock = $connect->prepare("select qty, stock_id, sname from stock where ingName_id = ?");
+        $update_qty_in_stock = $connect->prepare("insert into withdrawstock (qty, stock_id, remarks, user_id) values (?, ?, ?, '".$user_id."');");
 
         if (!$get_ingredient) {
             $status = "error in get_ingredient statement";
@@ -52,14 +54,15 @@
                                 $status = "error in get_qty_from_stock || \n num-rows = 0";
                             } else {
                                 while ($row = $get_qty_from_stock_result->fetch_assoc()) {
-                                    $new_stock_quantity = $row["qty"] - ($recipe_quantity * $received_quantities[$i]);
-                                    $update_qty_in_stock->bind_param('ii', $new_stock_quantity, $row["stock_id"]);
+                                    $new_stock_quantity = $recipe_quantity * $received_quantities[$i];
+                                    $update_qty_in_stock->bind_param('iis', $new_stock_quantity, $row["stock_id"], "Withdrawn stock: {$row["sname"]}");
                                     $update_qty_in_stock->execute();
 
                                     if (!$update_qty_in_stock) {
                                         $status = $connect->error;
                                     } else {
                                         $status = 'success';
+                                        $update_qty_in_stock->close();
                                     }
                                 }
                             }
@@ -72,7 +75,6 @@
         $statement->close();
         $get_ingredient->close();
         $get_qty_from_stock->close();
-        $update_qty_in_stock->close();
     
     }
 
