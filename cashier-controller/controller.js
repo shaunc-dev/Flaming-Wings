@@ -116,12 +116,16 @@ function addToOrder(itemSelected) {
 
 function computeTotalCost() {
     var total_cost = 0;
+    var subtotal = 0;
+
     $("#orders tr td:nth-child(3)").each(function() {
-        total_cost += parseFloat($(this).text());
+        subtotal += parseFloat($(this).text());
     });
 
-    total_cost = Number(total_cost).toFixed(2);
-    $("#total-cost").html(total_cost);
+    $("#subtotal").html(subtotal.toFixed(2));
+    var vat_compute = (Number(subtotal).toFixed(2)) * (parseFloat($("#vat").html()) / 100.0);
+    total_cost = vat_compute + subtotal;
+    $("#total-cost").html(total_cost.toFixed(2));
 }
 
 function sendOrders(finalizedOrders) {

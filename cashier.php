@@ -125,11 +125,27 @@ session_start();
                                 <div class="box box-danger box-solid">
                                     <div class="box-body total-background">
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-xs-3">
                                                 <strong><h3>Total</h3></strong>
                                             </div>
-                                            <div class="col-sm-9" style="text-align: right">
+                                            <div class="col-xs-9" style="text-align: right">
                                                 <h3>₱ <span id="total-cost">0.00</span></h3>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                VAT
+                                            </div>
+                                            <div class="col-xs-9" style="text-align: right">
+                                                <span id="vat">12%</span>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                Subtotal
+                                            </div>
+                                            <div class="col-xs-9" style="text-align: right">
+                                                ₱ <span id="subtotal">0.00</span>
                                             </div>
                                         </div>
                                     </div>
