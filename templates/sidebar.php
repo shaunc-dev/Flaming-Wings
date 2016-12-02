@@ -108,7 +108,7 @@
         <ul class="treeview-menu">
             <li><a href="summary.php"><i class="fa fa-circle-o"></i>Summary</a></li>
             <li><a href="ordershistory.php"><i class="fa fa-circle-o"></i>Orders History</a></li>
-            <li><a href="cashier.php"><i class="fa fa-money"></i>Cashier</a></li>
+            <li><a href="cashier.php"><i class="fa fa-circle-o"></i>Cashier</a></li>
         </ul>
     </li>
 
