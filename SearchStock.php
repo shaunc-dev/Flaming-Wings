@@ -12,7 +12,8 @@ if (!isset($_SESSION["guest"])) {
     <title>Flaming Wings | Search Stock</title>
 
    <?PHP 
-   include("dbconnection.php")
+   include("dbconnection.php");
+   include("templates/imports.php");
 
    ?>
    

@@ -1,6 +1,5 @@
 <?php 
 
-session_start(); 
 include ("dbconnection.php");
 
 ?>
@@ -113,7 +112,12 @@ session_start();
     <body class="skin-red">
         <div class="wrapper">
             <?php include("templates/navbar.php"); ?>
+            <?php if ($_SESSION["type"] == 2) { require("templates/sidebar.php"); ?>
             <div class="content-wrapper">
+            <section class="content">
+            <?php } else { ?>
+            <div class="content-wrapper">
+            <?php } ?>
                 <div class="row">
                     <div class="col-md-4">
                         <div class="row">
@@ -198,6 +202,7 @@ session_start();
                         </div>
                     </div>
                 </div>
+                </section>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="alert-overlay">
@@ -231,5 +236,8 @@ session_start();
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script src="dist/js/app.min.js"></script>
         <script src="cashier-controller/controller.js"></script>
+        <script>
+        $("body").toggleClass("sidebar-collapse");
+        </script>
     </body>
 </html>
