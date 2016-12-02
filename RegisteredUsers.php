@@ -3,7 +3,6 @@
 
 session_start();
 
-
 ?>
 
 <html>
