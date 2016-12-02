@@ -3,6 +3,7 @@
   <head>
     <title>Flaming Wings | Search Recipe</title>
    <?PHP 
+   session_start();
    include ("templates/imports.php");
    include("dbconnection.php");
 
