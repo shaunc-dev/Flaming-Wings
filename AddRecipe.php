@@ -67,6 +67,12 @@ session_start();
                              ?>
                       </select>
 
+                      <label>Price</label>
+                        <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-rouble"></i></span><input type="number" min="0" step=".01" class="form-control" id="price" placeholder="Enter price of recipe" name="price" required
+                      value="<?php if (isset($_POST['recipe_price'])) echo $_POST['recipe_price']; ?>">
+                    </div>
+
 
 
 
