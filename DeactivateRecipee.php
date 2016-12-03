@@ -94,7 +94,7 @@ while ($row = mysqli_fetch_array($result)) {
 
                   <br>
                   <form action= "DeactRecipePage.php" method="post">
-                  <a href="DeactivateRecipe.php" class="btn btn-primary" role="button">Go Back to Deactivate Recipe</a><input type='hidden' name="DeactivateRecipeButton" value= <?php echo $_POST['DeactivateRecipeButton']; ?> />
+                  <a href="DeactivateRecipe.php" class="btn btn-primary" role="button">Go Back </a><input type='hidden' name="DeactivateRecipeButton" value= <?php echo $_POST['DeactivateRecipeButton']; ?> />
                   <button type ="submit" class="btn btn-primary" role="button" >DEACTIVATE</a>
                   </form>
                 </div><!-- /.box-body -->

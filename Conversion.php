@@ -146,7 +146,7 @@ session_start();
                      
                        <?php
                        
-                        $sql = mysqli_query($connect, "SELECT conv_id, qty1, u.unit_name as uname1, qty2, u2.unit_name as uname2 FROM conversion as c JOIN unitmeasurement as u on c.unit_id1 = u.unit_id JOIN unitmeasurement as u2 on c.unit_id2 = u2.unit_id LIMIT 5");
+                        $sql = mysqli_query($connect, "SELECT conv_id, qty1, u.unit_name as uname1, qty2, u2.unit_name as uname2 FROM conversion as c JOIN unitmeasurement as u on c.unit_id1 = u.unit_id JOIN unitmeasurement as u2 on c.unit_id2 = u2.unit_id ORDER BY conv_id DESC LIMIT 5 ");
                         if (!$sql) {
                               printf("Error: %s\n", mysqli_error($connect));
                               exit();

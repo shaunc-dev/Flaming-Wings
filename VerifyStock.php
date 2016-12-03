@@ -43,7 +43,7 @@ if (!isset($_SESSION["guest"])) {
                         <option value="" disabled selected> -- ID -- Stock Name -- In-stock --</option> 
                         
                         <?php
-                        $sql = mysqli_query($connect, "SELECT SUM(r.qty) AS qty, sname, s.stock_id, pack_name, s.qty AS sqty, unit_name FROM replenishstock AS r, stock AS s, unitpackaging AS p, unitmeasurement AS u WHERE s.stock_id=r.stock_id AND p.pack_id=s.pack_id AND s.unit_id=u.unit_id GROUP BY s.stock_id");
+                        $sql = mysqli_query($connect, "SELECT SUM(r.qty) AS qty, sname, s.stock_id, pack_name, s.qty AS sqty, unit_name FROM replenishstock AS r, stock AS s, unitpackaging AS p, unitmeasurement AS u WHERE s.stock_id=r.stock_id AND p.pack_id=s.pack_id AND s.unit_id=u.unit_id AND deactivate=0 GROUP BY s.stock_id");
                         while ($row = mysqli_fetch_array($sql)){
                            echo "<option value=\"" . $row['stock_id'] . "\">".$row['stock_id']. " -- ".$row['sname']. " -- " .$row['qty']. " ".$row['pack_name']. " (" .$row['sqty']. " " .$row['unit_name']. ")</option>"; 
                         }
