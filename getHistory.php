@@ -30,7 +30,8 @@ if (isset($_POST["start"], $_POST["end"])) {
         $orders_query = "select sd.sales_id, r.recipe_name, sum(sd.qty) as qty, sum(r.price * sd.qty) as price 
         from sales s, sales_details sd, recipe r 
         where sd.sales_id = s.sales_id && sd.recipe_id = r.recipe_id && sd.sales_id = '".$sales_row["sales_id"]."'
-        group by recipe_name";
+        group by recipe_name
+        order by sd.sales_id desc";
 
         $orders_result = $connect->query($orders_query);
 
