@@ -2,8 +2,8 @@
 	header ("url=AddRecipe.php"); 
 	include("dbconnection.php"); 
 
- $sql_query1 = "INSERT INTO recipe(recipe_name, recipe_typeid)
-		VALUES ('" . $_POST['recipe_name'] . "'," .  $_POST['recipe_type'] . ")"; 
+ $sql_query1 = "INSERT INTO recipe(recipe_name, recipe_typeid, price)
+		VALUES ('" . $_POST['recipe_name'] . "','" .  $_POST['recipe_type'] . "','" . $_POST['price'] . "')"; 
 
 	mysqli_query($connect, $sql_query1); 
 
