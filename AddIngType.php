@@ -109,7 +109,7 @@ session_start();
                      
                        <?php
                        
-                        $sql = mysqli_query($connect, "SELECT * FROM ingredientname AS i, unitmeasurement AS u WHERE i.unit_id=u.unit_id ORDER BY i.ingName_id DESC");
+                        $sql = mysqli_query($connect, "SELECT * FROM ingredientname AS i, unitmeasurement AS u WHERE i.unit_id=u.unit_id ORDER BY i.ingName_id DESC LIMIT 5");
                         while ($row = mysqli_fetch_array($sql)){
                           echo "<tr>"; 
                           echo "<td>".$row['ingName_id']."</td>"; //id
@@ -125,7 +125,9 @@ session_start();
                    
                      
                     </tbody>
+
                   </table>
+                   </br><center><a href="ViewIngType.php">View All</a></center>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
               
