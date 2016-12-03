@@ -1,17 +1,17 @@
 <?php include ("cashier-controller/connect.php"); session_start(); ?>
 <?php
 
-function getReport($date = "") {
+function getReport($date = "", $min = "08:00", $max = "15:00") {
     if ($date == "") {
         $date = date("Y-m-d");
     }
 
-    $get_report_statement = $GLOBALS["connect"]->prepare("select r.recipe_name, sum(sd.qty) as qty, sum(r.price * sd.qty) as price 
+    $get_report_statement = $GLOBALS["connect"]->prepare("select r.recipe_name, r.price as unit_price, sum(sd.qty) as qty 
     from sales s, sales_details sd, recipe r 
-    where sd.sales_id = s.sales_id && sd.recipe_id = r.recipe_id && date(s.dtSales) = ?
+    where sd.sales_id = s.sales_id && sd.recipe_id = r.recipe_id && date(s.dtSales) = ? && time_format(s.dtSales, '%H:%i') between ? and ?
     group by recipe_name");
 
-    $get_report_statement->bind_param("s", $date);
+    $get_report_statement->bind_param("sss", $date, $min, $max);
     $get_report_statement->execute();
     $get_report_statement_result = $get_report_statement->get_result();
     return $get_report_statement_result;
@@ -35,32 +35,33 @@ function getReport($date = "") {
             width: 100%;
         }
 
-        th:first-child {
-            text-align: right;
-        }
-
         th, td {
             padding: 10px;
             border-bottom: 1px lightgray solid;
         }
 
-        tbody tr td:nth-child(1) {
-            text-align: right;
-            width: 5%;
+        tbody > tr > td:nth-child(1) {
+            text-align: left;
+            width: 85%;
+            padding-left: 30px !important;
         }
         
-        tbody tr td:nth-child(2) {
-            width: 85%;
-            text-align: left;
-        }
-
-        tbody tr td:nth-child(3) {
+        tbody > tr > td:nth-child(2) {
             width: 5%;
             text-align: right;
         }
 
-        tfoot tr td:last-child {
+        tfoot tr > td:last-child {
             text-align: right;
+        }
+
+        #total {
+            font-weight: 700;
+        }
+
+        .shift-label {
+            text-align: left !important;
+            font-weight: 700;
         }
 
         @media print {
@@ -103,32 +104,44 @@ function getReport($date = "") {
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Qty</th>
                                     <th>Recipe name</th>
-                                    <th>Price</th>
+                                    <th>Qty</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <tr>
+                                    <th colspan="2" class="shift-label">Shift 1 (8:00 am - 3:00 pm)</th>
+                                </tr>
                                 <?php 
                                 $data = getReport($_POST["sales-report-date"]);
-                                while ($row = $data->fetch_assoc()) { ?>
+                                $total_qty = 0;
+                                while ($row = $data->fetch_assoc()) { $total_qty = intval($row["qty"] + $total_qty); ?>
                                 <tr>
+                                    <td><?=$row["recipe_name"]?>(Unit price: <?=$row["unit_price"]?>)</td>
                                     <td><?=$row["qty"]?></td>
-                                    <td><?=$row["recipe_name"]?></td>
-                                    <td><?=$row["price"]?></td>
                                 </tr>
                                 <?php } ?>
-                            </tbody>
-                            <tfoot>
                                 <tr>
-                                    <td colspan="2" style="text-align: left !important">
-                                        <strong>Total</strong>
-                                    </td>
-                                    <td>
-                                        <span id="total">0</span>
-                                    </td>
+                                    <th>Total</th>
+                                    <th><span style="float: right;"><?=$total_qty?></span></th>
                                 </tr>
-                            </tfoot>
+                                <tr>
+                                    <th colspan="2" class="shift-label">Shift 2 (3:01 pm - 11:00 pm)</th>
+                                </tr>
+                                <?php 
+                                $data = getReport($_POST["sales-report-date"], "15:01", "23:59");
+                                $total_qty = 0;
+                                while ($row = $data->fetch_assoc()) { $total_qty = intval($row["qty"] + $total_qty); ?>
+                                <tr>
+                                    <td><?=$row["recipe_name"]?> (Unit price: <?=$row["unit_price"]?>)</td>
+                                    <td><?=$row["qty"]?></td>
+                                </tr>
+                                <?php } ?>
+                                <tr>
+                                    <th>Total</th>
+                                    <th><span style="float: right;"><?=$total_qty?></span></th>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -148,12 +161,18 @@ function getReport($date = "") {
 
             var total = 0;
             $("tbody td:last-child").each(function() {
-                total += parseFloat($(this).html());
+                console.log($(this).html());
+                total += parseInt($(this).html());
             });
 
             // console.log(total);
 
-            $("#total").html(total.toFixed(2));
+            $("#total").html(total);
+            $("#total-orders").html(total);
+
+        }
+
+        function computePerShift() {
 
         }
         
@@ -169,7 +188,7 @@ function getReport($date = "") {
         }
 
         computeTotalPrice();
-        computeTotalQuantity();
+        // computeTotalQuantity();
         window.print();
 
         </script>
