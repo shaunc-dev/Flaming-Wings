@@ -214,7 +214,7 @@ function initializeListeners() {
             if (orderQuantity > 0) {
                 addToOrder(
                     { 
-                        name: itemSelected.name,
+                        name: itemSelected.name + " (Unit price: " + itemSelected.price + ")",
                         quantity: orderQuantity,
                         price: itemSelected.price * orderQuantity
                     }
