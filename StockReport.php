@@ -75,7 +75,7 @@ if (!isset($_SESSION["guest"])) {
                       <?php
                         $stock_code = isset($_GET['stock_code']) ? $_GET['stock_code'] : '';
                      
-                      // GET UNIT NAME OF STOCK AND PAIR IT WITH UNIT NAME OF INGRDEIENT TYPE 
+                      // GET UNIT NAME OF STOCK AND PAIR IT WITH UNIT NAME OF INGREDIENT TYPE 
 
                         $sql = mysqli_query($connect, "SELECT stock_id, stock_type, sname, qty, unit_name, ing_name, pack_name FROM stock AS s, stocktype AS type, unitmeasurement AS uom, ingredientname AS ingname, unitpackaging AS packname WHERE s.stocktype_id=type.stocktype_id AND s.unit_id=uom.unit_id AND s.ingName_id=ingname.ingName_id AND s.pack_id=packname.pack_id AND stock_id = '".$var_value."';");
                         while ($row = mysqli_fetch_array($sql)){

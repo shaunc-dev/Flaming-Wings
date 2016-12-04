@@ -98,7 +98,8 @@ if (!isset($_SESSION["guest"])) {
                   // } 
 
                  
-
+                  // GET UNIT NAME OF STOCK AND PAIR IT WITH UNIT NAME OF INGREDIENT TYPE 
+                    
                   $currentstock = mysqli_query($connect, "SELECT COALESCE(SUM(r.qty), 0) - COALESCE(SUM(w.qty), 0) AS qty, sname FROM replenishstock AS r, withdrawstock AS w, stock AS s WHERE s.stock_id=w.stock_id AND r.stock_id=s.stock_id AND s.stock_id='".$var_value."'");
 
                   $numrows = mysqli_num_rows($currentstock); 

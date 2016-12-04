@@ -66,7 +66,6 @@ if (!isset($_SESSION["guest"])) {
                         <th>Stock Code</th>
                         <th>Stock Category/Type</th>
                         <th>Stock Name</th>
-                        <th></th>
                         <th>Current Stock</th>
                     <!--    <th>End Inventory</th> -->
                       
@@ -80,20 +79,23 @@ if (!isset($_SESSION["guest"])) {
                           echo "<tr>"; 
                           echo "<td>".$row['stock_id']."</td>"; //stockcode
                           echo "<td>".$row['stock_type']."</td>"; //type
-                           echo "<td>".$row['sname']."</td>"; //type
-                               echo "<td> <a type='button' href='StockDetails.php?varname=".$row['stock_id']."' class='btn btn-block btn-default btn-sm' name='ViewStockButton'>View</a></td>";
+                          echo "<td>".$row['sname']."</td>"; //type
+
+                          echo "<td> <a type='button' href='StockDetails.php?varname=".$row['stock_id']."' class='btn btn-block btn-default btn-sm' name='ViewStockButton'>View</a></td>";
+                          
                          $currentstock = mysqli_query($connect, "SELECT COALESCE(SUM(r.qty), 0) - COALESCE(SUM(w.qty), 0) AS qty, sname FROM replenishstock AS r, withdrawstock AS w, stock AS s WHERE s.stock_id=w.stock_id AND r.stock_id=s.stock_id AND s.stock_id='".$row['stock_id']."'");
 
                           $numrows = mysqli_num_rows($currentstock); 
 
                          if($numrows == 0){
                            echo "<td>" .$row['verifiedqty']."</td>"; 
+
                          } else{
                            while($row = mysqli_fetch_array($currentstock)){ 
                              echo "<td>" .$row['qty']. "</td>"; 
                           
                          }
-                         
+
                           echo "</tr>";
                          }
                         }

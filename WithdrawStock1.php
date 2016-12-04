@@ -27,7 +27,7 @@ if (!isset($_SESSION["guest"])) {
 <?php 
 
   $sql_query = "INSERT INTO withdrawstock(dtWithdrawn, qty, stock_id, remarks, user_id) 
-  VALUES ('".$_POST['dtWithdrawn']."', '".$_POST['qty']."', '".$_POST['sname']."','".$_POST['remarks']."','".$_POST['user_name']."')"; 
+  VALUES ('".$_POST['dtWithdrawn']."', '".$_POST['qty']."', '".$_POST['sname']."','".$_POST['remarks']."','".$_SESSION['user_id']."')"; 
 
   
   mysqli_query($connect, $sql_query); 
