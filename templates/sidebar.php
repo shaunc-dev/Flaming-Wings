@@ -148,7 +148,7 @@
 
 
         <!--INVENTORY REPORTS-->
-        <li class="treeview">
+    <li class="treeview">
         <a href="#">
         <i class="fa fa-folder"></i>
         <span>Inventory Reports</span>
@@ -159,6 +159,19 @@
             <li><a href="InventoryReport.php"><i class="fa fa-circle-o"></i> Inventory Report</a></li>
             <li><a href="VerifyStock.php"><i class="fa fa-circle-o"></i>Stock Controller</a></li>
             <li><a href="MostSold.php"><i class="fa fa-circle-o"></i> Most sold order</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+        <i class="fa fa-calculator"></i> 
+        <span>Conversion</span> 
+        <span class="label label-primary pull-right"></span>
+        </a>
+
+
+        <ul class="treeview-menu">
+            <li><a href="Conversion.php"><i class="fa fa-circle-o"></i>Conversion Table</a></li>
         </ul>
     </li>
 
