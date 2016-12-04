@@ -261,7 +261,7 @@ if (!isset($_SESSION["guest"])) {
 <?php 
  
 	$sql_query = "INSERT INTO verifystock(dtVerified, verifiedqty, stock_id, remarks, user_id)
-			VALUES ('" . $_POST['dtVerified'] ."', '" . $_POST['qty']."', '" . $_POST['sname']. "', '" . $_POST['remarks'] . "', '" . $_POST['user_name'] . "')"; 
+			VALUES ('" . $_POST['dtVerified'] ."', '" . $_POST['qty']."', '" . $_POST['sname']. "', '" . $_POST['remarks'] . "', '" . $_SESSION['user_id'] . "')"; 
 
 
 	mysqli_query($connect, $sql_query); 
