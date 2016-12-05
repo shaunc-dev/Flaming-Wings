@@ -88,7 +88,7 @@
             <input type="password" class="form-control" placeholder="Password" 
             id="password" 
             name="password"
-            value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>" drequired>
+            value="<?php if(isset($_POST['password'])) echo $_POST['password']; ?>" required>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
           </div>
           

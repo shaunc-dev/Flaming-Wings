@@ -131,7 +131,7 @@ if (!isset($_SESSION["guest"])) {
                     echo "<h4><b>Current Stock : </b> 0</h4>"; 
                   } else{
                      while($row = mysqli_fetch_array($currentstock)){ 
-                       echo "<h4><b>Current Stock : </b>" .$row['qty']. "</h4>"; 
+                       echo "<h4><b>Current Stock : </b><span id='current-stock'>" .$row['qty']. "</span></h4>"; 
                   }
                   }
                   ?>
@@ -190,7 +190,7 @@ if (!isset($_SESSION["guest"])) {
                         $sql = mysqli_query($connect, "SELECT dtReceived, replenish_id, r.qty, sname, remarks, user_name FROM `replenishstock` AS r, stock AS s, users AS u WHERE s.stock_id=r.stock_id AND r.user_id=u.user_id AND s.stock_id ='".$var_value."' ORDER BY replenish_id DESC;");
                         while ($row = mysqli_fetch_array($sql)){
                           echo "<tr>"; 
-                          echo "<td>" .$row['qty']."</td>"; 
+                          echo "<td class='replenish-qty'>" .$row['qty']."</td>"; 
                           echo "<td>".$row['remarks']."</td>"; 
                            echo "<td>".$row['user_name']."</td>"; 
                           echo "<td>".$row['dtReceived']."</td>"; 
@@ -234,7 +234,7 @@ if (!isset($_SESSION["guest"])) {
                     
                         while ($row = mysqli_fetch_array($sql)){
                           echo "<tr>"; 
-                          echo "<td>".$row['qty']." </td>";
+                          echo "<td class='withdraw-qty'>".$row['qty']." </td>";
                           echo "<td>".$row['remarks']."</td>";
                           echo "<td>".$row['user_name']."</td>"; 
                           echo "<td>".$row['dtWithdrawn']."</td>";
@@ -341,5 +341,22 @@ if (!isset($_SESSION["guest"])) {
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
+
+     <script type="text/javascript">
+
+        var replenish_qty = 0;
+        var withdraw_qty = 0;
+
+        $(".replenish-qty").each(function() {
+            replenish_qty += parseInt($(this).html());
+        });
+
+        $(".withdraw-qty").each(function() {
+            withdraw_qty += parseInt($(this).html());
+        });
+
+        $("#current-stock").html(replenish_qty - withdraw_qty);
+
+    </script>
   </body>
 </html>

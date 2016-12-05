@@ -48,8 +48,8 @@ session_start();
 
   mysqli_query($connect, $deact_query) or die(mysqli_error($connect)); 
 
-  $sql_query = "INSERT INTO stock(sname, qty, unit_id, ingName_id, pack_id, stocktype_id, deactivate)
-      VALUES ('" . $_POST["sname"] . "','" . $_POST['qty'] . "','"  . $_POST['unitM'] . "','" . $_POST['ingtype'] . "','" . $_POST['pack_name'] . "','" . $_POST['type'] . "', '0')"; 
+  $sql_query = "INSERT INTO stock(sname, qty, unit_id, ingName_id, pack_id, stocktype_id, deactivate, emergencyLvl)
+      VALUES ('" . $_POST["sname"] . "','" . $_POST['qty'] . "','"  . $_POST['unitM'] . "','" . $_POST['ingtype'] . "','" . $_POST['pack_name'] . "','" . $_POST['type'] . "', '0', '". $_POST['emergencyLvl']."')"; 
 
   mysqli_query($connect, $sql_query) or die(mysqli_error($connect)); 
 

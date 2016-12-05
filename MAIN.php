@@ -149,30 +149,85 @@
                 <div class="box-body">
                   <table id="recentlyadded" class="table table-bordered table-hover">
                     <thead>
+                      Stocks Needed for Replenishing
+                    </br>
                       <tr>
                       
-                        <th>Ingredient Name</th>
+                        <th>Stock Name</th>
                         <th>Emergency Level</th>
                         <th>Current Stock</th>
+                      
                       
                       </tr>
                     </thead>
                     <tbody>
                         <?php
-                       
-                        $sql = mysqli_query($connect, "SELECT SUM(r.qty)- SUM(w.qty) AS qty, ing_name, emergencyLvl, unit_name FROM ingredientname as i, unitmeasurement, recipeingredients AS ri, replenishstock AS r, withdrawstock AS w, stock AS s WHERE s.stock_id=w.stock_id AND r.stock_id=s.stock_id AND unitmeasurement.unit_id=i.unit_id AND ri.ingName_id=i.ingName_id AND ri.unit_id=unitmeasurement.unit_id AND emergencyLvl < ri.qty");
-                        while ($row = mysqli_fetch_array($sql)){
-                          echo "<tr>"; 
-                          echo "<td>".$row["ing_name"]."</td>"; //ing_name
-                          echo "<td>".$row['emergencyLvl']." ".$row['unit_name']."</td>"; //emergencyLvl
-                          echo "<td>".$row["qty"]."</td>"; 
-                      
-                          echo "</tr>";
+                        // $ingredients_query= "SELECT ingredientname.ingName_id, recipeingredients.qty FROM ingredientname, unitmeasurement, recipeingredients WHERE ingredientname.unit_id=unitmeasurement.unit_id AND recipeingredients.ingName_id=ingredientname.ingName_id AND recipeingredients.unit_id=unitmeasurement.unit_id"; 
 
-                      
+                        // // get all stocks
+                        //   $sql = mysqli_query($connect, "SELECT stock_id, stock_type, sname FROM stock AS s, stocktype AS type WHERE s.stocktype_id=type.stocktype_id AND deactivate='0'");
+
+                        // while ($row = mysqli_fetch_array($sql)){
+                        // // get all stocks with emergencylvl less than current stock; iterate 
+                        //     $currentstock_checker = mysqli_query($connect, "SELECT stock_id, stocktype.stock_type AS type, sname, emergencyLvl
+                        //             FROM stock, stocktype 
+                        //             WHERE deactivate='0'
+                        //             AND stocktype.stocktype_id=stock.stocktype_id
+                        //             AND stock.stock_id='".$row['stock_id']."'
+                        //             AND emergencyLvl >= (SELECT SUM(r.qty) - SUM(w.qty)
+                        //                                 FROM replenishstock r, withdrawstock w, stock
+                        //                                 WHERE r.stock_id=stock.stock_id
+                        //                                  AND w.stock_id=stock.stock_id
+                        //                                  AND stock.stock_id='".$row['stock_id']."')
+                        //             "); 
+
+                        //     if (!$currentstock_checker) {
+                        //           printf("Error: %s\n", mysqli_error($connect));
+                        //           exit();
+                        //       }
+                        //     while ($row2 = mysqli_fetch_array($currentstock_checker)){
+
+                        // get replenishstock
+                        $need_stock = array();
+
+                        $replenish_query = mysqli_query($connect, "SELECT r.stock_id as stockid, sname, SUM(r.qty) as replenish_quantity, emergencyLvl
+                                                        FROM stock s, replenishstock r
+                                                        WHERE s.stock_id=r.replenish_id
+                                                        group by r.stock_id");
+
+                        while ($replenish_row = mysqli_fetch_assoc($replenish_query)) {
+                            $withdraw_query = mysqli_query($connect, "SELECT SUM(w.qty) as withdraw_quantity FROM stock s, withdrawstock w WHERE s.stock_id=w.stock_id && w.stock_id = '{$replenish_row["stockid"]}'") or die (mysqli_error($connect));
+
+                            while ($withdraw_row = mysqli_fetch_assoc($withdraw_query)) {
+                                $current_stock = 0;
+                                $current_stock = $replenish_row["replenish_quantity"] - $withdraw_row["withdraw_quantity"];
+
+                                if ($current_stock <= $replenish_row["emergencyLvl"]) {
+                                    array_push($need_stock, array(
+
+                                        "sname" => $replenish_row["sname"],
+                                        "stock_id" => $replenish_row["stockid"],
+                                        "current_stock" => $current_stock,
+                                        "emergencyLvl" => $replenish_row["emergencyLvl"]
+
+                                        )
+                                    );
+                                }
+                            }
                         }
-                         ?>
-                     
+
+                        // get withdrawstock
+
+                        //  
+                        for ($i = 0; $i < sizeof($need_stock); $i++) { ?>
+
+                        <tr>
+                            <td><?=$need_stock[$i]['sname']?></td>
+                            <td><?=$need_stock[$i]['emergencyLvl']?></td>
+                            <td><?=$need_stock[$i]['current_stock']?></td>
+                        </tr>
+
+                        <?php } ?>
                  
                     </tbody>
                   </table>
@@ -188,9 +243,7 @@
 
 
              <!--CALENDAR-->
-                <li>
-                  <i class="fa  fa-calendar-plus-o bg-purple"></i>
-                  <div class="timeline-item">
+             
                      <!-- Main row -->
           <div class="row">
             <!-- Left col -->
@@ -203,32 +256,7 @@
 
               <!-- Calendar -->
 
-              <div class="box box-solid bg-green-gradient">
-                <div class="box-header">
-                  <i class="fa fa-calendar"></i>
-                  <h3 class="box-title">Calendar</h3>
-                  <!-- tools box -->
-                  <div class="pull-right box-tools">
-                    <!-- button with a dropdown -->
-                    <div class="btn-group">
-                      <button class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars"></i></button>
-                      <ul class="dropdown-menu pull-right" role="menu">
-                        <li><a href="#">Add new event</a></li>
-                        <li><a href="#">Clear events</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">View calendar</a></li>
-                      </ul>
-                    </div>
-                    <button class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <button class="btn btn-success btn-sm" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div><!-- /. tools -->
-                </div><!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <!--The calendar -->
-                  <div id="calendar" style="width: 100%"></div>
-                </div><!-- /.box-body -->
-              </div>
-              </li>
+         
                 <!-- END timeline item -->
 
          

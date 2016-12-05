@@ -98,6 +98,19 @@ while ($row = mysqli_fetch_array($result)) {
                              ?>
                       </select>
 
+                   <label>Price</label>
+                        <div class="input-group">
+                         <span class="input-group-addon"><i class="fa fa-rouble"></i></span><input type="number" min="0" step=".01" class="form-control" id="price" placeholder="Enter price of recipe" name="price" required
+                      value="<?php 
+                      $price = mysqli_query($connect, "SELECT price from recipe where recipe_id = '".$var_value."'"); 
+
+                      while ($row = mysqli_fetch_array($price)){
+                        echo "". $row['price'] . ""; 
+                       }
+                       ?>"></input>
+                    </div>
+
+
 
 
 <?php

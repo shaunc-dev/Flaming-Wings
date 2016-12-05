@@ -17,7 +17,7 @@
   mysqli_query($connect, $deact_query) or die(mysqli_error($connect)); 
 
   //add new recipe name, type with new id 
-  $query = "INSERT INTO recipe (recipe_name, recipe_typeid) VALUES('" . $_POST['recipe_name'] . "', '" . $_POST['recipe_type'] . "')";
+  $query = "INSERT INTO recipe (recipe_name, recipe_typeid, price) VALUES('" . $_POST['recipe_name'] . "', '" . $_POST['recipe_type'] . "', '". $_POST['price']. "')";
   mysqli_query($connect, $query) or die(mysqli_error($connect));
 
   $last_insert = mysqli_insert_id($connect);

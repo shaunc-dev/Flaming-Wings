@@ -169,7 +169,18 @@ $_SESSION['varname'] = 'varname';
                    
                       </select>
                     </div>
-                  
+
+                     <div class="form-group">
+                      <label for="InputEmergencyLvl">Emergency Level</label>
+                      <input type="number" class="form-control" id="InputEmergencyLvl" value="<?php 
+                        $sql = mysqli_query($connect, "select emergencyLvl from stock where stock_id='".$var_value."';");
+                       while ($row = mysqli_fetch_array($sql)){
+                          echo $row['emergencyLvl']; }
+                      
+                      ?>"  maxlength="60" name="emergencyLvl" required
+                      value="<?php if (isset($_POST['emergencyLvl']) && !$flag) echo $_POST['emergencyLvl']; ?>">
+                    </div>
+                 
                 
 
 

@@ -59,6 +59,7 @@ if (!isset($_SESSION["guest"])) {
                         <th>Unit of Measurement</th>
                         <th>Ingredient Type</th>
                         <th>Packaging</th>
+                        <th>Emergency Level</th>
                     <!--    <th>End Inventory</th> -->
                       
                       </tr>
@@ -69,7 +70,7 @@ if (!isset($_SESSION["guest"])) {
                      
                       
 
-                        $sql = mysqli_query($connect, "SELECT stock_id, stock_type, sname, qty, unit_name, ing_name, pack_name FROM stock AS s, stocktype AS type, unitmeasurement AS uom, ingredientname AS ingname, unitpackaging AS packname WHERE s.stocktype_id=type.stocktype_id AND s.unit_id=uom.unit_id AND s.ingName_id=ingname.ingName_id AND s.pack_id=packname.pack_id AND stock_id = '".$var_value."';");
+                        $sql = mysqli_query($connect, "SELECT stock_id, stock_type, sname, qty, unit_name, ing_name, pack_name, s.emergencyLvl AS emergencyLvl FROM stock AS s, stocktype AS type, unitmeasurement AS uom, ingredientname AS ingname, unitpackaging AS packname WHERE s.stocktype_id=type.stocktype_id AND s.unit_id=uom.unit_id AND s.ingName_id=ingname.ingName_id AND s.pack_id=packname.pack_id AND stock_id = '".$var_value."';");
                         while ($row = mysqli_fetch_array($sql)){
                           echo "<tr>"; 
                           echo "<td>".$row['stock_id']."</td>"; //stockcode
@@ -79,6 +80,7 @@ if (!isset($_SESSION["guest"])) {
                           echo "<td>".$row['unit_name']."</td>"; //type
                           echo "<td>".$row['ing_name']."</td>"; //itemname
                           echo "<td>".$row['pack_name']."</td>"; //stockcode
+                          echo "<td>".$row['emergencyLvl']."</td>"; //emergencyLvl
                      
                           echo "</tr>";
 
@@ -100,17 +102,17 @@ if (!isset($_SESSION["guest"])) {
                  
                   // GET UNIT NAME OF STOCK AND PAIR IT WITH UNIT NAME OF INGREDIENT TYPE 
                     
-                  $currentstock = mysqli_query($connect, "SELECT COALESCE(SUM(r.qty), 0) - COALESCE(SUM(w.qty), 0) AS qty, sname FROM replenishstock AS r, withdrawstock AS w, stock AS s WHERE s.stock_id=w.stock_id AND r.stock_id=s.stock_id AND s.stock_id='".$var_value."'");
+                  $currentstock = mysqli_query($connect, "SELECT COALESCE(SUM(r.qty),0) - COALESCE(SUM(w.qty),0) AS qty, sname FROM replenishstock AS r, withdrawstock AS w, stock AS s WHERE s.stock_id=w.stock_id AND r.stock_id=s.stock_id AND s.stock_id='".$var_value."'");
 
                   $numrows = mysqli_num_rows($currentstock); 
 
                   if($numrows == 0){
-                    echo "<h4><b>Current Stock : </b>" .$row['verifiedqty']."</h4>"; 
+                    echo "<h4><b>Current Stock : </b><span id='current-stock'> ".$row['verifiedqty']."</span></h4>"; 
                   } else{
                     while($row = mysqli_fetch_array($currentstock)){ 
-                      echo "<h4><b>Current Stock : </b>" .$row['qty']. "</h4>"; 
+                      echo "<h4><b>Current Stock : </b><span id='current-stock'>" .$row['qty']. "</span></h4>"; 
                     
-                  }
+                    }
                   }
                   
                   ?>
@@ -170,7 +172,7 @@ if (!isset($_SESSION["guest"])) {
                         $sql = mysqli_query($connect, "SELECT dtReceived, replenish_id, r.qty, sname, remarks, user_name FROM `replenishstock` AS r, stock AS s, users AS u WHERE s.stock_id=r.stock_id AND r.user_id=u.user_id AND s.stock_id ='".$var_value."' ORDER BY replenish_id DESC;");
                         while ($row = mysqli_fetch_array($sql)){
                           echo "<tr>"; 
-                          echo "<td>" .$row['qty']."</td>"; 
+                          echo "<td class='replenish-qty'>" .$row['qty']."</td>"; 
                           echo "<td>".$row['remarks']."</td>"; 
                            echo "<td>".$row['user_name']."</td>"; 
                           echo "<td>".$row['dtReceived']."</td>"; 
@@ -216,7 +218,7 @@ if (!isset($_SESSION["guest"])) {
                     
                         while ($row = mysqli_fetch_array($sql)){
                           echo "<tr>"; 
-                          echo "<td>".$row['qty']." </td>";
+                          echo "<td class='withdraw-qty'>".$row['qty']." </td>";
                           echo "<td>".$row['remarks']."</td>";
                           echo "<td>".$row['user_name']."</td>"; 
                           echo "<td>".$row['dtWithdrawn']."</td>";
@@ -317,5 +319,21 @@ if (!isset($_SESSION["guest"])) {
            immediately after the control sidebar -->
       <div class="control-sidebar-bg"></div>
     </div><!-- ./wrapper -->
+    <script type="text/javascript">
+
+        var replenish_qty = 0;
+        var withdraw_qty = 0;
+
+        $(".replenish-qty").each(function() {
+            replenish_qty += parseInt($(this).html());
+        });
+
+        $(".withdraw-qty").each(function() {
+            withdraw_qty += parseInt($(this).html());
+        });
+
+        $("#current-stock").html(replenish_qty - withdraw_qty);
+
+    </script>
   </body>
 </html>

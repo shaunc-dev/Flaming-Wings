@@ -71,7 +71,6 @@
                     <th>Stock Category/Type</th>
                     <th>Stock Name</th>
                     <th>Gross Weight</th>
-                    <th>Current Stock</th>
 
               
                  </b>
@@ -88,19 +87,7 @@
                           echo "<td>".$row['stock_type']."</td>"; //type
                           echo "<td>" .$row['sname']."</a></td>"; //itemname
                           echo "<td>" .$row['qty']." "  .$row['unit_name']. " " .$row['pack_name']."</a></td>"; //itemname
-                         $currentstock = mysqli_query($connect, "SELECT COALESCE(SUM(r.qty), 0) - COALESCE(SUM(w.qty), 0) AS qty, sname FROM replenishstock AS r, withdrawstock AS w, stock AS s WHERE s.stock_id=w.stock_id AND r.stock_id=s.stock_id AND s.stock_id='".$row['stock_id']."'");
-
-                          $numrows = mysqli_num_rows($currentstock); 
-
-                         if($numrows == 0){
-                           echo "<td>" .$row['verifiedqty']."</td>"; 
-                         } else{
-                           while($row = mysqli_fetch_array($currentstock)){ 
-                             echo "<td>" .$row['qty']. "</td>"; 
-                          
-                         }
-                           echo "</tr>";
-                         }
+                     
                          }
 
                         $rowcount=mysqli_num_rows($sql); 
