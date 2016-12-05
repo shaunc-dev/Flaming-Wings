@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<?php session_start(); ?>
 <html>
   <head>
     <title>Flaming Wings | Registration Page</title>

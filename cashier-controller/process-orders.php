@@ -32,6 +32,13 @@
                 $statement->bind_param('ii', $received_ids[$i], $received_quantities[$i]);
                 $statement->execute();
 
+                $result = $connect->query("select recipe_name from recipe where recipe_id = '{$received_ids[$i]}';");
+                $recipe_name = "";
+
+                while ($recipe_name_row = $result->fetch_assoc()) {
+                    $recipe_name = $recipe_name_row["recipe_name"];
+                }
+
                 if (!$statement) {
                     $status = $connect->error;
                 } else {
@@ -55,7 +62,7 @@
                             } else {
                                 while ($row = $get_qty_from_stock_result->fetch_assoc()) {
                                     $new_stock_quantity = $recipe_quantity * $received_quantities[$i];
-                                    $remark_text = "Withdrawn stock: {$row["sname"]}";
+                                    $remark_text = "Withdrew '{$row["sname"]}' stock for '{$recipe_name}' recipe for order #{$sales_id}";
                                     $update_qty_in_stock->bind_param('iis', $new_stock_quantity, $row["stock_id"], $remark_text);
                                     $update_qty_in_stock->execute();
 
