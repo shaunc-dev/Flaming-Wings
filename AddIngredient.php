@@ -10,6 +10,17 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Flaming Wings | Dashboard</title>
 
+    <style>
+
+		.IngredientDelete {
+			background: none;
+			border: none;
+			color: red;
+			font-size: 20px;
+		}
+
+    </style>
+
     <?php include ("templates/imports.php"); ?>
 
    
@@ -101,7 +112,7 @@ session_start();
                     <b>Ingredients</b>
                     <select class="form-control" id="AddIngredient" name="ing_name" value="<?php if (isset($_POST['ing_name'])) echo $_POST['ing_name']; ?>">  <option value="" disabled selected>Ingredients</option> //list of measurements from database
                             <?php
-                            $sql = mysqli_query($connect, "SELECT * FROM ingredientname");
+                            $sql = mysqli_query($connect, "SELECT * FROM ingredientname order by ing_name asc");
                             while ($row = mysqli_fetch_array($sql)){
                             echo "<option value=\"" . $row['ingName_id'] . "\">" . $row['ing_name'] . "</option>";
                             }

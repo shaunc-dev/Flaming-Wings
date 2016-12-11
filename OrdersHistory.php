@@ -83,6 +83,10 @@ include("dbconnection.php");
                 margin-bottom: 0;
             }
 
+            .input-group-addon {
+                min-width: 100px;
+            }
+
         </style>
     </head>
     <body class="sidebar-mini skin-red">
@@ -108,11 +112,21 @@ include("dbconnection.php");
                                             <h3 class="box-title">Show orders</h3>
                                         </div>
                                         <div class="box-body selection-container">
-                                            <div class="selection">
-                                                <a data-value="now" class="active">Today</a>
-                                                <a data-value="lweek">Last week</a>
-                                                <a data-value="lmonth">Last month</a>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">Start date</div>
+                                                    <input type="date" class="form-control" id="start-date">
+                                                </div>
                                             </div>
+                                            <div class="form-group">
+                                                <div class="input-group">
+                                                    <div class="input-group-addon">End date</div>
+                                                    <input type="date" class="form-control" id="end-date">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="box-footer">
+                                            <button class="btn btn-default pull-right" id="get-orders">Get orders</button>
                                         </div>
                                     </div>
                                 </div>
@@ -160,7 +174,22 @@ include("dbconnection.php");
                 </section>
             </div>
         </div>
-        <script src="dist/js/orders-history.js">
+        <script src="dist/js/orders-history.js"></script>
+        <script>
+
+        // initial date values
+        $("#start-date, #end-date").val(moment().format("YYYY-MM-DD"));
+
+        $("#get-orders").click(function() {
+            removeOrders();
+            if ($("#start-date").val() == $("#end-date").val()) {
+                getOrdersFromDate($("#start-date").val(), "");
+            } else {
+                getOrdersFromDate($("#start-date").val(), $("#end-date").val())
+            }
+        });
+
+        $("#get-orders").trigger("click");
 
         </script>
     </body>
