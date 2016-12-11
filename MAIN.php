@@ -12,6 +12,14 @@
     <!-- Tell the browser to be responsive to screen width -->
 
     <?php include ("templates/imports.php"); ?>
+    
+    <style>
+
+      .content-header > * {
+        display: inline-block;
+      }
+
+    </style>
 
    <?PHP 
    include("dbconnection.php")
@@ -38,16 +46,15 @@
         <section class="content-header">
           <h1>
             Dashboard
-            <small>Control panel</small>
-            <?php 
+          </h1>
+          <small>Control panel</small>
+
+          <?php 
 
 
-            echo "<h4 class='pull-right'><b>Today is: </b> " . date('l jS \of F Y h:i:s A') . "</h4>";
+            echo "<h4 style='float: right; margin: 0;'><b>Today is: </b> " . date('l jS \of F Y h:i:s A') . "</h4>";
         
              ?>
-
-
-          </h1>
         
         </section>
 
